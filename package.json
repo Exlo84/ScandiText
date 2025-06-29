@@ -1,0 +1,57 @@
+{
+  "name": "nordisk-tekstredigering",
+  "version": "1.0.0",
+  "description": "En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (norsk, svensk, dansk)",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "test": "node tests/basic-tests.js",
+    "lint": "echo 'No linting configured yet'",
+    "build": "echo 'No build step required - vanilla JavaScript'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/username/ScandiText.git"
+  },
+  "keywords": [
+    "text-editor",
+    "norwegian",
+    "swedish",
+    "danish",
+    "nordic",
+    "scandinavian",
+    "language-detection",
+    "text-analysis",
+    "readability",
+    "vanilla-javascript",
+    "modular",
+    "responsive"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/ScandiText/issues"
+  },
+  "homepage": "https://github.com/username/ScandiText#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "devDependencies": {},
+  "dependencies": {},
+  "files": [
+    "index.html",
+    "demo.html",
+    "css/",
+    "js/",
+    "README.md",
+    "LICENSE"
+  ]
+}
