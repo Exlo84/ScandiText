@@ -10,20 +10,22 @@
 }
 
 :root {
-    --primary-blue: #3498db;
+    --primary-blue: #2563eb;
     --primary-purple: #667eea;
     --secondary-purple: #764ba2;
-    --dark-blue: #2c3e50;
-    --success-green: #27ae60;
-    --light-green: #2ecc71;
-    --purple-gradient: linear-gradient(90deg, #8e44ad, #9b59b6);
-    --blue-gradient: linear-gradient(90deg, #2c3e50, #3498db);
+    --dark-blue: #1e293b;
+    --success-green: #16a34a;
+    --light-green: #22c55e;
+    --purple-gradient: linear-gradient(90deg, #7c3aed, #8b5cf6);
+    --blue-gradient: linear-gradient(90deg, #1e293b, #2563eb);
     --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --light-gray: #f8f9fa;
-    --border-gray: #e9ecef;
-    --text-gray: #6c757d;
+    --light-gray: #f8fafc;
+    --border-gray: #d1d5db;
+    --text-gray: #374151;
+    --text-muted: #6b7280;
+    --text-dark: #111827;
     --shadow-light: 0 20px 40px rgba(0,0,0,0.1);
-    --shadow-medium: 0 5px 15px rgba(52, 152, 219, 0.3);
+    --shadow-medium: 0 5px 15px rgba(37, 99, 235, 0.3);
     --border-radius: 8px;
     --border-radius-large: 16px;
     --transition: all 0.3s ease;
@@ -140,21 +142,33 @@ body {
     padding: 15px;
     background: var(--light-gray);
     border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
 }
 
 .tool-btn {
     padding: 8px 16px;
-    border: 1px solid #ddd;
+    border: 2px solid var(--border-gray);
     background: white;
+    color: var(--text-dark);
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9em;
+    font-weight: 500;
 }
 
 .tool-btn:hover {
-    background: #e9ecef;
-    border-color: #adb5bd;
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    transform: translateY(-1px);
+}
+
+.tool-btn:active,
+.tool-btn.active {
+    background: var(--dark-blue);
+    color: white;
+    border-color: var(--dark-blue);
 }
 
 .text-area {
@@ -168,12 +182,14 @@ body {
     font-family: var(--font-serif);
     resize: vertical;
     transition: border-color 0.3s ease;
+    color: var(--text-dark);
+    background: white;
 }
 
 .text-area:focus {
     outline: none;
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .stats-panel {
@@ -184,9 +200,10 @@ body {
 }
 
 .stats-panel h3 {
-    color: var(--dark-blue);
+    color: var(--text-dark);
     margin-bottom: 20px;
     font-size: 1.3em;
+    font-weight: 600;
 }
 
 .stat-row {
@@ -203,12 +220,12 @@ body {
 
 .stat-label {
     color: var(--text-gray);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .stat-value {
     font-weight: bold;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     font-size: 1.1em;
 }
 
@@ -236,8 +253,9 @@ body {
 }
 
 .tools-section h4 {
-    color: var(--dark-blue);
+    color: var(--text-dark);
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .tool-group {
@@ -248,19 +266,28 @@ body {
 }
 
 .advanced-btn {
-    background: var(--purple-gradient);
+    background: var(--primary-blue);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border-radius: 6px;
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
+    text-shadow: none;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
 }
 
 .advanced-btn:hover {
+    background: var(--dark-blue);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+    box-shadow: 0 4px 8px rgba(30, 41, 59, 0.3);
+}
+
+.advanced-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(30, 41, 59, 0.2);
 }
 
 .status-bar {
@@ -417,7 +444,7 @@ body.focus-mode .main-content {
     }
     
     /* Mobile toolbar improvements */
-    .toolbar {
+    .editor-toolbar {
         flex-direction: column;
         gap: 10px;
         padding: 15px;
@@ -433,13 +460,29 @@ body.focus-mode .main-content {
         min-width: 44px; /* Better touch target */
         min-height: 44px;
         font-size: 14px;
+        font-weight: 600;
+        border: 2px solid var(--border-gray);
+    }
+    
+    .tool-btn:hover,
+    .tool-btn:active {
+        background: var(--primary-blue);
+        color: white;
+        border-color: var(--primary-blue);
     }
     
     /* Mobile-specific text editor */
-    .text-editor {
+    .text-area {
         min-height: 60vh;
         font-size: 16px; /* Prevent zoom on iOS */
         line-height: 1.5;
+        color: var(--text-dark);
+        border: 2px solid var(--border-gray);
+    }
+    
+    .text-area:focus {
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
     }
     
     /* Mobile stats layout */
@@ -489,35 +532,71 @@ body.focus-mode .main-content {
 /* Touch device improvements */
 @media (hover: none) and (pointer: coarse) {
     .tool-btn:hover {
-        background: var(--light-gray);
+        background: var(--primary-blue);
+        color: white;
+        border-color: var(--primary-blue);
     }
     
     .tool-btn:active {
         transform: scale(0.95);
-        background: var(--border-gray);
+        background: var(--dark-blue);
+        color: white;
+        border-color: var(--dark-blue);
+    }
+    
+    .advanced-btn:hover {
+        background: var(--primary-blue);
+    }
+    
+    .advanced-btn:active {
+        background: var(--dark-blue);
+        transform: scale(0.95);
     }
     
     /* Larger touch targets */
-    button, .btn, .tool-btn {
+    button, .btn, .tool-btn, .advanced-btn {
         min-height: 44px;
         min-width: 44px;
+        font-weight: 600;
+    }
+    
+    .lang-btn {
+        min-height: 44px;
+        font-weight: 600;
     }
 }
 
 /* High contrast mode for accessibility */
 @media (prefers-contrast: high) {
     :root {
-        --border-gray: #666;
-        --text-gray: #333;
+        --border-gray: #6b7280;
+        --text-gray: #1f2937;
+        --text-muted: #374151;
     }
     
     .tool-btn {
-        border: 2px solid #333;
+        border: 2px solid var(--text-dark);
+        font-weight: 600;
     }
     
     .tool-btn.active {
-        background: #000;
-        color: #fff;
+        background: var(--text-dark);
+        color: white;
+    }
+    
+    .advanced-btn {
+        border: 2px solid var(--primary-blue);
+        font-weight: 700;
+        text-shadow: none;
+    }
+    
+    .advanced-btn:hover {
+        border-color: var(--text-dark);
+        background: var(--text-dark);
+    }
+    
+    .stat-label {
+        color: var(--text-dark);
     }
 }
 
@@ -533,29 +612,55 @@ body.focus-mode .main-content {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        --light-gray: #34495e;
-        --border-gray: #495057;
-        --text-gray: #adb5bd;
+        --background-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        --light-gray: #334155;
+        --border-gray: #475569;
+        --text-gray: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-dark: #f1f5f9;
     }
     
     body {
-        color: #f8f9fa;
+        color: var(--text-dark);
     }
     
     .container {
-        background: #2c3e50;
-        color: #f8f9fa;
+        background: #1e293b;
+        color: var(--text-dark);
     }
     
-    .text-editor {
-        background: #34495e;
-        color: #f8f9fa;
-        border-color: #495057;
+    .text-area {
+        background: #334155;
+        color: var(--text-dark);
+        border-color: var(--border-gray);
     }
     
-    .sidebar {
-        background: #2c3e50;
-        border-left-color: #495057;
+    .stats-panel {
+        background: #334155;
+    }
+    
+    .tool-btn {
+        background: #475569;
+        color: var(--text-dark);
+        border-color: var(--border-gray);
+    }
+    
+    .tool-btn:hover {
+        background: var(--primary-blue);
+        color: white;
+    }
+    
+    .advanced-btn {
+        background: var(--primary-blue);
+        color: white;
+    }
+    
+    .advanced-btn:hover {
+        background: #1d4ed8;
+    }
+    
+    .tools-section {
+        background: #334155;
+        border-color: var(--border-gray);
     }
 }

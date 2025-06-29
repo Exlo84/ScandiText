@@ -53,7 +53,7 @@
 .modal-title {
     font-size: 1.4em;
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     margin: 0;
 }
 
@@ -63,7 +63,7 @@
     font-size: 1.5em;
     cursor: pointer;
     color: var(--text-gray);
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     padding: 5px;
     border-radius: 50%;
     width: 35px;
@@ -74,8 +74,8 @@
 }
 
 .modal-close:hover {
-    color: var(--dark-blue);
-    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-dark);
+    background: rgba(55, 65, 81, 0.1);
 }
 
 .modal-body {
@@ -104,8 +104,8 @@
 .form-label {
     display: block;
     margin-bottom: 5px;
-    font-weight: 500;
-    color: var(--dark-blue);
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 .form-input {
@@ -115,12 +115,14 @@
     border-radius: 6px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    color: var(--text-dark);
+    background: white;
 }
 
 .form-input:focus {
     outline: none;
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .form-row {
@@ -152,8 +154,9 @@
 
 .checkbox-item label {
     font-size: 14px;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     cursor: pointer;
+    font-weight: 500;
 }
 
 .search-results {
@@ -163,6 +166,7 @@
     margin: 15px 0;
     font-size: 14px;
     color: var(--text-gray);
+    border: 1px solid var(--border-gray);
 }
 
 /* Button Styles */
@@ -179,30 +183,33 @@
 .btn-primary {
     background: var(--primary-blue);
     color: white;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background: #2980b9;
+    background: #1d4ed8;
     transform: translateY(-1px);
 }
 
 .btn-secondary {
     background: var(--text-gray);
     color: white;
+    font-weight: 600;
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #1f2937;
     transform: translateY(-1px);
 }
 
 .btn-success {
     background: var(--success-green);
     color: white;
+    font-weight: 600;
 }
 
 .btn-success:hover {
-    background: #219a52;
+    background: #15803d;
     transform: translateY(-1px);
 }
 
@@ -210,6 +217,7 @@
     background: transparent;
     border: 2px solid var(--primary-blue);
     color: var(--primary-blue);
+    font-weight: 600;
 }
 
 .btn-outline:hover {
@@ -240,7 +248,7 @@
     background: var(--light-gray);
     padding: 10px 15px;
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     border-bottom: 1px solid var(--border-gray);
 }
 
@@ -250,6 +258,8 @@
     font-family: var(--font-serif);
     line-height: 1.6;
     white-space: pre-wrap;
+    color: var(--text-dark);
+    background: white;
 }
 
 .diff-added {
@@ -282,9 +292,10 @@
 }
 
 .stat-card h4 {
-    color: var(--dark-blue);
+    color: var(--text-dark);
     margin-bottom: 10px;
     font-size: 14px;
+    font-weight: 600;
 }
 
 .stat-card .value {
@@ -340,7 +351,7 @@
 
 .toast-title {
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     font-size: 14px;
 }
 
@@ -383,16 +394,17 @@
     text-align: center;
     cursor: pointer;
     transition: var(--transition);
+    background: white;
 }
 
 .export-option:hover {
     border-color: var(--primary-blue);
-    background: rgba(52, 152, 219, 0.05);
+    background: rgba(37, 99, 235, 0.05);
 }
 
 .export-option.active {
     border-color: var(--primary-blue);
-    background: rgba(52, 152, 219, 0.1);
+    background: rgba(37, 99, 235, 0.1);
 }
 
 .export-icon {
@@ -403,7 +415,7 @@
 
 .export-title {
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--text-dark);
     margin-bottom: 5px;
 }
 
@@ -465,5 +477,99 @@
     
     .toast {
         max-width: none;
+    }
+}
+
+/* Dark mode support for components */
+@media (prefers-color-scheme: dark) {
+    .modal {
+        background: #1e293b;
+        color: var(--text-dark);
+    }
+    
+    .modal-header,
+    .modal-footer {
+        background: #334155;
+        border-color: #475569;
+    }
+    
+    .form-input {
+        background: #334155;
+        color: var(--text-dark);
+        border-color: #475569;
+    }
+    
+    .form-input:focus {
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    .search-results {
+        background: #334155;
+        border-color: #475569;
+        color: var(--text-muted);
+    }
+    
+    .compare-section {
+        border-color: #475569;
+    }
+    
+    .compare-header {
+        background: #334155;
+        border-color: #475569;
+    }
+    
+    .compare-text {
+        background: #1e293b;
+        color: var(--text-dark);
+    }
+    
+    .stat-card {
+        background: #334155;
+    }
+    
+    .toast {
+        background: #1e293b;
+        border-left-color: var(--primary-blue);
+    }
+    
+    .export-option {
+        background: #334155;
+        border-color: #475569;
+    }
+    
+    .export-option:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
+    
+    .export-option.active {
+        background: rgba(37, 99, 235, 0.2);
+    }
+}
+
+/* High contrast mode for components */
+@media (prefers-contrast: high) {
+    .modal {
+        border: 2px solid var(--text-dark);
+    }
+    
+    .form-input {
+        border: 3px solid var(--text-gray);
+        font-weight: 500;
+    }
+    
+    .btn {
+        border: 2px solid;
+        font-weight: 700;
+    }
+    
+    .export-option {
+        border: 3px solid var(--border-gray);
+    }
+    
+    .export-option:hover,
+    .export-option.active {
+        border-color: var(--text-dark);
+        font-weight: 600;
     }
 }
