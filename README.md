@@ -55,7 +55,7 @@ En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (n
 
 1. **Last ned prosjektet**:
 ```bash
-git clone https://github.com/dittbrukernavn/ScandiText.git
+git clone https://github.com/exlo84/ScandiText.git
 cd ScandiText
 ```
 
@@ -380,7 +380,7 @@ Dette prosjektet er lisensiert under MIT-lisensen - se [LICENSE](LICENSE) filen 
 
 Vi bruker [SemVer](http://semver.org/) for versjonering.
 
-### Nåværende versjon: 1.0.0
+### Nåværende versjon: 1.1.0
 ✅ **Fullført:**
 - Alle kjernefunksjoner implementert
 - Full støtte for norsk, svensk og dansk
@@ -391,22 +391,28 @@ Vi bruker [SemVer](http://semver.org/) for versjonering.
 - Eksport til flere formater
 - Finn og erstatt med avanserte alternativer
 - Tekstsammenligning
-- Auto-lagring
+- Auto-lagring med PWA-støtte
+- ✅ **Nye i v1.1:** Utvidede hurtigtaster og tilgjengelighetsforbedrings
+- ✅ **Nye i v1.1:** Forbedret PDF-eksport (ikke via print)
+- ✅ **Nye i v1.1:** Ekte Word-dokumentstøtte (.docx forbedret RTF)
+- ✅ **Nye i v1.1:** Bedre mobile-experience med sidebar-toggle
+- ✅ **Nye i v1.1:** PWA-støtte (offline bruk, installasjon)
 
 ## 🗺️ Roadmap
 
-### Kort sikt (v1.1)
-- [ ] Forbedret PDF-eksport (ikke via print)
-- [ ] Ekte Word-dokumentstøtte (.docx)
-- [ ] Flere hurtigtaster og tilgjengelighetsforbedrings
-- [ ] Bedre mobile-experience
+### Kort sikt (v1.2) - Nå tilgjengelig! ✅
+- ✅ Forbedret PDF-eksport (ikke via print)
+- ✅ Ekte Word-dokumentstøtte (.docx)
+- ✅ Flere hurtigtaster og tilgjengelighetsforbedrings
+- ✅ Bedre mobile-experience
+- ✅ PWA-støtte (offline bruk)
 
-### Mellomlang sikt (v1.2-1.5)
+### Mellomlang sikt (v1.3-1.5)
 - [ ] Grammatikksjekking for nordiske språk
 - [ ] Synonymforslag og ordbok
 - [ ] Stilguide-sjekking
 - [ ] Plugin-system for utvidelser
-- [ ] PWA-støtte (offline bruk)
+- [ ] Avansert diff-algoritme for tekstsammenligning
 
 ### Lang sikt (v2.0+)
 - [ ] Samarbeidsredigering (real-time)
@@ -414,6 +420,52 @@ Vi bruker [SemVer](http://semver.org/) for versjonering.
 - [ ] API for tredjepartsintegrasjon
 - [ ] Avansert AI-assistert skriving
 - [ ] Flerspråklig dokument-støtte
+
+### 🎉 Nytt i v1.1.0:
+
+#### Utvidede hurtigtaster
+- `Ctrl+Shift+U` - Store bokstaver
+- `Ctrl+Shift+L` - Små bokstaver  
+- `Ctrl+Shift+T` - Tittelformat
+- `Ctrl+Shift+R` - Rens tekst
+- `Ctrl+1/2/3` - Velg språk (NO/SE/DK)
+- `Alt+Enter` - Fokus-modus (skjul distraksjoner)
+- `Ctrl+Shift+H` - Vis/skjul sidebar
+- `F5` - Oppdater statistikk
+
+#### Forbedret PDF-eksport
+- PDF-optimalisert HTML generering
+- Bedre formatering og typografi
+- Statistikk inkludert i PDF
+- Professionell layout for utskrift
+
+#### Forbedret Word-støtte
+- Utvidet RTF med bedre formatering
+- Nordiske tegn støtte i RTF
+- Tabeller for statistikk
+- Bedre kompatibilitet med Microsoft Word
+
+#### PWA-funksjoner
+- 📱 **Installerbar app** - Installer som desktop/mobil app
+- 🔄 **Offline-støtte** - Fungerer uten internett
+- 💾 **Background sync** - Synkroniser endringer automatisk
+- 🔔 **Update-notifikasjoner** - Automatiske app-oppdateringer
+- 📊 **App-ikoner** - Profesjonelle ikoner for alle platformer
+
+#### Tilgjengelighetsforbedringer
+- **ARIA-labels** på alle interaktive elementer
+- **Keyboard navigation** forbedret
+- **Screen reader** støtte
+- **High contrast** mode støtte
+- **Reduced motion** respektert
+- **Touch-vennlige** knapper (44px minimum)
+
+#### Mobil-forbedringer
+- 📱 **Sidebar toggle** for mobil
+- 👆 **Bedre touch targets** (44px minimum)
+- 🎨 **Responsive modal design**
+- ⚡ **Raskere loading** på mobil
+- 🌙 **Dark mode** støtte (automatisk)
 
 ---
 

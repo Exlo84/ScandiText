@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Nordisk Tekstredigering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .offline-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .retry-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .retry-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📴</div>
+        <h1>Du er offline</h1>
+        <p>Nordisk Tekstredigering krever internettilkobling for å fungere optimalt. Når du kobler til igjen, vil alle funksjoner være tilgjengelige.</p>
+        
+        <button class="retry-btn" onclick="window.location.reload()">🔄 Prøv igjen</button>
+        <button class="retry-btn" onclick="window.location.href='/'">🏠 Gå til hovedside</button>
+        
+        <div class="features">
+            <h3 style="margin-bottom: 15px; font-size: 18px;">Funksjoner tilgjengelig offline:</h3>
+            <div class="feature">
+                <span class="feature-icon">✍️</span>
+                <span>Grunnleggende tekstredigering</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📊</span>
+                <span>Tekststatistikk og analyse</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔤</span>
+                <span>Teksttransformasjoner</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔍</span>
+                <span>Finn og erstatt</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">💾</span>
+                <span>Lokal lagring av tekst</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

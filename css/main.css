@@ -49,10 +49,19 @@ body {
 }
 
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
     background: var(--blue-gradient);
     color: white;
     padding: 25px 30px;
     text-align: center;
+}
+
+.header-content {
+    flex: 1;
 }
 
 .header h1 {
@@ -93,6 +102,22 @@ body {
 .lang-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.mobile-menu-toggle:hover {
+    background: var(--dark-blue);
 }
 
 .main-content {
@@ -299,43 +324,238 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Responsive design */
+/* Focus Mode - Hide distractions for concentrated writing */
+body.focus-mode .toolbar,
+body.focus-mode .status-bar {
+    opacity: 0.3;
+    transition: var(--transition);
+}
+
+body.focus-mode .toolbar:hover,
+body.focus-mode .status-bar:hover {
+    opacity: 1;
+}
+
+body.focus-mode .sidebar {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+body.focus-mode .main-content {
+    margin-right: 0;
+}
+
+/* Sidebar toggle */
+.sidebar.hidden {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.hidden ~ .main-content {
+    margin-right: 0;
+}
+
+/* Enhanced keyboard shortcuts indicator */
+.keyboard-hint {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.keyboard-hint.show {
+    opacity: 1;
+}
+
+/* Improved mobile experience - Enhanced responsive design */
 @media (max-width: 768px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .editor-toolbar {
-        justify-content: center;
-    }
-    
-    .header h1 {
-        font-size: 1.8em;
-    }
-    
-    .container {
-        margin: 10px;
-        border-radius: var(--border-radius);
-    }
-    
     body {
         padding: 10px;
     }
-}
-
-@media (max-width: 480px) {
-    .language-selector {
+    
+    .container {
+        border-radius: 8px;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    }
+    
+    .sidebar.mobile-open {
+        transform: translateX(0);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 300px;
+        z-index: 1001;
+        overflow-y: auto;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    }
+    
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-right: 0;
+    }
+    
+    /* Mobile toolbar improvements */
+    .toolbar {
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
+        padding: 15px;
     }
     
     .tool-group {
+        flex-wrap: wrap;
         justify-content: center;
+        gap: 8px;
     }
     
-    .status-bar {
-        flex-direction: column;
-        gap: 10px;
+    .tool-btn {
+        min-width: 44px; /* Better touch target */
+        min-height: 44px;
+        font-size: 14px;
+    }
+    
+    /* Mobile-specific text editor */
+    .text-editor {
+        min-height: 60vh;
+        font-size: 16px; /* Prevent zoom on iOS */
+        line-height: 1.5;
+    }
+    
+    /* Mobile stats layout */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-item {
+        padding: 15px;
         text-align: center;
+    }
+    
+    /* Mobile modal improvements */
+    .modal-content {
+        margin: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    /* Mobile-friendly language buttons */
+    .language-selector {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .lang-btn {
+        min-height: 44px;
+        font-size: 16px;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        order: 2;
+    }
+    
+    .language-selector {
+        order: 3;
+        flex-basis: 100%;
+    }
+    
+    .header-content {
+        order: 1;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    .tool-btn:hover {
+        background: var(--light-gray);
+    }
+    
+    .tool-btn:active {
+        transform: scale(0.95);
+        background: var(--border-gray);
+    }
+    
+    /* Larger touch targets */
+    button, .btn, .tool-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    :root {
+        --border-gray: #666;
+        --text-gray: #333;
+    }
+    
+    .tool-btn {
+        border: 2px solid #333;
+    }
+    
+    .tool-btn.active {
+        background: #000;
+        color: #fff;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        --light-gray: #34495e;
+        --border-gray: #495057;
+        --text-gray: #adb5bd;
+    }
+    
+    body {
+        color: #f8f9fa;
+    }
+    
+    .container {
+        background: #2c3e50;
+        color: #f8f9fa;
+    }
+    
+    .text-editor {
+        background: #34495e;
+        color: #f8f9fa;
+        border-color: #495057;
+    }
+    
+    .sidebar {
+        background: #2c3e50;
+        border-left-color: #495057;
     }
 }

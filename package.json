@@ -1,6 +1,6 @@
 {
   "name": "nordisk-tekstredigering",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (norsk, svensk, dansk)",
   "type": "module",
   "main": "index.html",

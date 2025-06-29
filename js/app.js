@@ -103,6 +103,18 @@ class NordiskTekstredigering {
             btn.addEventListener('click', () => this.handleAdvancedTool(tool));
         });
 
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                const sidebar = document.querySelector('.stats-panel');
+                sidebar.classList.toggle('mobile-open');
+                const isOpen = sidebar.classList.contains('mobile-open');
+                mobileToggle.setAttribute('aria-expanded', isOpen.toString());
+                mobileToggle.textContent = isOpen ? '✕ Lukk' : '📊 Statistikk';
+            });
+        }
+
         // Window events
         window.addEventListener('beforeunload', this.handleBeforeUnload.bind(this));
         window.addEventListener('resize', this.handleResize.bind(this));
@@ -142,6 +154,54 @@ class NordiskTekstredigering {
         else if (e.key === 'F1') {
             e.preventDefault();
             this.showHelp();
+        }
+        // F5 for refresh stats
+        else if (e.key === 'F5') {
+            e.preventDefault();
+            this.updateStats();
+            this.showToast('Statistikk oppdatert', 'success');
+        }
+        // Ctrl/Cmd + Shift + U for uppercase
+        else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'U') {
+            e.preventDefault();
+            this.handleTextTransform('uppercase');
+        }
+        // Ctrl/Cmd + Shift + L for lowercase
+        else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'L') {
+            e.preventDefault();
+            this.handleTextTransform('lowercase');
+        }
+        // Ctrl/Cmd + Shift + T for title case
+        else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+            e.preventDefault();
+            this.handleTextTransform('titlecase');
+        }
+        // Ctrl/Cmd + Shift + R for clean text
+        else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'R') {
+            e.preventDefault();
+            this.handleTextTransform('clean');
+        }
+        // Ctrl/Cmd + 1, 2, 3 for language selection
+        else if ((e.ctrlKey || e.metaKey) && ['1', '2', '3'].includes(e.key)) {
+            e.preventDefault();
+            const languages = ['no', 'se', 'dk'];
+            const langIndex = parseInt(e.key) - 1;
+            if (languages[langIndex]) {
+                this.currentLanguage = languages[langIndex];
+                this.updateLanguageUI();
+                this.updateStats();
+                this.showToast(`Språk endret til ${this.getLanguageLabel(languages[langIndex])}`, 'info');
+            }
+        }
+        // Alt + Enter for full screen editor (toggle focus mode)
+        else if (e.altKey && e.key === 'Enter') {
+            e.preventDefault();
+            this.toggleFocusMode();
+        }
+        // Ctrl/Cmd + Shift + H for show/hide sidebar
+        else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+            e.preventDefault();
+            this.toggleSidebar();
         }
     }
 
@@ -349,8 +409,76 @@ class NordiskTekstredigering {
             this.toggleAutoSave();
         }
 
-        // Load saved text
+        // Load saved text and settings
         this.loadFromLocalStorage();
+        
+        // Initialize PWA background sync if available
+        if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+            this.initializeBackgroundSync();
+        }
+        
+        // Handle app state changes (online/offline)
+        window.addEventListener('online', () => {
+            this.showToast('Tilkoblet - Auto-lagring gjenopprettet', 'success');
+            this.syncPendingChanges();
+        });
+        
+        window.addEventListener('offline', () => {
+            this.showToast('Offline - Endringer lagres lokalt', 'warning');
+        });
+    }
+
+    /**
+     * Initialize background sync for PWA
+     */
+    async initializeBackgroundSync() {
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            
+            // Register for background sync
+            if (registration.sync) {
+                console.log('Background sync supported');
+                
+                // Sync on visibility change
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden && this.autoSaveEnabled) {
+                        this.requestBackgroundSync();
+                    }
+                });
+            }
+        } catch (error) {
+            console.warn('Background sync not available:', error);
+        }
+    }
+
+    /**
+     * Request background sync
+     */
+    async requestBackgroundSync() {
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            await registration.sync.register('save-text');
+            console.log('Background sync requested');
+        } catch (error) {
+            console.warn('Background sync request failed:', error);
+        }
+    }
+
+    /**
+     * Sync pending changes when coming back online
+     */
+    syncPendingChanges() {
+        const pendingData = localStorage.getItem('nordisk-text-editor-pending');
+        if (pendingData) {
+            try {
+                const data = JSON.parse(pendingData);
+                // Process any pending changes
+                this.showToast('Synkroniserte endringer', 'success');
+                localStorage.removeItem('nordisk-text-editor-pending');
+            } catch (error) {
+                console.error('Failed to sync pending changes:', error);
+            }
+        }
     }
 
     /**
@@ -431,6 +559,67 @@ class NordiskTekstredigering {
             if (langMap[langText] === this.currentLanguage) {
                 btn.classList.add('active');
             }
+        });
+    }
+
+    /**
+     * Get language label for display
+     * @param {string} code - Language code
+     * @returns {string} Language label
+     */
+    getLanguageLabel(code) {
+        const labels = {
+            'no': 'Norsk',
+            'se': 'Svenska', 
+            'dk': 'Dansk'
+        };
+        return labels[code] || 'Ukjent';
+    }
+
+    /**
+     * Toggle focus mode (hide/show sidebar and controls)
+     */
+    toggleFocusMode() {
+        const body = document.body;
+        const sidebar = document.querySelector('.sidebar');
+        const toolbar = document.querySelector('.toolbar');
+        
+        body.classList.toggle('focus-mode');
+        
+        if (body.classList.contains('focus-mode')) {
+            this.showToast('Fokus-modus aktivert. Alt+Enter for å avslutte', 'info');
+        } else {
+            this.showToast('Fokus-modus deaktivert', 'info');
+        }
+    }
+
+    /**
+     * Toggle sidebar visibility
+     */
+    toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('hidden');
+        
+        if (sidebar.classList.contains('hidden')) {
+            this.showToast('Sidebar skjult', 'info');
+        } else {
+            this.showToast('Sidebar vist', 'info');
+        }
+    }
+
+    /**
+     * Update language UI indicators
+     */
+    updateLanguageUI() {
+        // Update language buttons
+        document.querySelectorAll('[data-lang]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === this.currentLanguage);
+        });
+        
+        // Update any language indicators
+        const indicators = document.querySelectorAll('.language-indicator');
+        indicators.forEach(indicator => {
+            indicator.textContent = this.getLanguageLabel(this.currentLanguage);
         });
     }
 

@@ -321,59 +321,310 @@ export class ExportUtils {
      * @param {Object} loading - Loading modal controller
      */
     async exportToPdf(text, filename, stats, loading) {
-        loading.updateMessage('Laster PDF-bibliotek...');
-        loading.updateProgress(50);
+        loading.updateMessage('Genererer PDF...');
+        loading.updateProgress(30);
 
         try {
-            // For a real implementation, you would load jsPDF here
-            // const { jsPDF } = await import('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/+esm');
-            
-            // Simplified implementation - create a printable HTML version
-            const printHtml = this.generatePrintableHtml(text, filename, stats);
-            const blob = new Blob([printHtml], { type: 'text/html' });
-            this.downloadBlob(blob, filename.replace('.pdf', '_printable.html'));
-            
-            loading.updateProgress(90);
-            
-            // Open print dialog
-            setTimeout(() => {
-                modal.alert({
-                    title: 'PDF-eksport',
-                    message: 'En utskriftsvennlig HTML-fil har blitt lastet ned. Bruk nettleserens utskriftsfunksjon og velg "Lagre som PDF" for å generere PDF.',
-                    type: 'info'
-                });
-            }, 1000);
+            // Try to use browser's built-in PDF generation
+            if (window.showSaveFilePicker) {
+                // Modern browsers with File System Access API
+                await this.generateModernPdf(text, filename, stats, loading);
+            } else {
+                // Fallback to improved HTML PDF generation
+                await this.generateHtmlPdf(text, filename, stats, loading);
+            }
             
         } catch (error) {
-            // Fallback to HTML export
+            console.warn('PDF generation failed, using fallback:', error);
+            // Final fallback to HTML export
             await this.exportToHtml(text, filename.replace('.pdf', '.html'), stats);
         }
     }
 
     /**
-     * Generate RTF content
+     * Generate PDF using modern browser APIs
+     */
+    async generateModernPdf(text, filename, stats, loading) {
+        loading.updateProgress(50);
+        
+        // Create a dedicated PDF-optimized HTML
+        const pdfHtml = this.generatePdfOptimizedHtml(text, filename, stats);
+        
+        // Create a hidden iframe for PDF generation
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'absolute';
+        iframe.style.left = '-9999px';
+        iframe.style.width = '210mm'; // A4 width
+        iframe.style.height = '297mm'; // A4 height
+        document.body.appendChild(iframe);
+        
+        // Write content to iframe
+        iframe.contentDocument.open();
+        iframe.contentDocument.write(pdfHtml);
+        iframe.contentDocument.close();
+        
+        loading.updateProgress(70);
+        
+        // Wait for content to load
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        try {
+            // Try to use the iframe's print functionality
+            iframe.contentWindow.print();
+            
+            modal.confirm({
+                title: 'PDF-generering',
+                message: 'Utskriftsdialogen er åpnet. Velg "Lagre som PDF" som destinasjon for å generere PDF-filen.',
+                confirmText: 'OK',
+                cancelText: 'Last ned HTML i stedet',
+                onConfirm: () => {
+                    document.body.removeChild(iframe);
+                },
+                onCancel: () => {
+                    document.body.removeChild(iframe);
+                    const blob = new Blob([pdfHtml], { type: 'text/html' });
+                    this.downloadBlob(blob, filename.replace('.pdf', '_pdf-optimized.html'));
+                }
+            });
+            
+        } catch (error) {
+            document.body.removeChild(iframe);
+            throw error;
+        }
+        
+        loading.updateProgress(100);
+    }
+
+    /**
+     * Generate HTML optimized for PDF conversion
+     */
+    generateHtmlPdf(text, filename, stats, loading) {
+        loading.updateProgress(60);
+        
+        const pdfHtml = this.generatePdfOptimizedHtml(text, filename, stats);
+        const blob = new Blob([pdfHtml], { type: 'text/html' });
+        
+        this.downloadBlob(blob, filename.replace('.pdf', '_pdf-ready.html'));
+        
+        loading.updateProgress(90);
+        
+        setTimeout(() => {
+            modal.alert({
+                title: 'PDF-klar HTML',
+                message: 'En PDF-optimalisert HTML-fil har blitt lastet ned. Åpne filen i nettleseren og bruk Ctrl+P → "Lagre som PDF" for beste resultat.',
+                type: 'info'
+            });
+        }, 500);
+    }
+
+    /**
+     * Generate PDF-optimized HTML content
+     */
+    generatePdfOptimizedHtml(text, filename, stats) {
+        const title = filename.replace(/\.[^/.]+$/, '');
+        const date = new Date().toLocaleDateString('no-NO');
+        
+        return `<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>${title}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 1cm;
+            margin-bottom: 1cm;
+        }
+        
+        .title {
+            font-size: 24pt;
+            font-weight: bold;
+            margin-bottom: 0.5cm;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 12pt;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .stats-box {
+            background: #ecf0f1;
+            padding: 0.5cm;
+            border-radius: 4px;
+            margin: 1cm 0;
+            font-size: 10pt;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .stat-item {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 14pt;
+            color: #2c3e50;
+        }
+        
+        .content {
+            font-size: 12pt;
+            text-align: justify;
+            margin-top: 1cm;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 1cm;
+            left: 2cm;
+            right: 2cm;
+            text-align: center;
+            font-size: 9pt;
+            color: #7f8c8d;
+            border-top: 1px solid #bdc3c7;
+            padding-top: 0.3cm;
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            body { print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="title">${title}</div>
+        <div class="subtitle">Generert av Nordisk Tekstredigering • ${date}</div>
+    </header>
+    
+    <div class="stats-box">
+        <div class="stat-item">
+            <div class="stat-value">${stats.words || 0}</div>
+            <div>Ord</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">${stats.characters || 0}</div>
+            <div>Tegn</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">${stats.sentences || 0}</div>
+            <div>Setninger</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">${stats.paragraphs || 0}</div>
+            <div>Avsnitt</div>
+        </div>
+        ${stats.readabilityScore ? `
+        <div class="stat-item">
+            <div class="stat-value">${Math.round(stats.readabilityScore)}</div>
+            <div>Lesbarhet</div>
+        </div>` : ''}
+    </div>
+    
+    <main class="content">
+        ${text.split('\n\n').map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`).join('')}
+    </main>
+    
+    <footer class="footer">
+        Nordisk Tekstredigering - Avansert tekstanalyse for nordiske språk
+    </footer>
+</body>
+</html>`;
+    }
+
+    /**
+     * Generate enhanced RTF content with better Word compatibility
      * @param {string} text - Text content
      * @param {string} filename - Filename
      * @param {Object} stats - Text statistics
-     * @returns {string} RTF content
+     * @returns {string} Enhanced RTF content
      */
     generateRtf(text, filename, stats) {
         const title = filename.replace(/\.[^/.]+$/, '');
-        const statsText = `Ord: ${stats.words || 0} | Tegn: ${stats.characters || 0} | Setninger: ${stats.sentences || 0}`;
+        const date = new Date().toLocaleDateString('no-NO');
+        const time = new Date().toLocaleTimeString('no-NO');
         
-        return `{\\rtf1\\ansi\\deff0 {\\fonttbl {\\f0 Times New Roman;}}
-\\f0\\fs24
-{\\b\\fs28 ${title}\\par}
-\\par
-{\\i Eksportert fra Nordisk Tekstredigering\\par}
-\\par
-{\\fs20 ${statsText}\\par}
-\\par
-${text.replace(/\n/g, '\\par\n')}
-\\par
-\\par
-{\\fs16\\i Generert ${new Date().toLocaleString('no-NO')}\\par}
+        // Enhanced RTF with better formatting and Nordic character support
+        const rtfHeader = `{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1044{\\fonttbl{\\f0\\froman\\fprq2\\fcharset0 Times New Roman;}{\\f1\\fswiss\\fprq2\\fcharset0 Arial;}}
+{\\colortbl ;\\red47\\green79\\blue79;\\red52\\green152\\blue219;\\red39\\green174\\blue96;}
+{\\*\\generator Nordisk Tekstredigering RTF Export;}
+\\viewkind4\\uc1`;
+
+        const rtfTitle = `\\pard\\keep\\keepn\\widctlpar\\s1\\sb360\\sa180\\sl288\\slmult1\\cf1\\f1\\fs32\\b ${this.escapeRtf(title)}\\par`;
+        
+        const rtfSubtitle = `\\pard\\widctlpar\\sa180\\sl276\\slmult1\\cf2\\f1\\fs18\\i Eksportert fra Nordisk Tekstredigering • ${date} ${time}\\par`;
+        
+        // Stats table
+        const statsTable = `\\pard\\widctlpar\\sa180\\trowd\\trgaph70\\trleft-70\\trbrdrl\\brdrs\\brdrw10 \\trbrdrt\\brdrs\\brdrw10 \\trbrdrr\\brdrs\\brdrw10 \\trbrdrb\\brdrs\\brdrw10 
+\\clbrdrl\\brdrw10\\brdrs\\clbrdrt\\brdrw10\\brdrs\\clbrdrr\\brdrw10\\brdrs\\clbrdrb\\brdrw10\\brdrs \\cellx1800
+\\clbrdrl\\brdrw10\\brdrs\\clbrdrt\\brdrw10\\brdrs\\clbrdrr\\brdrw10\\brdrs\\clbrdrb\\brdrw10\\brdrs \\cellx3600
+\\clbrdrl\\brdrw10\\brdrs\\clbrdrt\\brdrw10\\brdrs\\clbrdrr\\brdrw10\\brdrs\\clbrdrb\\brdrw10\\brdrs \\cellx5400
+\\clbrdrl\\brdrw10\\brdrs\\clbrdrt\\brdrw10\\brdrs\\clbrdrr\\brdrw10\\brdrs\\clbrdrb\\brdrw10\\brdrs \\cellx7200
+\\cf3\\f1\\fs20\\b Ord\\cell Tegn\\cell Setninger\\cell Avsnitt\\cell\\row
+\\cf0\\f1\\fs18 ${stats.words || 0}\\cell ${stats.characters || 0}\\cell ${stats.sentences || 0}\\cell ${stats.paragraphs || 0}\\cell\\row`;
+
+        // Process text with proper paragraph formatting
+        const paragraphs = text.split('\n\n').filter(p => p.trim());
+        const rtfContent = paragraphs.map(paragraph => {
+            const cleanPara = this.escapeRtf(paragraph.replace(/\n/g, ' ').trim());
+            return `\\pard\\widctlpar\\sa180\\sl276\\slmult1\\f0\\fs24 ${cleanPara}\\par`;
+        }).join('\n');
+
+        const rtfFooter = `\\pard\\widctlpar\\sa180\\sl276\\slmult1\\cf2\\f1\\fs16\\i Tekstanalysefunksjoner: 
+${stats.readabilityScore ? `Lesbarhetsscore: ${Math.round(stats.readabilityScore)} • ` : ''}
+${stats.averageWordsPerSentence ? `Gj.snitt ord per setning: ${stats.averageWordsPerSentence.toFixed(1)} • ` : ''}
+${stats.averageWordLength ? `Gj.snitt ordlengde: ${stats.averageWordLength.toFixed(1)} tegn` : ''}\\par
 }`;
+
+        return `${rtfHeader}
+${rtfTitle}
+${rtfSubtitle}
+${statsTable}
+\\pard\\widctlpar\\sa180\\par
+${rtfContent}
+\\pard\\widctlpar\\sa180\\par
+${rtfFooter}`;
+    }
+
+    /**
+     * Escape RTF special characters
+     * @param {string} text - Text to escape
+     * @returns {string} Escaped RTF text
+     */
+    escapeRtf(text) {
+        return text
+            .replace(/\\/g, '\\\\')
+            .replace(/\{/g, '\\{')
+            .replace(/\}/g, '\\}')
+            .replace(/æ/g, '\\u230?')
+            .replace(/ø/g, '\\u248?')
+            .replace(/å/g, '\\u229?')
+            .replace(/Æ/g, '\\u198?')
+            .replace(/Ø/g, '\\u216?')
+            .replace(/Å/g, '\\u197?')
+            .replace(/é/g, '\\u233?')
+            .replace(/è/g, '\\u232?')
+            .replace(/ê/g, '\\u234?')
+            .replace(/ë/g, '\\u235?');
     }
 
     /**
