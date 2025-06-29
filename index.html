@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skandinavisk Tekstredigering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .editor-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .tool-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+        }
+
+        .tool-btn:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .text-area {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            font-family: 'Georgia', serif;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .stats-panel {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            height: fit-content;
+        }
+
+        .stats-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .detected-language {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .tools-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .tools-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tool-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .advanced-btn {
+            background: linear-gradient(90deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .advanced-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .editor-toolbar {
+                justify-content: center;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        .status-bar {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 30px;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .readability-score {
+            background: #27ae60;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nordisk Tekstredigering</h1>
+            <p>Tekstverktøy for norsk, svensk og dansk</p>
+            
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="selectLanguage('no')">🇳🇴 Norsk</button>
+                <button class="lang-btn" onclick="selectLanguage('se')">🇸🇪 Svenska</button>
+                <button class="lang-btn" onclick="selectLanguage('dk')">🇩🇰 Dansk</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="editor-section">
+                <div class="editor-toolbar">
+                    <button class="tool-btn" onclick="transformText('uppercase')">STORE BOKSTAVER</button>
+                    <button class="tool-btn" onclick="transformText('lowercase')">små bokstaver</button>
+                    <button class="tool-btn" onclick="transformText('title')">Tittel Format</button>
+                    <button class="tool-btn" onclick="transformText('clean')">Rens Tekst</button>
+                    <button class="tool-btn" onclick="transformText('ae-convert')">æ/ø/å → ae/oe/aa</button>
+                </div>
+
+                <textarea class="text-area" id="textEditor" placeholder="Skriv eller lim inn teksten din her. Verktøyet vil automatisk gjenkjenne språket og gi deg relevante statistikker og forslag.
+
+Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. Den kan telle ord, setninger og gi deg nyttig statistikk om teksten din.'"></textarea>
+
+                <div class="tools-section">
+                    <h4>Avanserte verktøy</h4>
+                    <div class="tool-group">
+                        <button class="advanced-btn" onclick="showAdvancedTool('find-replace')">Finn og erstatt</button>
+                        <button class="advanced-btn" onclick="showAdvancedTool('compare')">Sammenlign tekster</button>
+                        <button class="advanced-btn" onclick="showAdvancedTool('export')">Eksporter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <h3>Tekststatistikk</h3>
+                
+                <div class="stat-row">
+                    <span class="stat-label">Gjenkjent språk:</span>
+                    <span class="detected-language" id="detectedLang">Norsk</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Ord:</span>
+                    <span class="stat-value" id="wordCount">0</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Tegn (med mellomrom):</span>
+                    <span class="stat-value" id="charCount">0</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Tegn (uten mellomrom):</span>
+                    <span class="stat-value" id="charCountNoSpaces">0</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Setninger:</span>
+                    <span class="stat-value" id="sentenceCount">0</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Avsnitt:</span>
+                    <span class="stat-value" id="paragraphCount">0</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Lesetid:</span>
+                    <span class="stat-value" id="readingTime">0 min</span>
+                </div>
+
+                <div class="stat-row">
+                    <span class="stat-label">Gjennomsnittlig ordlengde:</span>
+                    <span class="stat-value" id="avgWordLength">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span>Sist oppdatert: <span id="lastUpdated">Aldri</span></span>
+            <span class="readability-score">Lesbarhet: God</span>
+        </div>
+    </div>
+
+    <script>
+        const textEditor = document.getElementById('textEditor');
+        let currentLanguage = 'no';
+
+        // Update statistics in real-time
+        textEditor.addEventListener('input', updateStats);
+
+        function updateStats() {
+            const text = textEditor.value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            const charsNoSpaces = text.replace(/\s/g, '').length;
+            const sentences = text.trim() ? text.split(/[.!?]+/).filter(s => s.trim()).length : 0;
+            const paragraphs = text.trim() ? text.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
+            const readingTime = Math.ceil(words / 200); // 200 words per minute
+            const avgWordLength = words > 0 ? (charsNoSpaces / words).toFixed(1) : 0;
+
+            document.getElementById('wordCount').textContent = words;
+            document.getElementById('charCount').textContent = chars;
+            document.getElementById('charCountNoSpaces').textContent = charsNoSpaces;
+            document.getElementById('sentenceCount').textContent = sentences;
+            document.getElementById('paragraphCount').textContent = paragraphs;
+            document.getElementById('readingTime').textContent = readingTime + ' min';
+            document.getElementById('avgWordLength').textContent = avgWordLength;
+            document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString('no-NO');
+
+            // Mock language detection
+            detectLanguage(text);
+        }
+
+        function detectLanguage(text) {
+            // Simple mock detection based on common words
+            const norwegianWords = ['og', 'i', 'det', 'til', 'en', 'er', 'som', 'på', 'med', 'av'];
+            const swedishWords = ['och', 'i', 'det', 'till', 'en', 'är', 'som', 'på', 'med', 'av'];
+            const danishWords = ['og', 'i', 'det', 'til', 'en', 'er', 'som', 'på', 'med', 'af'];
+
+            const words = text.toLowerCase().split(/\s+/);
+            let noScore = 0, seScore = 0, dkScore = 0;
+
+            words.forEach(word => {
+                if (norwegianWords.includes(word)) noScore++;
+                if (swedishWords.includes(word)) seScore++;
+                if (danishWords.includes(word)) dkScore++;
+            });
+
+            let detectedLang = 'Ukjent';
+            if (noScore > seScore && noScore > dkScore) detectedLang = 'Norsk';
+            else if (seScore > noScore && seScore > dkScore) detectedLang = 'Svenska';
+            else if (dkScore > noScore && dkScore > seScore) detectedLang = 'Dansk';
+
+            document.getElementById('detectedLang').textContent = detectedLang;
+        }
+
+        function selectLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function transformText(action) {
+            const text = textEditor.value;
+            let transformed = text;
+
+            switch(action) {
+                case 'uppercase':
+                    transformed = text.toUpperCase();
+                    break;
+                case 'lowercase':
+                    transformed = text.toLowerCase();
+                    break;
+                case 'title':
+                    transformed = text.replace(/\w\S*/g, (txt) => 
+                        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+                    break;
+                case 'clean':
+                    transformed = text.replace(/\s+/g, ' ').trim();
+                    break;
+                case 'ae-convert':
+                    transformed = text.replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
+                                     .replace(/Æ/g, 'Ae').replace(/Ø/g, 'Oe').replace(/Å/g, 'Aa');
+                    break;
+            }
+
+            textEditor.value = transformed;
+            updateStats();
+        }
+
+        function showAdvancedTool(tool) {
+            alert(`Avansert verktøy "${tool}" ville åpne i en modal eller ny seksjon`);
+        }
+
+        // Initialize stats
+        updateStats();
+    </script>
+</body>
+</html>
