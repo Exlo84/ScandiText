@@ -128,8 +128,8 @@ body {
 
 .main-content {
     display: grid !important;
-    grid-template-columns: 2fr 1fr !important;
-    grid-template-areas: "editor stats" !important;
+    grid-template-columns: 200px 2fr 1fr !important;
+    grid-template-areas: "ads editor stats" !important;
     gap: 30px !important;
     padding: 30px !important;
     align-items: start !important;
@@ -142,6 +142,19 @@ body {
     display: flex !important;
     flex-direction: column !important;
     min-width: 0 !important; /* Prevents flex overflow */
+}
+
+.ad-column-left {
+    grid-area: ads !important;
+    min-width: 160px !important;
+    max-width: 200px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+.ad-column-left .adsbygoogle {
+    margin: 10px 0 !important;
 }
 
 .stats-panel {
@@ -443,11 +456,19 @@ body.focus-mode .main-content {
 @media screen and (min-width: 769px) {
     .main-content {
         display: grid !important;
-        grid-template-columns: 2fr 1fr !important;
-        grid-template-areas: "editor stats" !important;
+        grid-template-columns: 200px 2fr 1fr !important;
+        grid-template-areas: "ads editor stats" !important;
         gap: 30px !important;
         align-items: start !important;
         padding: 30px !important;
+    }
+    
+    .ad-column-left {
+        grid-area: ads !important;
+        display: flex !important;
+        flex-direction: column !important;
+        min-width: 160px !important;
+        max-width: 200px !important;
     }
     
     .editor-section {
@@ -465,7 +486,7 @@ body.focus-mode .main-content {
         height: fit-content !important;
         box-shadow: none !important;
         z-index: auto !important;
-        order: 2 !important;
+        order: 3 !important;
         max-width: 350px !important;
         min-width: 280px !important;
         background: var(--light-gray) !important;
@@ -478,24 +499,26 @@ body.focus-mode .main-content {
 @media screen and (min-width: 769px) {
     body .container .main-content {
         display: grid !important;
-        grid-template-columns: 2fr 1fr !important;
-        grid-template-areas: "editor stats" !important;
+        grid-template-columns: 200px 2fr 1fr !important;
+        grid-template-areas: "ads editor stats" !important;
         gap: 30px !important;
         align-items: start !important;
         padding: 30px !important;
     }
     
+    body .container .main-content .ad-column-left {
+        grid-area: ads !important;
+        order: 1 !important;
+    }
+    
     body .container .main-content .editor-section {
         grid-area: editor !important;
-        display: flex !important;
-        flex-direction: column !important;
-        min-width: 0 !important;
-        order: 1 !important;
+        order: 2 !important;
     }
     
     body .container .main-content .stats-panel {
         grid-area: stats !important;
-        order: 2 !important;
+        order: 3 !important;
         position: static !important;
         transform: none !important;
         width: auto !important;
@@ -554,6 +577,10 @@ html body .container .main-content .stats-panel:not(.force-mobile) {
         margin-right: 0 !important;
         padding: 20px !important;
         gap: 20px !important;
+    }
+    
+    .ad-column-left {
+        display: none !important; /* Hide ads on mobile */
     }
     
     .editor-section {
