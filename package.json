@@ -7,8 +7,6 @@
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "python -m http.server 8000",
-    "test": "node tests/basic-tests.js",
-    "lint": "echo 'No linting configured yet'",
     "build": "echo 'No build step required - vanilla JavaScript'"
   },
   "repository": {
@@ -48,10 +46,13 @@
   "dependencies": {},
   "files": [
     "index.html",
-    "demo.html",
     "css/",
     "js/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "manifest.json",
+    "sw.js",
+    "icons/",
+    "og-image.jpg"
   ]
 }

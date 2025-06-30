@@ -19,6 +19,14 @@ class EnvLoader {
         }
 
         try {
+            // First check if config is already loaded in window.APP_CONFIG
+            if (window.APP_CONFIG) {
+                this.config = window.APP_CONFIG;
+                console.log('✅ Config loaded from window.APP_CONFIG');
+                this.isLoaded = true;
+                return this.config;
+            }
+
             // Try to load from a config.js file that should be created on the server
             const response = await fetch('./config.js');
             if (response.ok) {
