@@ -268,17 +268,14 @@
       gtag('config', 'G-EC264CFY25');
     </script>
 </head>
-<body itemscope itemtype="https://schema.org/WebApplication">
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="skip-link" tabindex="1">Hopp til hovedinnhold</a>
-    
+<body>
     <div class="container">
         <header class="header" role="banner">
-            <div class="logo" itemscope itemtype="https://schema.org/Brand">
+            <div class="logo">
                 <div class="logo-icon">NT</div>
                 <div class="logo-text">
-                    <h1 class="logo-title" id="main-title" itemprop="name">Nordisk Tekstredigering</h1>
-                    <p class="logo-subtitle" id="main-subtitle" itemprop="description">Avansert tekstbehandling for nordiske språk</p>
+                    <h1 class="logo-title" id="main-title">Nordisk Tekstredigering</h1>
+                    <p class="logo-subtitle" id="main-subtitle">Avansert tekstbehandling for nordiske språk</p>
                 </div>
             </div>
             
@@ -286,16 +283,16 @@
                 📊 Statistikk
             </button>
             
-            <nav class="language-selector" role="navigation" aria-label="Språkvalg">
+            <div class="language-selector" role="group" aria-label="Språkvalg">
                 <button class="lang-btn active" data-lang="no" aria-pressed="true" aria-label="Velg norsk">🇳🇴 Norsk</button>
                 <button class="lang-btn" data-lang="se" aria-pressed="false" aria-label="Velg svenska">🇸🇪 Svenska</button>
                 <button class="lang-btn" data-lang="dk" aria-pressed="false" aria-label="Velg dansk">🇩🇰 Dansk</button>
-            </nav>
+            </div>
         </header>
 
-        <main class="main-content" id="main-content" role="main" itemscope itemtype="https://schema.org/SoftwareApplication">
+        <div class="main-content">
             <!-- Left Ad Column -->
-            <aside class="ad-column-left" role="complementary" aria-label="Annonser">
+            <div class="ad-column-left">
                 <!-- AdSense Ad Unit -->
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -306,9 +303,9 @@
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-            </aside>
+            </div>
 
-            <section class="editor-section" role="application" aria-label="Tekstbehandling">
+            <div class="editor-section">
                 <div class="editor-toolbar" role="toolbar" aria-label="Teksttransformasjoner">
                     <button class="tool-btn tooltip tooltip-shortcut" data-transform="uppercase" data-tooltip="Konverter all tekst til store bokstaver" data-shortcut="Ctrl+Shift+U" aria-label="Konverter til store bokstaver">STORE BOKSTAVER</button>
                     <button class="tool-btn tooltip tooltip-shortcut" data-transform="lowercase" data-tooltip="Konverter all tekst til små bokstaver" data-shortcut="Ctrl+Shift+L" aria-label="Konverter til små bokstaver">små bokstaver</button>
@@ -317,7 +314,7 @@
                     <button class="tool-btn tooltip tooltip-long" data-transform="ae-convert" data-tooltip="Konverter nordiske bokstaver til ASCII-ekvivalenter for kompatibilitet" aria-label="Konverter nordiske tegn til ASCII">æ/ø/å → ae/oe/aa</button>
                 </div>
 
-                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">
+                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">>
                     <h4 id="translation-title">Oversettelse</h4>
                     <div class="tool-group" role="group" aria-label="Oversettelsesverktøy">
                         <button class="translate-btn tooltip" data-translate="no" data-tooltip="Oversett teksten til norsk" aria-label="Oversett til norsk">🇳🇴 Til Norsk</button>
@@ -343,8 +340,8 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 </div>
             </div>
 
-            <aside class="stats-panel" role="complementary" aria-label="Tekststatistikk" itemscope itemtype="https://schema.org/Article">
-                <h3 itemprop="headline">Tekststatistikk</h3>
+            <div class="stats-panel" role="region" aria-label="Tekststatistikk">
+                <h3>Tekststatistikk</h3>
                 
                 <div class="stat-row">
                     <span class="stat-label">Gjenkjent språk:</span>
@@ -393,23 +390,14 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
             </div>
         </div>
 
-        <footer class="status-bar" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
-            <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link" itemprop="url">
-                <span itemprop="name">© Exlo 2025</span>
-            </a>
-            <nav aria-label="Fotlenker">
-                <a href="https://scanditext.exlo.no/privacy" rel="nofollow">Personvern</a>
-                <a href="https://scanditext.exlo.no/terms" rel="nofollow">Vilkår</a>
-                <a href="https://exlo.no/contact" rel="noopener">Kontakt</a>
-            </nav>
-        </footer>
+        <div class="status-bar">
+            <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link">© Exlo 2025</a>
+        </div>
     </div>
 
-    <aside class="sponsor-banner" role="banner" aria-label="Sponsor">
-        <a href="https://music.exlo.no/" target="_blank" rel="noopener sponsored" itemscope itemtype="https://schema.org/Organization">
-            <span itemprop="name">🎵 Sponset av Exlo Music</span>
-        </a>
-    </aside>
+    <a href="https://music.exlo.no/" target="_blank" rel="noopener" class="sponsor-banner">
+        🎵 Sponset av Exlo Music
+    </a>
 
     <script type="module" src="js/app.js"></script>
     
