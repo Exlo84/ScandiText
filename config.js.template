@@ -1,0 +1,8 @@
+// Application Configuration Template
+// Copy this to config.js and add your actual API key
+// DO NOT commit config.js to git - it's in .gitignore for security
+
+window.APP_CONFIG = {
+    "GOOGLE_TRANSLATE_API_KEY": "YOUR_API_KEY_HERE",
+    "NODE_ENV": "production"
+};

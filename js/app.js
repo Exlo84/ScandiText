@@ -910,13 +910,13 @@ class NordiskTekstredigering {
                 `,
                 footer: `
                     <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Avbryt</button>
-                    <button class="btn btn-primary" onclick="document.getElementById('app').dispatchEvent(new CustomEvent('applyTranslation', { detail: ${JSON.stringify(result)} })); this.closest('.modal').remove();">Bruk oversettelse</button>
+                    <button class="btn btn-primary" onclick="document.dispatchEvent(new CustomEvent('applyTranslation', { detail: ${JSON.stringify(result)} })); this.closest('.modal').remove();">Bruk oversettelse</button>
                 `,
                 className: 'translation-modal'
             });
 
             // Handle translation application
-            document.getElementById('app').addEventListener('applyTranslation', (e) => {
+            document.addEventListener('applyTranslation', (e) => {
                 const translationResult = e.detail;
                 
                 // Apply translation to text editor

@@ -67,6 +67,7 @@ export class GoogleTranslate {
             
             if (!this.apiKey || this.apiKey === 'null' || this.apiKey === '') {
                 console.warn('⚠️ Google Translate API key not configured - translation disabled');
+                console.info('To enable translation: upload config.js with valid API key to server');
                 this.isInitialized = false;
                 return false;
             }

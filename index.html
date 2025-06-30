@@ -61,6 +61,10 @@
     <meta name="original-source" content="https://nordisk.exlo.no/">
     <meta name="verification" content="ScandiText Nordic Text Editor">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="og-image.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="og-image.jpg">
+    
     <!-- Sitemap and Robots -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
     
@@ -224,14 +228,7 @@
     <link rel="stylesheet" href="css/tooltips.css">
     
     <!-- Configuration -->
-    <script>
-        // Fallback configuration in case config.js is not available
-        window.APP_CONFIG = window.APP_CONFIG || {
-            "GOOGLE_TRANSLATE_API_KEY": "AIzaSyADbeyYtB-ZdXur0MNPTihPJ7ryqZgTm-E",
-            "NODE_ENV": "production"
-        };
-    </script>
-    <script src="config.js" onerror="console.log('config.js not found, using fallback configuration')"></script>
+    <script src="config.js" onerror="console.log('config.js not found - translation features will be disabled')"></script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC264CFY25"></script>

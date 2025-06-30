@@ -45,13 +45,16 @@ class EnvLoader {
         // Fallback: check for environment variables in the global scope
         if (!this.config.GOOGLE_TRANSLATE_API_KEY) {
             this.config = {
-                GOOGLE_TRANSLATE_API_KEY: window.GOOGLE_TRANSLATE_API_KEY || window.APP_CONFIG?.GOOGLE_TRANSLATE_API_KEY || null,
-                NODE_ENV: window.NODE_ENV || window.APP_CONFIG?.NODE_ENV || 'development'
+                GOOGLE_TRANSLATE_API_KEY: window.APP_CONFIG?.GOOGLE_TRANSLATE_API_KEY || null,
+                NODE_ENV: window.APP_CONFIG?.NODE_ENV || 'production'
             };
-            console.log('📋 Using fallback configuration:', { 
-                hasApiKey: !!this.config.GOOGLE_TRANSLATE_API_KEY,
-                nodeEnv: this.config.NODE_ENV 
-            });
+            
+            if (this.config.GOOGLE_TRANSLATE_API_KEY) {
+                console.log('📋 Using configuration from window.APP_CONFIG');
+            } else {
+                console.log('📋 No API key found - translation features disabled');
+                console.info('To enable translation: ensure config.js is uploaded to server with valid API key');
+            }
         }
 
         this.isLoaded = true;

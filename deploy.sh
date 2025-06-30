@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Deploy script for Nordisk Tekstredigering
-# Uploads essential files to fix API and icon issues
+# Secure deployment that keeps API keys out of public code
 
-echo "🚀 Deploying fixes for Nordisk Tekstredigering..."
+echo "🚀 Deploying Nordisk Tekstredigering..."
 
 # Check if config.js exists
 if [ ! -f "config.js" ]; then
@@ -11,7 +11,7 @@ if [ ! -f "config.js" ]; then
     if [ -f ".env" ]; then
         # Create config.js from .env
         echo "// Application Configuration" > config.js
-        echo "// This file is generated from .env" >> config.js
+        echo "// This file is generated from .env and should not be committed to git" >> config.js
         echo "window.APP_CONFIG = {" >> config.js
         
         # Extract API key from .env
@@ -28,11 +28,18 @@ if [ ! -f "config.js" ]; then
     fi
 fi
 
-echo "📁 Files to upload:"
-echo "  - index.html (updated with fallback config)"
-echo "  - config.js (API key configuration)"
+echo ""
+echo "� SECURITY REMINDER:"
+echo "  - config.js contains sensitive API keys"
+echo "  - Upload config.js separately to server (not via git)"
+echo "  - Ensure config.js is in .gitignore"
+echo ""
+
+echo "�📁 Files to upload:"
+echo "  - index.html (secure version without embedded keys)"
+echo "  - config.js (upload separately - contains API key)"
 echo "  - js/googleTranslate.js (improved error handling)"
-echo "  - js/envLoader.js (robust config loading)"
+echo "  - js/envLoader.js (secure config loading)"
 echo "  - browserconfig.xml (fixed icon references)"
 echo "  - og-image.jpg (social media image)"
 
@@ -42,7 +49,6 @@ echo "1. Upload all files listed above to your server"
 echo "2. Ensure config.js is accessible at https://nordisk.exlo.no/config.js"
 echo "3. Test translation functionality"
 echo ""
-echo "🆘 If config.js still returns 404:"
-echo "   Don't worry! The fallback configuration in index.html will work."
+echo "⚠️  IMPORTANT: Never commit config.js to git repository!"
 
-echo "✅ Deployment preparation complete!"
+echo "✅ Secure deployment preparation complete!"
