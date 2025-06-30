@@ -1,0 +1,21 @@
+# Environment variables
+.env
+config.js
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+dist/

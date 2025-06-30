@@ -24,15 +24,30 @@
     <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
     
     <!-- Stylesheets -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/logo.css">
+    <link rel="stylesheet" href="css/sponsor.css">
+    <link rel="stylesheet" href="css/tooltips.css">
+    
+    <!-- Configuration -->
+    <script src="config.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-content">
-                <h1>Nordisk Tekstredigering</h1>
-                <p>Tekstverktøy for norsk, svensk og dansk</p>
+            <div class="logo">
+                <div class="logo-icon">NT</div>
+                <div class="logo-text">
+                    <h1 class="logo-title" id="main-title">Nordisk Tekstredigering</h1>
+                    <p class="logo-subtitle" id="main-subtitle">Avansert tekstbehandling for nordiske språk</p>
+                </div>
             </div>
             
             <button class="mobile-menu-toggle" aria-label="Toggle statistikk panel" aria-expanded="false">
@@ -49,11 +64,20 @@
         <div class="main-content">
             <div class="editor-section">
                 <div class="editor-toolbar" role="toolbar" aria-label="Teksttransformasjoner">
-                    <button class="tool-btn" data-transform="uppercase" aria-label="Konverter til store bokstaver" title="Ctrl+Shift+U">STORE BOKSTAVER</button>
-                    <button class="tool-btn" data-transform="lowercase" aria-label="Konverter til små bokstaver" title="Ctrl+Shift+L">små bokstaver</button>
-                    <button class="tool-btn" data-transform="titlecase" aria-label="Konverter til tittelformat" title="Ctrl+Shift+T">Tittel Format</button>
-                    <button class="tool-btn" data-transform="clean" aria-label="Rens tekst" title="Ctrl+Shift+R">Rens Tekst</button>
-                    <button class="tool-btn" data-transform="ae-convert" aria-label="Konverter nordiske tegn til ASCII">æ/ø/å → ae/oe/aa</button>
+                    <button class="tool-btn tooltip tooltip-shortcut" data-transform="uppercase" data-tooltip="Konverter all tekst til store bokstaver" data-shortcut="Ctrl+Shift+U" aria-label="Konverter til store bokstaver">STORE BOKSTAVER</button>
+                    <button class="tool-btn tooltip tooltip-shortcut" data-transform="lowercase" data-tooltip="Konverter all tekst til små bokstaver" data-shortcut="Ctrl+Shift+L" aria-label="Konverter til små bokstaver">små bokstaver</button>
+                    <button class="tool-btn tooltip tooltip-shortcut" data-transform="titlecase" data-tooltip="Intelligent kapitalisering med nordisk språkstøtte" data-shortcut="Ctrl+Shift+T" aria-label="Konverter til tittelformat">Tittel Format</button>
+                    <button class="tool-btn tooltip tooltip-shortcut" data-transform="clean" data-tooltip="Fjern ekstra mellomrom og normaliser tekst" data-shortcut="Ctrl+Shift+R" aria-label="Rens tekst">Rens Tekst</button>
+                    <button class="tool-btn tooltip tooltip-long" data-transform="ae-convert" data-tooltip="Konverter nordiske bokstaver til ASCII-ekvivalenter for kompatibilitet" aria-label="Konverter nordiske tegn til ASCII">æ/ø/å → ae/oe/aa</button>
+                </div>
+
+                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">
+                    <h4 id="translation-title">Oversettelse</h4>
+                    <div class="tool-group" role="group" aria-label="Oversettelsesverktøy">
+                        <button class="translate-btn tooltip" data-translate="no" data-tooltip="Oversett teksten til norsk" aria-label="Oversett til norsk">🇳🇴 Til Norsk</button>
+                        <button class="translate-btn tooltip" data-translate="se" data-tooltip="Oversett teksten til svensk" aria-label="Oversett til svensk">🇸🇪 Til Svenska</button>
+                        <button class="translate-btn tooltip" data-translate="dk" data-tooltip="Oversett teksten til dansk" aria-label="Oversett til dansk">🇩🇰 Til Dansk</button>
+                    </div>
                 </div>
 
                 <textarea class="text-area" id="textEditor" 
@@ -65,10 +89,10 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 <div class="tools-section">
                     <h4>Avanserte verktøy</h4>
                     <div class="tool-group" role="group" aria-label="Avanserte verktøy">
-                        <button class="advanced-btn" data-tool="find-replace" aria-label="Åpne finn og erstatt" title="Ctrl+F">Finn og erstatt</button>
-                        <button class="advanced-btn" data-tool="compare" aria-label="Sammenlign tekster" title="Ctrl+Shift+C">Sammenlign tekster</button>
-                        <button class="advanced-btn" data-tool="export" aria-label="Eksporter tekst" title="Ctrl+E">Eksporter</button>
-                        <button class="advanced-btn" data-tool="help" aria-label="Vis hjelp" title="F1">Hjelp</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="find-replace" data-tooltip="Søk og erstatt tekst med avanserte alternativer" data-shortcut="Ctrl+F" aria-label="Åpne finn og erstatt">Finn og erstatt</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="compare" data-tooltip="Sammenlign to tekster side-ved-side med diff-markering" data-shortcut="Ctrl+Shift+C" aria-label="Sammenlign tekster">Sammenlign tekster</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="export" data-tooltip="Eksporter tekst til TXT, HTML, Word eller PDF format" data-shortcut="Ctrl+E" aria-label="Eksporter tekst">Eksporter</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="help" data-tooltip="Vis hurtigtaster og bruksanvisning" data-shortcut="F1" aria-label="Vis hjelp">Hjelp</button>
                     </div>
                 </div>
             </div>
@@ -124,10 +148,13 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
         </div>
 
         <div class="status-bar">
-            <span>Sist oppdatert: <span id="lastUpdated">Aldri</span></span>
-            <span class="readability-score">Lesbarhet: God</span>
+            <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link">© Exlo 2025</a>
         </div>
     </div>
+
+    <a href="https://music.exlo.no/" target="_blank" rel="noopener" class="sponsor-banner">
+        🎵 Sponset av Exlo Music
+    </a>
 
     <script type="module" src="js/app.js"></script>
     

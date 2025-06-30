@@ -1,0 +1,87 @@
+/**
+ * Enhanced tooltips with descriptions
+ */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip::before,
+.tooltip::after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    background: var(--text-dark);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: var(--font-modern);
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+    max-width: 250px;
+    white-space: normal;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-bottom: 5px;
+    letter-spacing: 0.01em;
+}
+
+.tooltip::after {
+    content: '';
+    border: 5px solid transparent;
+    border-top-color: var(--text-dark);
+    margin-bottom: -5px;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* Multi-line tooltip for longer descriptions */
+.tooltip-long::before {
+    white-space: normal;
+    max-width: 200px;
+    text-align: left;
+}
+
+/* Keyboard shortcut in tooltip */
+.tooltip-shortcut::before {
+    content: attr(data-tooltip) " (" attr(data-shortcut) ")";
+    font-family: var(--font-primary);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .tooltip::before {
+        background: #f1f5f9;
+        color: var(--text-dark);
+    }
+    
+    .tooltip::after {
+        border-top-color: #f1f5f9;
+    }
+}
+
+/* Mobile - disable tooltips on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .tooltip::before,
+    .tooltip::after {
+        display: none;
+    }
+}

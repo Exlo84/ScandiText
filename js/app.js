@@ -11,6 +11,8 @@ import { FindReplace } from './ui/findReplace.js';
 import { ExportUtils } from './exportUtils.js';
 import { TextCompare } from './textCompare.js';
 import { modal } from './ui/modal.js';
+import { i18n } from './i18n.js';
+import { GoogleTranslate } from './googleTranslate.js';
 
 /**
  * Main application class
@@ -30,6 +32,8 @@ class NordiskTekstredigering {
         this.exportUtils = new ExportUtils();
         this.textCompare = new TextCompare();
         this.findReplace = null; // Will be initialized after DOM is ready
+        this.i18n = new i18n(this.currentLanguage);
+        this.googleTranslate = new GoogleTranslate();
 
         // Bind methods
         this.updateStats = this.updateStats.bind(this);
@@ -37,19 +41,28 @@ class NordiskTekstredigering {
         this.handleTextTransform = this.handleTextTransform.bind(this);
         this.handleAdvancedTool = this.handleAdvancedTool.bind(this);
         this.handleKeyboard = this.handleKeyboard.bind(this);
+        this.handleTranslate = this.handleTranslate.bind(this);
     }
 
     /**
      * Initialize the application
      */
-    init() {
-        this.setupDOM();
-        this.setupEventListeners();
-        this.setupKeyboardShortcuts();
-        this.initializeAutoSave();
-        this.updateStats();
-        
-        console.log('Nordisk Tekstredigering initialized successfully');
+    async init() {
+        try {
+            // Initialize Google Translate first
+            await this.googleTranslate.initialize();
+            
+            this.setupDOM();
+            this.setupEventListeners();
+            this.setupKeyboardShortcuts();
+            this.initializeAutoSave();
+            this.updateStats();
+            
+            console.log('Nordisk Tekstredigering initialized successfully');
+        } catch (error) {
+            console.error('Failed to initialize application:', error);
+            this.showToast('Feil ved oppstart: ' + error.message, 'error');
+        }
     }
 
     /**
@@ -66,9 +79,7 @@ class NordiskTekstredigering {
             readingTime: document.getElementById('readingTime'),
             avgWordLength: document.getElementById('avgWordLength'),
             avgSentenceLength: document.getElementById('avgSentenceLength'),
-            detectedLang: document.getElementById('detectedLang'),
-            lastUpdated: document.getElementById('lastUpdated'),
-            readabilityScore: document.querySelector('.readability-score')
+            detectedLang: document.getElementById('detectedLang')
         };
 
         // Initialize FindReplace with textarea reference
@@ -101,6 +112,12 @@ class NordiskTekstredigering {
         document.querySelectorAll('[data-tool]').forEach(btn => {
             const tool = btn.getAttribute('data-tool');
             btn.addEventListener('click', () => this.handleAdvancedTool(tool));
+        });
+
+        // Translation buttons
+        document.querySelectorAll('[data-translate]').forEach(btn => {
+            const targetLang = btn.getAttribute('data-translate');
+            btn.addEventListener('click', () => this.handleTranslate(targetLang));
         });
 
         // Mobile menu toggle
@@ -188,9 +205,10 @@ class NordiskTekstredigering {
             const langIndex = parseInt(e.key) - 1;
             if (languages[langIndex]) {
                 this.currentLanguage = languages[langIndex];
+                this.i18n.setLanguage(this.currentLanguage);
                 this.updateLanguageUI();
                 this.updateStats();
-                this.showToast(`Språk endret til ${this.getLanguageLabel(languages[langIndex])}`, 'info');
+                this.showToast(`${this.i18n.t('langChanged')} ${this.getLanguageLabel(languages[langIndex])}`, 'info');
             }
         }
         // Alt + Enter for full screen editor (toggle focus mode)
@@ -244,7 +262,6 @@ class NordiskTekstredigering {
         this.elements.readingTime.textContent = stats.readingTime + ' min';
         this.elements.avgWordLength.textContent = stats.avgWordLength;
         this.elements.avgSentenceLength.textContent = stats.avgSentenceLength;
-        this.elements.lastUpdated.textContent = stats.lastUpdated;
 
         // Update language detection
         this.elements.detectedLang.textContent = detection.detectedLanguage;
@@ -253,22 +270,6 @@ class NordiskTekstredigering {
                 ${detection.detectedLanguage}
                 <span class="confidence-score">(${detection.confidence}%)</span>
             `;
-        }
-
-        // Update readability score
-        const readabilityElement = this.elements.readabilityScore;
-        readabilityElement.textContent = `Lesbarhet: ${stats.readabilityScore.level}`;
-        
-        // Update readability class based on score
-        readabilityElement.className = 'readability-score';
-        if (stats.readabilityScore.score >= 80) {
-            readabilityElement.classList.add('excellent');
-        } else if (stats.readabilityScore.score >= 60) {
-            readabilityElement.classList.add('good');
-        } else if (stats.readabilityScore.score >= 40) {
-            readabilityElement.classList.add('fair');
-        } else {
-            readabilityElement.classList.add('poor');
         }
     }
 
@@ -288,14 +289,11 @@ class NordiskTekstredigering {
         e.target.classList.add('active');
         
         // Extract language from button content or data attribute
-        const langMap = {
-            'Norsk': 'no',
-            'Svenska': 'se',
-            'Dansk': 'dk'
-        };
+        const lang = e.target.dataset.lang || 'no';
+        this.currentLanguage = lang;
         
-        const langText = e.target.textContent.replace(/🇳🇴|🇸🇪|🇩🇰/, '').trim();
-        this.currentLanguage = langMap[langText] || 'no';
+        // Update i18n language and UI
+        this.i18n.setLanguage(lang);
         
         // Update stats with new language
         this.updateStats();
@@ -534,6 +532,7 @@ class NordiskTekstredigering {
                     if (!this.textEditor.value.trim()) {
                         this.textEditor.value = data.text;
                         this.currentLanguage = data.language || 'no';
+                        this.i18n.setLanguage(this.currentLanguage);
                         this.updateLanguageButtons();
                         this.updateStats();
                         
@@ -836,12 +835,77 @@ class NordiskTekstredigering {
             }, 300);
         });
     }
+
+    /**
+     * Handle translation requests
+     * @param {string} targetLang - Target language code
+     */
+    async handleTranslate(targetLang) {
+        const text = this.textEditor.value;
+        if (!text.trim()) {
+            this.showToast(this.i18n.t('noTextToTranslate') || 'Ingen tekst å oversette', 'warning');
+            return;
+        }
+
+        if (targetLang === this.currentLanguage) {
+            this.showToast(this.i18n.t('sameLanguageError') || 'Teksten er allerede på det valgte språket', 'info');
+            return;
+        }
+
+        // Find the translate button and show loading state
+        const translateBtn = document.querySelector(`[data-translate="${targetLang}"]`);
+        if (translateBtn) {
+            translateBtn.classList.add('loading');
+            translateBtn.disabled = true;
+        }
+
+        try {
+            this.showToast(this.i18n.t('translating') || 'Oversetter tekst...', 'info');
+            
+            const result = await this.googleTranslate.translateText(
+                text, 
+                targetLang, 
+                this.currentLanguage
+            );
+
+            // Apply translation to text editor
+            this.textEditor.value = result.translatedText;
+            
+            // Update current language to target language
+            this.currentLanguage = targetLang;
+            this.i18n.setLanguage(targetLang);
+            this.updateLanguageButtons();
+            this.updateStats();
+
+            // Show success message
+            const targetLangName = this.googleTranslate.getLanguageName(targetLang);
+            this.showToast(
+                this.i18n.t('translationComplete') || `Teksten er oversatt til ${targetLangName}`, 
+                'success'
+            );
+
+        } catch (error) {
+            console.error('Translation error:', error);
+            this.showToast(
+                this.i18n.t('translationError') || `Oversettelse mislyktes: ${error.message}`, 
+                'error'
+            );
+        } finally {
+            // Remove loading state
+            if (translateBtn) {
+                translateBtn.classList.remove('loading');
+                translateBtn.disabled = false;
+            }
+        }
+    }
+
+    // ...existing code...
 }
 
 // Initialize application when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const app = new NordiskTekstredigering();
-    app.init();
+    await app.init();
     
     // Make app globally available for debugging
     window.NordiskTekstredigering = app;

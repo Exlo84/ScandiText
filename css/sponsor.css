@@ -1,0 +1,83 @@
+/**
+ * Sponsor banner styles
+ */
+
+.sponsor-banner {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: var(--font-modern);
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sponsor-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    color: white;
+    text-decoration: none;
+}
+
+.sponsor-banner:focus {
+    outline: 2px solid rgba(255,255,255,0.8);
+    outline-offset: 2px;
+}
+
+.sponsor-banner:visited {
+    color: white;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .sponsor-banner {
+        bottom: 15px;
+        right: 15px;
+        font-size: 12px;
+        padding: 10px 16px;
+    }
+    
+    .sponsor-banner:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .sponsor-banner {
+        background: var(--text-dark);
+        border: 2px solid white;
+    }
+}
+
+/* Large screen sponsor banner */
+@media (min-width: 1200px) {
+    .sponsor-banner {
+        bottom: 25px;
+        right: 25px;
+        padding: 14px 24px;
+        font-size: 15px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+}
+
+/* Remove margin adjustment since banner is no longer overlapping content */
+@media (min-width: 769px) {
+    .container {
+        margin-right: 0;
+    }
+}

@@ -4,6 +4,12 @@ En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (n
 
 ## 🌟 Funksjoner
 
+### 🔄 Oversettelse (NYT!)
+- **Google Translate API**: Oversett mellom norsk, svensk og dansk
+- **Én-klikk oversettelse**: Hurtig oversettelse mellom nordiske språk
+- **Automatisk språkgjenkjenning**: Intelligent gjenkjenning av kildespråk
+- **Sikker API-håndtering**: API-nøkler lagres sikkert i miljøvariabler
+
 ### Tekstanalyse
 - **Sanntidsstatistikker**: Ord, tegn, setninger, avsnitt
 - **Lesbarhetsscore**: Tilpasset Flesch-Kincaid for nordiske språk
@@ -43,6 +49,11 @@ En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (n
 - **Formatert output**: Inkluderer tekststatistikk og metadata
 - **Utskriftsvennlig**: Optimalisert for utskrift og PDF-generering
 
+### 🔐 Sikkerhet og konfigurasjon
+- **Miljøvariabler**: Sikker lagring av API-nøkler i .env filer
+- **Build system**: Automatisk generering av klientkonfigurasjon
+- **Git sikkerhet**: Sensitive data ekskluderes automatisk fra versjonskontroll
+
 ### Avanserte funksjoner
 - **Auto-lagring**: Automatisk lagring til nettleserens lokale lagring
 - **Hurtigtaster**: Omfattende tastaturstøtte
@@ -66,6 +77,50 @@ cd ScandiText
 python -m http.server 8000
 ```
 
+## 🚀 Installasjon og oppsett
+
+### Forutsetninger
+- Moderne nettleser med ES6 module støtte
+- Google Translate API-nøkkel (for oversettelsestjenester)
+- Lokal webserver (anbefalt)
+
+### 1. Last ned prosjektet
+```bash
+git clone https://github.com/username/ScandiText.git
+cd ScandiText
+```
+
+### 2. Konfigurer miljøvariabler
+```bash
+# Kopier eksempel-konfigurasjon
+cp .env.example .env
+
+# Rediger .env og legg inn din Google Translate API-nøkkel
+nano .env
+```
+
+I `.env` filen:
+```
+GOOGLE_TRANSLATE_API_KEY=din_api_nøkkel_her
+NODE_ENV=development
+```
+
+### 3. Bygg konfigurasjon
+```bash
+# Gjør build-script kjørbart
+chmod +x build.sh
+
+# Generer klient-konfigurasjon
+./build.sh
+```
+
+### 4. Start lokal webserver
+
+**Med Python 3:**
+```bash
+python3 -m http.server 8080
+```
+
 **Med Node.js:**
 ```bash
 # Installer http-server globalt (engangs)
@@ -84,21 +139,24 @@ php -S localhost:8000
 - Installer "Live Server" extension
 - Høyreklikk på `index.html` → "Open with Live Server"
 
-3. **Åpne i nettleser**:
-   - Gå til http://localhost:8000
-   - Applikasjonen lastes automatisk
+### 5. Åpne i nettleser
+- Gå til http://localhost:8080 (eller din valgte port)
+- Applikasjonen lastes automatisk
+
+### ⚠️ Sikkerhet
+- `.env` og `config.js` inneholder sensitive API-nøkler
+- Disse filene skal ALDRI committes til versjonskontroll
+- De er automatisk ekskludert via `.gitignore`
 
 ### Alternativ: Direkte filåpning
-For testing kan du åpne `index.html` direkte i nettleser, men ES6 modules fungerer best via webserver.
+For testing kan du åpne `index.html` direkte i nettleser, men ES6 modules og API-funksjonalitet krever webserver.
 
 ### Testing
 ```bash
-# Kjør tester
-npm test
-# eller
+# Test grunnleggende funksjonalitet
 node tests/basic-tests.js
 
-# Test imports og grunnleggende funksjonalitet
+# Test imports og modules
 node test-imports.js
 ```
 
