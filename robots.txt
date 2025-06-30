@@ -1,0 +1,70 @@
+# Robots.txt for ScandiText - Nordisk Tekstredigering
+# https://scanditext.exlo.no/robots.txt
+
+User-agent: *
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /icons/
+Allow: /manifest.json
+Allow: /sitemap.xml
+
+# Disallow sensitive files
+Disallow: /.env
+Disallow: /.env.example
+Disallow: /config.js
+Disallow: /build.sh
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /*.log
+
+# Enhanced crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://scanditext.exlo.no/sitemap.xml
+
+# Search engine specific instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow problematic bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

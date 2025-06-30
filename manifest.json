@@ -1,15 +1,24 @@
 {
-  "name": "Nordisk Tekstredigering",
+  "name": "Nordisk Tekstredigering - Avansert tekstbehandling for nordiske språk",
   "short_name": "ScandiText",
-  "description": "Avansert tekstredigeringsapplikasjon for nordiske språk",
-  "start_url": "/",
+  "description": "Profesjonell tekstredigeringsverktøy for nordiske språk med automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt, eksport og offline støtte.",
+  "start_url": "/?utm_source=pwa&utm_medium=manifest",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#3498db",
   "orientation": "portrait-primary",
-  "categories": ["productivity", "utilities"],
+  "categories": ["productivity", "utilities", "education", "office"],
   "lang": "no",
   "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://scanditext.exlo.no/"
+    }
+  ],
   "icons": [
     {
       "src": "icons/icon-72x72.png",

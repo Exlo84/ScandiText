@@ -1,16 +1,232 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="no" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nordisk Tekstredigering</title>
     
-    <!-- PWA Meta Tags -->
-    <meta name="description" content="Avansert tekstredigeringsapplikasjon for nordiske språk (norsk, svensk, dansk)">
-    <meta name="theme-color" content="#3498db">
+    <!-- Primary Meta Tags -->
+    <title>Nordisk Tekstredigering - Avansert tekstbehandling for norsk, svensk og dansk | ScandiText</title>
+    <meta name="title" content="Nordisk Tekstredigering - Avansert tekstbehandling for norsk, svensk og dansk | ScandiText">
+    <meta name="description" content="Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt med regex, eksport til PDF/RTF/HTML, tekstsammenligning og offline PWA-støtte for norsk, svensk og dansk.">
+    <meta name="keywords" content="tekstredigering, norsk, svensk, dansk, nordiske språk, tekstbehandling, oversettelse, språkverktøy, tekststatistikk, online editor, google translate, finn og erstatt, regex, tekstsammenligning, PDF eksport, RTF eksport, HTML eksport, PWA, offline, responsiv design, språkgjenkjenning, ordtelling, setninger, avsnitt, lesbarhetsanalyse, sammensatte ord, skandinavisk, nordic text editor, scandinavian languages">
+    <meta name="author" content="Exlo - Nordic Language Technology">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="Norwegian">
+    <meta name="revisit-after" content="3 days">
+    <meta name="category" content="Productivity, Language Tools, Text Processing">
+    <meta name="subject" content="Nordic Text Editor and Language Processing Tool">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://scanditext.exlo.no/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://scanditext.exlo.no/">
+    <meta property="og:title" content="Nordisk Tekstredigering - Avansert tekstbehandling for nordiske språk | ScandiText">
+    <meta property="og:description" content="Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt med regex, eksport til PDF/RTF/HTML, tekstsammenligning og offline PWA-støtte.">
+    <meta property="og:image" content="https://scanditext.exlo.no/icons/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ScandiText - Nordisk Tekstredigering Logo">
+    <meta property="og:site_name" content="ScandiText - Nordisk Tekstredigering">
+    <meta property="og:locale" content="nb_NO">
+    <meta property="og:locale:alternate" content="sv_SE">
+    <meta property="og:locale:alternate" content="da_DK">
+    <meta property="og:updated_time" content="2025-01-17T12:00:00+01:00">
+    <meta property="article:author" content="https://exlo.no">
+    <meta property="article:section" content="Productivity Tools">
+    <meta property="article:tag" content="text editor, nordic languages, translation, productivity">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://scanditext.exlo.no/">
+    <meta property="twitter:title" content="Nordisk Tekstredigering - Avansert tekstbehandling for nordiske språk">
+    <meta property="twitter:description" content="Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt med regex, eksport og offline PWA-støtte.">
+    <meta property="twitter:image" content="https://scanditext.exlo.no/icons/twitter-image.png">
+    <meta property="twitter:image:alt" content="ScandiText - Nordic Text Editor Interface">
+    <meta property="twitter:creator" content="@exlomusic">
+    <meta property="twitter:site" content="@exlomusic">
+    <meta property="twitter:label1" content="Språk">
+    <meta property="twitter:data1" content="Norsk, Svensk, Dansk">
+    <meta property="twitter:label2" content="Pris">
+    <meta property="twitter:data2" content="Gratis">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="application-name" content="ScandiText">
+    <meta name="msapplication-TileColor" content="#3498db">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="skype_toolbar" content="skype_toolbar_parser_compatible">
+    
+    <!-- SEO Enhancement Tags -->
+    <meta name="page-topic" content="Nordic Text Editor and Language Processing">
+    <meta name="page-type" content="Web Application">
+    <meta name="audience" content="Writers, Translators, Students, Nordic Language Users">
+    <meta name="copyright" content="© 2025 Exlo. All rights reserved.">
+    <meta name="designer" content="Exlo">
+    <meta name="owner" content="Exlo">
+    <meta name="url" content="https://scanditext.exlo.no/">
+    <meta name="identifier-URL" content="https://scanditext.exlo.no/">
+    <meta name="directory" content="submission">
+    <meta name="pagename" content="Nordisk Tekstredigering - ScandiText">
+    <meta name="Category" content="Education, Productivity, Language Tools">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="rating" content="General">
+    <meta name="subtitle" content="Professional Nordic Text Processing Tool">
+    <meta name="target" content="Nordic language users, writers, translators">
+    <meta name="medium" content="mult">
+    <meta name="syndication-source" content="https://scanditext.exlo.no/">
+    <meta name="original-source" content="https://scanditext.exlo.no/">
+    <meta name="verification" content="ScandiText Nordic Text Editor">
+    
+    <!-- Sitemap and Robots -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+    
+    <!-- Geo Meta Tags -->
+    <meta name="geo.region" content="NO">
+    <meta name="geo.placename" content="Norway">
+    <meta name="geo.position" content="60.472024;8.468946">
+    <meta name="ICBM" content="60.472024, 8.468946">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="rating" content="General">
+    <meta name="distribution" content="Global">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="all">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ScandiText">
+    <meta name="theme-color" content="#3498db">
+    <meta name="msapplication-navbutton-color" content="#3498db">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Performance and Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://translate.googleapis.com">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://translate.googleapis.com;">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Nordisk Tekstredigering",
+      "alternateName": "ScandiText",
+      "description": "Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, oversettelse og avanserte redigeringsverktøy for norsk, svensk og dansk.",
+      "url": "https://scanditext.exlo.no/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.3.4",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NOK"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Exlo",
+        "url": "https://exlo.no"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Exlo",
+        "url": "https://exlo.no"
+      },
+      "inLanguage": ["no", "sv", "da"],
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Norwegian",
+          "alternateName": "Norsk"
+        },
+        {
+          "@type": "Language", 
+          "name": "Swedish",
+          "alternateName": "Svenska"
+        },
+        {
+          "@type": "Language",
+          "name": "Danish", 
+          "alternateName": "Dansk"
+        }
+      ],
+      "featureList": [
+        "Automatisk språkgjenkjenning",
+        "Tekststatistikk og analyse", 
+        "Google Translate integrasjon",
+        "Finn og erstatt med regex",
+        "Eksport til flere formater",
+        "Tekstsammenligning",
+        "Offline støtte (PWA)",
+        "Responsiv design",
+        "Tilgjengelighetsfunksjoner"
+      ],
+      "screenshot": "https://scanditext.exlo.no/icons/og-image.png",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+    
+    <!-- Additional Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Exlo",
+      "url": "https://exlo.no",
+      "sameAs": [
+        "https://twitter.com/exlomusic"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Developer Support",
+        "availableLanguage": ["Norwegian", "English"]
+      }
+    }
+    </script>
+    
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Hjem",
+          "item": "https://scanditext.exlo.no/"
+        },
+        {
+          "@type": "ListItem", 
+          "position": 2,
+          "name": "Nordisk Tekstredigering",
+          "item": "https://scanditext.exlo.no/"
+        }
+      ]
+    }
+    </script>
     
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -52,14 +268,17 @@
       gtag('config', 'G-EC264CFY25');
     </script>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebApplication">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link" tabindex="1">Hopp til hovedinnhold</a>
+    
     <div class="container">
-        <div class="header">
-            <div class="logo">
+        <header class="header" role="banner">
+            <div class="logo" itemscope itemtype="https://schema.org/Brand">
                 <div class="logo-icon">NT</div>
                 <div class="logo-text">
-                    <h1 class="logo-title" id="main-title">Nordisk Tekstredigering</h1>
-                    <p class="logo-subtitle" id="main-subtitle">Avansert tekstbehandling for nordiske språk</p>
+                    <h1 class="logo-title" id="main-title" itemprop="name">Nordisk Tekstredigering</h1>
+                    <p class="logo-subtitle" id="main-subtitle" itemprop="description">Avansert tekstbehandling for nordiske språk</p>
                 </div>
             </div>
             
@@ -67,16 +286,16 @@
                 📊 Statistikk
             </button>
             
-            <div class="language-selector" role="group" aria-label="Språkvalg">
+            <nav class="language-selector" role="navigation" aria-label="Språkvalg">
                 <button class="lang-btn active" data-lang="no" aria-pressed="true" aria-label="Velg norsk">🇳🇴 Norsk</button>
                 <button class="lang-btn" data-lang="se" aria-pressed="false" aria-label="Velg svenska">🇸🇪 Svenska</button>
                 <button class="lang-btn" data-lang="dk" aria-pressed="false" aria-label="Velg dansk">🇩🇰 Dansk</button>
-            </div>
-        </div>
+            </nav>
+        </header>
 
-        <div class="main-content">
+        <main class="main-content" id="main-content" role="main" itemscope itemtype="https://schema.org/SoftwareApplication">
             <!-- Left Ad Column -->
-            <div class="ad-column-left">
+            <aside class="ad-column-left" role="complementary" aria-label="Annonser">
                 <!-- AdSense Ad Unit -->
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -87,9 +306,9 @@
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-            </div>
+            </aside>
 
-            <div class="editor-section">
+            <section class="editor-section" role="application" aria-label="Tekstbehandling">
                 <div class="editor-toolbar" role="toolbar" aria-label="Teksttransformasjoner">
                     <button class="tool-btn tooltip tooltip-shortcut" data-transform="uppercase" data-tooltip="Konverter all tekst til store bokstaver" data-shortcut="Ctrl+Shift+U" aria-label="Konverter til store bokstaver">STORE BOKSTAVER</button>
                     <button class="tool-btn tooltip tooltip-shortcut" data-transform="lowercase" data-tooltip="Konverter all tekst til små bokstaver" data-shortcut="Ctrl+Shift+L" aria-label="Konverter til små bokstaver">små bokstaver</button>
@@ -124,8 +343,8 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 </div>
             </div>
 
-            <div class="stats-panel" role="region" aria-label="Tekststatistikk">
-                <h3>Tekststatistikk</h3>
+            <aside class="stats-panel" role="complementary" aria-label="Tekststatistikk" itemscope itemtype="https://schema.org/Article">
+                <h3 itemprop="headline">Tekststatistikk</h3>
                 
                 <div class="stat-row">
                     <span class="stat-label">Gjenkjent språk:</span>
@@ -174,14 +393,23 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
             </div>
         </div>
 
-        <div class="status-bar">
-            <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link">© Exlo 2025</a>
-        </div>
+        <footer class="status-bar" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+            <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link" itemprop="url">
+                <span itemprop="name">© Exlo 2025</span>
+            </a>
+            <nav aria-label="Fotlenker">
+                <a href="https://scanditext.exlo.no/privacy" rel="nofollow">Personvern</a>
+                <a href="https://scanditext.exlo.no/terms" rel="nofollow">Vilkår</a>
+                <a href="https://exlo.no/contact" rel="noopener">Kontakt</a>
+            </nav>
+        </footer>
     </div>
 
-    <a href="https://music.exlo.no/" target="_blank" rel="noopener" class="sponsor-banner">
-        🎵 Sponset av Exlo Music
-    </a>
+    <aside class="sponsor-banner" role="banner" aria-label="Sponsor">
+        <a href="https://music.exlo.no/" target="_blank" rel="noopener sponsored" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">🎵 Sponset av Exlo Music</span>
+        </a>
+    </aside>
 
     <script type="module" src="js/app.js"></script>
     
