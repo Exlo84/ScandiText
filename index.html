@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>Nordisk Tekstredigering - Avansert tekstbehandling for norsk, svensk og dansk | ScandiText</title>
+    <title>Nordisk Tekstredigering - Avansert tekstbehandling for norsk, svensk og dansk |                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">
+                    <h4 id="translation-title">Oversettelse</h4>
+                    <div class="tool-group" role="group" aria-label="Oversettelsesverktøy">
+                        <button class="translate-btn tooltip" data-translate="no" data-tooltip="Oversett teksten til norsk" aria-label="Oversett til norsk">🇳🇴 Til Norsk</button>
+                        <button class="translate-btn tooltip" data-translate="se" data-tooltip="Oversett teksten til svensk" aria-label="Oversett til svensk">🇸🇪 Til Svenska</button>
+                        <button class="translate-btn tooltip" data-translate="dk" data-tooltip="Oversett teksten til dansk" aria-label="Oversett til dansk">🇩🇰 Til Dansk</button>
+                    </div>
+                </div>ext</title>
     <meta name="title" content="Nordisk Tekstredigering - Avansert tekstbehandling for norsk, svensk og dansk | ScandiText">
     <meta name="description" content="Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt med regex, eksport til PDF/RTF/HTML, tekstsammenligning og offline PWA-støtte for norsk, svensk og dansk.">
     <meta name="keywords" content="tekstredigering, norsk, svensk, dansk, nordiske språk, tekstbehandling, oversettelse, språkverktøy, tekststatistikk, online editor, google translate, finn og erstatt, regex, tekstsammenligning, PDF eksport, RTF eksport, HTML eksport, PWA, offline, responsiv design, språkgjenkjenning, ordtelling, setninger, avsnitt, lesbarhetsanalyse, sammensatte ord, skandinavisk, nordic text editor, scandinavian languages">
@@ -107,7 +114,6 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
     <link rel="preconnect" href="https://translate.googleapis.com">
     
     <!-- Security Headers -->
@@ -118,7 +124,7 @@
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://translate.googleapis.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://translate.googleapis.com;">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -255,9 +261,6 @@
     <!-- Configuration -->
     <script src="config.js"></script>
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1987919603765926" crossorigin="anonymous"></script>
-    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC264CFY25"></script>
     <script>
@@ -291,20 +294,6 @@
         </header>
 
         <div class="main-content">
-            <!-- Left Ad Column -->
-            <div class="ad-column-left">
-                <!-- AdSense Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-1987919603765926"
-                     data-ad-slot="1234567890"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-
             <div class="editor-section">
                 <div class="editor-toolbar" role="toolbar" aria-label="Teksttransformasjoner">
                     <button class="tool-btn tooltip tooltip-shortcut" data-transform="uppercase" data-tooltip="Konverter all tekst til store bokstaver" data-shortcut="Ctrl+Shift+U" aria-label="Konverter til store bokstaver">STORE BOKSTAVER</button>
@@ -314,7 +303,7 @@
                     <button class="tool-btn tooltip tooltip-long" data-transform="ae-convert" data-tooltip="Konverter nordiske bokstaver til ASCII-ekvivalenter for kompatibilitet" aria-label="Konverter nordiske tegn til ASCII">æ/ø/å → ae/oe/aa</button>
                 </div>
 
-                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">>
+                <div class="translation-toolbar" role="toolbar" aria-label="Oversettelse">>>
                     <h4 id="translation-title">Oversettelse</h4>
                     <div class="tool-group" role="group" aria-label="Oversettelsesverktøy">
                         <button class="translate-btn tooltip" data-translate="no" data-tooltip="Oversett teksten til norsk" aria-label="Oversett til norsk">🇳🇴 Til Norsk</button>
