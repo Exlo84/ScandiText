@@ -915,36 +915,65 @@ html body .container .main-content .stats-panel:not(.force-mobile) {
     border-top-color: transparent;
 }
 
-/* Dark mode support for translation */
-@media (prefers-color-scheme: dark) {
-    .translation-toolbar {
-        background: #334155;
-        border-color: var(--border-gray);
-    }
-    
-    .translate-btn {
-        background: #475569;
-        color: var(--success-green);
-        border-color: var(--success-green);
-    }
-    
-    .translate-btn:hover {
-        background: var(--success-green);
-        color: white;
-    }
+/* Loading spinner */
+.spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
 }
 
-/* Mobile translation buttons */
-@media (max-width: 768px) {
-    .translation-toolbar .tool-group {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .translate-btn {
-        min-height: 44px;
-        font-size: 14px;
-        font-weight: 600;
-        justify-content: center;
-    }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Translation modal styles */
+.translation-modal .modal-body {
+    max-width: 500px;
+}
+
+.translation-result {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.translation-stats {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-blue);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.translation-preview h4 {
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    font-size: 16px;
+}
+
+.translation-text {
+    background: #fff;
+    border: 1px solid var(--border-gray);
+    padding: 15px;
+    border-radius: 8px;
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    color: var(--text-gray);
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Loading button state */
+.translate-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.translate-btn.loading .spinner {
+    margin-right: 8px;
 }

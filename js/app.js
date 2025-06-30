@@ -840,6 +840,17 @@ class NordiskTekstredigering {
     }
 
     /**
+     * Escape HTML characters to prevent XSS
+     * @param {string} text - Text to escape
+     * @returns {string} Escaped text
+     */
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    /**
      * Handle translation requests
      * @param {string} targetLang - Target language code
      */
@@ -860,7 +871,15 @@ class NordiskTekstredigering {
         if (translateBtn) {
             translateBtn.classList.add('loading');
             translateBtn.disabled = true;
+            translateBtn.innerHTML = '<span class="spinner"></span> Oversetter...';
         }
+
+        // Show loading modal
+        const loadingModal = modal.loading({
+            title: 'Oversetter tekst',
+            message: `Oversetter til ${this.googleTranslate.getLanguageName(targetLang)}...`,
+            showProgress: false
+        });
 
         try {
             this.showToast(this.i18n.t('translating') || 'Oversetter tekst...', 'info');
@@ -871,24 +890,62 @@ class NordiskTekstredigering {
                 this.currentLanguage
             );
 
-            // Apply translation to text editor
-            this.textEditor.value = result.translatedText;
-            
-            // Update current language to target language
-            this.currentLanguage = targetLang;
-            this.i18n.setLanguage(targetLang);
-            this.updateLanguageButtons();
-            this.updateStats();
+            loadingModal.close();
 
-            // Show success message
-            const targetLangName = this.googleTranslate.getLanguageName(targetLang);
-            this.showToast(
-                this.i18n.t('translationComplete') || `Teksten er oversatt til ${targetLangName}`, 
-                'success'
-            );
+            // Show translation result in modal
+            const resultModal = modal.create({
+                title: 'Oversettelse fullført',
+                body: `
+                    <div class="translation-result">
+                        <div class="translation-stats">
+                            <strong>Fra:</strong> ${this.googleTranslate.getLanguageName(result.sourceLang || this.currentLanguage)}<br>
+                            <strong>Til:</strong> ${this.googleTranslate.getLanguageName(result.targetLang)}<br>
+                            <strong>Ord oversatt:</strong> ${result.originalText.split(/\s+/).length}
+                        </div>
+                        <div class="translation-preview">
+                            <h4>Oversatt tekst:</h4>
+                            <div class="translation-text">${this.escapeHtml(result.translatedText.substring(0, 200))}${result.translatedText.length > 200 ? '...' : ''}</div>
+                        </div>
+                    </div>
+                `,
+                footer: `
+                    <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Avbryt</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('app').dispatchEvent(new CustomEvent('applyTranslation', { detail: ${JSON.stringify(result)} })); this.closest('.modal').remove();">Bruk oversettelse</button>
+                `,
+                className: 'translation-modal'
+            });
+
+            // Handle translation application
+            document.getElementById('app').addEventListener('applyTranslation', (e) => {
+                const translationResult = e.detail;
+                
+                // Apply translation to text editor
+                this.textEditor.value = translationResult.translatedText;
+                
+                // Update current language to target language
+                this.currentLanguage = translationResult.targetLang;
+                this.i18n.setLanguage(translationResult.targetLang);
+                this.updateLanguageButtons();
+                this.updateStats();
+
+                // Show success message
+                const targetLangName = this.googleTranslate.getLanguageName(translationResult.targetLang);
+                this.showToast(
+                    this.i18n.t('translationComplete') || `Teksten er oversatt til ${targetLangName}`, 
+                    'success'
+                );
+            }, { once: true });
 
         } catch (error) {
+            loadingModal.close();
             console.error('Translation error:', error);
+            
+            modal.alert({
+                title: 'Oversettelse mislyktes',
+                message: `Kunne ikke oversette teksten: ${error.message}`,
+                type: 'error'
+            });
+            
             this.showToast(
                 this.i18n.t('translationError') || `Oversettelse mislyktes: ${error.message}`, 
                 'error'
@@ -898,11 +955,10 @@ class NordiskTekstredigering {
             if (translateBtn) {
                 translateBtn.classList.remove('loading');
                 translateBtn.disabled = false;
+                translateBtn.innerHTML = `Oversett til ${this.googleTranslate.getLanguageName(targetLang)}`;
             }
         }
     }
-
-    // ...existing code...
 }
 
 // Initialize application when DOM is loaded

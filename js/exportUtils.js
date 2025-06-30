@@ -11,7 +11,7 @@ import { modal } from './ui/modal.js';
  */
 export class ExportUtils {
     constructor() {
-        this.supportedFormats = ['txt', 'html', 'docx', 'pdf'];
+        this.supportedFormats = ['txt', 'html', 'md', 'docx', 'pdf'];
     }
 
     /**
@@ -44,6 +44,11 @@ export class ExportUtils {
                     <div class="export-icon">🌐</div>
                     <div class="export-title">HTML</div>
                     <div class="export-description">Formatert HTML-dokument (.html)</div>
+                </div>
+                <div class="export-option" data-format="md">
+                    <div class="export-icon">📖</div>
+                    <div class="export-title">Markdown</div>
+                    <div class="export-description">Markdown-format for dokumentasjon (.md)</div>
                 </div>
                 <div class="export-option" data-format="docx">
                     <div class="export-icon">📝</div>
@@ -188,6 +193,9 @@ export class ExportUtils {
             case 'html':
                 await this.exportToHtml(text, filename, stats);
                 break;
+            case 'md':
+                await this.exportToMd(text, filename, stats);
+                break;
             case 'docx':
                 await this.exportToDocx(text, filename, stats, loading);
                 break;
@@ -283,6 +291,62 @@ export class ExportUtils {
 </html>`;
 
         const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        this.downloadBlob(blob, filename);
+    }
+
+    /**
+     * Export to Markdown file
+     * @param {string} text - Text content
+     * @param {string} filename - Output filename
+     * @param {Object} stats - Text statistics
+     */
+    async exportToMd(text, filename, stats) {
+        // Create markdown content with metadata and stats
+        const title = filename.replace(/\.[^/.]+$/, '');
+        const date = new Date().toISOString().split('T')[0];
+        
+        let markdown = `# ${title}\n\n`;
+        
+        // Add metadata section
+        markdown += `*Eksportert fra Nordisk Tekstredigering den ${new Date().toLocaleDateString('no-NO')}*\n\n`;
+        
+        // Add statistics section
+        if (stats && Object.keys(stats).length > 0) {
+            markdown += `## Tekststatistikk\n\n`;
+            markdown += `- **Ord:** ${stats.words || 0}\n`;
+            markdown += `- **Tegn:** ${stats.characters || 0}\n`;
+            markdown += `- **Setninger:** ${stats.sentences || 0}\n`;
+            markdown += `- **Avsnitt:** ${stats.paragraphs || 0}\n`;
+            
+            if (stats.readabilityScore) {
+                markdown += `- **Lesbarhet:** ${stats.readabilityScore.level} (${stats.readabilityScore.score})\n`;
+            }
+            
+            if (stats.language) {
+                markdown += `- **Språk:** ${stats.language}\n`;
+            }
+            
+            markdown += `\n---\n\n`;
+        }
+        
+        // Add main content
+        markdown += `## Innhold\n\n`;
+        
+        // Convert text to markdown-friendly format
+        const paragraphs = text.split('\n').filter(p => p.trim());
+        paragraphs.forEach(paragraph => {
+            // Simple markdown formatting - preserve line breaks and basic structure
+            const trimmed = paragraph.trim();
+            if (trimmed) {
+                markdown += `${trimmed}\n\n`;
+            }
+        });
+        
+        // Add footer
+        markdown += `---\n\n`;
+        markdown += `*Generert av [Nordisk Tekstredigering](https://scanditext.exlo.no) - Avansert tekstbehandling for nordiske språk*\n`;
+
+        const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
         this.downloadBlob(blob, filename);
     }
 
