@@ -32,16 +32,18 @@ export class GoogleTranslate {
             this.apiKey = envLoader.get('GOOGLE_TRANSLATE_API_KEY');
             
             if (!this.apiKey) {
-                console.error('🚨 SECURITY: Google Translate API key not found!');
-                console.error('For security reasons, API keys should not be exposed in client-side code.');
-                console.error('Please implement a backend proxy for Google Translate API calls.');
-                throw new Error('Translation service not available - API key not configured securely');
+                console.warn('⚠️ Google Translate API key not configured - translation disabled');
+                this.isInitialized = false;
+                return false;
             }
             
+            console.log('✅ Google Translate initialized successfully');
             this.isInitialized = true;
+            return true;
         } catch (error) {
             console.error('Failed to initialize Google Translate:', error.message);
-            throw new Error('Kunne ikke initialisere oversettingstjenesten. Kontakt administrator.');
+            this.isInitialized = false;
+            return false;
         }
     }
 

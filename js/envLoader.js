@@ -27,6 +27,7 @@ class EnvLoader {
                 const configMatch = configText.match(/window\.APP_CONFIG\s*=\s*({[^}]+})/);
                 if (configMatch) {
                     this.config = JSON.parse(configMatch[1]);
+                    console.log('✅ Config loaded successfully from config.js');
                 }
             }
         } catch (error) {
@@ -36,16 +37,13 @@ class EnvLoader {
         // Fallback: check for environment variables in the global scope
         if (!this.config.GOOGLE_TRANSLATE_API_KEY) {
             this.config = {
-                GOOGLE_TRANSLATE_API_KEY: window.GOOGLE_TRANSLATE_API_KEY || null,
-                NODE_ENV: window.NODE_ENV || 'development'
+                GOOGLE_TRANSLATE_API_KEY: window.GOOGLE_TRANSLATE_API_KEY || window.APP_CONFIG?.GOOGLE_TRANSLATE_API_KEY || null,
+                NODE_ENV: window.NODE_ENV || window.APP_CONFIG?.NODE_ENV || 'development'
             };
-        }
-
-        // Security check - never expose API keys in client-side code
-        if (!this.config.GOOGLE_TRANSLATE_API_KEY) {
-            console.error('🚨 SECURITY WARNING: Google Translate API key not found!');
-            console.error('For security reasons, API keys should not be exposed in client-side code.');
-            console.error('Consider implementing a backend proxy for Google Translate API calls.');
+            console.log('📋 Using fallback configuration:', { 
+                hasApiKey: !!this.config.GOOGLE_TRANSLATE_API_KEY,
+                nodeEnv: this.config.NODE_ENV 
+            });
         }
 
         this.isLoaded = true;

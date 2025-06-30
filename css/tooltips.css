@@ -1,87 +1,142 @@
 /**
- * Enhanced tooltips with descriptions
+ * Enhanced tooltips with descriptions - Fixed version
  */
 
+/* Base tooltip styling */
 .tooltip {
     position: relative;
     display: inline-block;
 }
 
+/* Tooltip content - High specificity */
 .tooltip::before,
-.tooltip::after {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    z-index: 1000;
+button.tooltip::before,
+.tool-btn.tooltip::before,
+.translate-btn.tooltip::before,
+.advanced-btn.tooltip::before {
+    content: attr(data-tooltip) !important;
+    position: absolute !important;
+    bottom: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: #1f2937 !important;
+    color: #ffffff !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    max-width: 250px !important;
+    text-align: center !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    margin-bottom: 8px !important;
+    z-index: 10000 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease !important;
+    pointer-events: none !important;
 }
 
-.tooltip::before {
-    content: attr(data-tooltip);
-    background: var(--text-dark);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-family: var(--font-modern);
-    font-size: 13px;
-    line-height: 1.4;
-    white-space: nowrap;
-    max-width: 250px;
-    white-space: normal;
-    text-align: center;
-    font-weight: 500;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-bottom: 5px;
-    letter-spacing: 0.01em;
+/* Tooltip arrow - High specificity */
+.tooltip::after,
+button.tooltip::after,
+.tool-btn.tooltip::after,
+.translate-btn.tooltip::after,
+.advanced-btn.tooltip::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    border: 5px solid transparent !important;
+    border-top-color: #1f2937 !important;
+    margin-bottom: 3px !important;
+    z-index: 10000 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease !important;
+    pointer-events: none !important;
 }
 
-.tooltip::after {
-    content: '';
-    border: 5px solid transparent;
-    border-top-color: var(--text-dark);
-    margin-bottom: -5px;
-}
-
+/* Show tooltip on hover - High specificity */
 .tooltip:hover::before,
-.tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-2px);
+.tooltip:hover::after,
+button.tooltip:hover::before,
+button.tooltip:hover::after,
+.tool-btn.tooltip:hover::before,
+.tool-btn.tooltip:hover::after,
+.translate-btn.tooltip:hover::before,
+.translate-btn.tooltip:hover::after,
+.advanced-btn.tooltip:hover::before,
+.advanced-btn.tooltip:hover::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(-2px) !important;
 }
 
-/* Multi-line tooltip for longer descriptions */
+/* Keyboard shortcut tooltips */
+.tooltip-shortcut::before {
+    content: attr(data-tooltip) " (" attr(data-shortcut) ")";
+    white-space: normal;
+    max-width: 280px;
+}
+
+/* Long tooltips */
 .tooltip-long::before {
     white-space: normal;
     max-width: 200px;
     text-align: left;
 }
 
-/* Keyboard shortcut in tooltip */
-.tooltip-shortcut::before {
-    content: attr(data-tooltip) " (" attr(data-shortcut) ")";
-    font-family: var(--font-primary);
+/* Fallback for tooltips without content */
+.tooltip:not([data-tooltip])::before,
+.tooltip[data-tooltip=""]::before {
+    content: "Tooltip mangler";
+    background: #dc2626;
+    color: white;
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     .tooltip::before {
-        background: #f1f5f9;
-        color: var(--text-dark);
+        background: #f8fafc;
+        color: #1f2937;
     }
     
     .tooltip::after {
-        border-top-color: #f1f5f9;
+        border-top-color: #f8fafc;
     }
 }
 
-/* Mobile - disable tooltips on touch devices */
+/* Disable on mobile/touch devices */
 @media (hover: none) and (pointer: coarse) {
     .tooltip::before,
     .tooltip::after {
-        display: none;
+        display: none !important;
     }
+}
+
+/* Debug tooltip - test styling */
+.tooltip-debug {
+    position: relative;
+}
+
+.tooltip-debug::before {
+    content: "TEST TOOLTIP";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: red !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    z-index: 9999 !important;
+    margin-bottom: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
 }

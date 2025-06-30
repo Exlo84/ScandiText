@@ -49,8 +49,11 @@ class NordiskTekstredigering {
      */
     async init() {
         try {
-            // Initialize Google Translate first
-            await this.googleTranslate.initialize();
+            // Try to initialize Google Translate (non-blocking)
+            const translateInit = await this.googleTranslate.initialize();
+            if (!translateInit) {
+                console.warn('⚠️ Translation features disabled - API key not configured');
+            }
             
             this.setupDOM();
             this.setupEventListeners();
@@ -58,7 +61,7 @@ class NordiskTekstredigering {
             this.initializeAutoSave();
             this.updateStats();
             
-            console.log('Nordisk Tekstredigering initialized successfully');
+            console.log('✅ Nordisk Tekstredigering initialized successfully');
         } catch (error) {
             console.error('Failed to initialize application:', error);
             this.showToast('Feil ved oppstart: ' + error.message, 'error');
