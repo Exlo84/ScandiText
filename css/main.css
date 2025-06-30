@@ -948,6 +948,7 @@ html body .container .main-content .stats-panel:not(.force-mobile) {
     border-left: 4px solid var(--primary-blue);
     font-size: 14px;
     line-height: 1.6;
+    color: var(--text-dark);
 }
 
 .translation-preview h4 {
@@ -963,7 +964,7 @@ html body .container .main-content .stats-panel:not(.force-mobile) {
     border-radius: 8px;
     font-family: var(--font-serif);
     line-height: 1.6;
-    color: var(--text-gray);
+    color: var(--text-dark);
     max-height: 150px;
     overflow-y: auto;
 }

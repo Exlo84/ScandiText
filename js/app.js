@@ -910,11 +910,39 @@ class NordiskTekstredigering {
                 `,
                 footer: `
                     <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Avbryt</button>
-                    <button class="btn btn-primary" onclick="document.dispatchEvent(new CustomEvent('applyTranslation', { detail: ${JSON.stringify(result)} })); this.closest('.modal').remove();">Bruk oversettelse</button>
+                    <button class="btn btn-primary" id="applyTranslationBtn">Bruk oversettelse</button>
                 `,
                 className: 'translation-modal'
             });
 
+            // Add event listener to the apply button after modal is created
+            setTimeout(() => {
+                const applyBtn = document.getElementById('applyTranslationBtn');
+                if (applyBtn) {
+                    applyBtn.addEventListener('click', () => {
+                        // Apply translation to text editor
+                        this.textEditor.value = result.translatedText;
+                        
+                        // Update current language to target language
+                        this.currentLanguage = result.targetLang;
+                        this.i18n.setLanguage(result.targetLang);
+                        this.updateLanguageButtons();
+                        this.updateStats();
+
+                        // Show success message
+                        const targetLangName = this.googleTranslate.getLanguageName(result.targetLang);
+                        this.showToast(
+                            this.i18n.t('translationComplete') || `Teksten er oversatt til ${targetLangName}`, 
+                            'success'
+                        );
+                        
+                        resultModal.close();
+                    });
+                }
+            }, 100);
+
+            // Remove the global event listener since we're handling it directly above
+            /*
             // Handle translation application
             document.addEventListener('applyTranslation', (e) => {
                 const translationResult = e.detail;
@@ -935,6 +963,7 @@ class NordiskTekstredigering {
                     'success'
                 );
             }, { once: true });
+            */
 
         } catch (error) {
             loadingModal.close();
