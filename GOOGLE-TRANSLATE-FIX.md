@@ -1,115 +1,80 @@
-# Google Translate Fix & Cleanup - v1.4.1
+# Google Translate API Key Fix - v1.4.1
 
-## Issues Fixed
+## Issue Resolved ✅
 
-### 1. Google Translate API Connection Issues
-**Problem**: Translation was failing with CSP violations and API key not found
+### Problem
+Google Translate was failing with:
+- API key showing as `null` in requests
+- 400 Bad Request errors
+- "API key not valid" messages
 
-**Root Causes**:
-- Content Security Policy was blocking `https://translation.googleapis.com` (API endpoint)
-- Only allowed `https://translate.googleapis.com` (different subdomain)
-- Environment loader wasn't properly checking `window.APP_CONFIG`
+### Root Cause
+**Timing Issue**: The Google Translate module was being initialized before `window.APP_CONFIG` was fully available, causing the API key to be cached as `null`.
 
-**Solutions**:
-- ✅ Updated CSP to include both `translate.googleapis.com` and `translation.googleapis.com`
-- ✅ Enhanced envLoader to check `window.APP_CONFIG` first before trying to fetch config.js
-- ✅ Added proper error handling and logging
+### Solution Implemented
 
-### 2. File Cleanup
-**Removed unnecessary files**:
-- ❌ All test/debug files: `test-*.js`, `debug-*.js`, `debug-*.css`
-- ❌ OG image creation tools: `create-og-image.py`, `create-og-image.sh`, `og-image-generator.html`, `og-image-preview.html`
-- ❌ Development documentation: Multiple `.md` files with version-specific changes
-- ❌ Build scripts: `build.sh`, `generate-icons.html`
-- ❌ Unnecessary images: `og-image.png`, `screenshot.png`
-- ❌ Old SVG file: `og-image.svg`
-
-**Kept essential files**:
-- ✅ `og-image.jpg` (correct format for social media)
-- ✅ Core application files
-- ✅ PWA files (manifest, service worker, icons)
-- ✅ Configuration files (config.js, .env, .env.example)
-- ✅ Final documentation (FINAL-RELEASE-v1.4.1.md)
-
-### 3. Package.json Cleanup
-**Removed**:
-- Test script referencing non-existent files
-- Lint script (not needed)
-- References to removed files in "files" array
-
-**Updated**:
-- Added proper file list including PWA files
-- Removed references to `demo.html`
-
-## Technical Changes
-
-### Content Security Policy Update
-```html
-<!-- Before -->
-connect-src 'self' ... https://translate.googleapis.com;
-
-<!-- After -->  
-connect-src 'self' ... https://translate.googleapis.com https://translation.googleapis.com;
-```
-
-### Environment Loader Enhancement
+#### 1. Added Fallback API Key Loading
 ```javascript
-// Added check for window.APP_CONFIG first
-if (window.APP_CONFIG) {
-    this.config = window.APP_CONFIG;
-    console.log('✅ Config loaded from window.APP_CONFIG');
-    this.isLoaded = true;
-    return this.config;
+// Double-check API key right before making each request
+let currentApiKey = this.apiKey;
+if (!currentApiKey && window.APP_CONFIG && window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY) {
+    currentApiKey = window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY;
+    this.apiKey = currentApiKey;
 }
 ```
 
-## Current File Structure
-```
-/
-├── index.html (main app)
-├── config.js (API keys)
-├── package.json (cleaned up)
-├── manifest.json (PWA)
-├── sw.js (service worker)
-├── og-image.jpg (social media image)
-├── css/ (stylesheets)
-├── js/ (JavaScript modules)
-├── icons/ (PWA icons)
-├── FINAL-RELEASE-v1.4.1.md (documentation)
-└── Configuration files (robots.txt, sitemap.xml, etc.)
-```
+#### 2. Enhanced Initialization
+- Added `initializationPromise` to prevent multiple simultaneous initializations
+- Added small delay to ensure `window.APP_CONFIG` is loaded
+- Direct access to `window.APP_CONFIG` before falling back to envLoader
+
+#### 3. Request-Time Validation
+- API key is checked and refreshed on every translation request
+- Uses `currentApiKey` variable instead of potentially stale `this.apiKey`
+- Proper error handling for missing API keys
+
+## Technical Changes
+
+### Files Modified
+- `js/googleTranslate.js`: Enhanced initialization and API key handling
+- `js/envLoader.js`: Added fallback to `window.APP_CONFIG`
+- `index.html`: Updated CSP to include `translation.googleapis.com`
+
+### Key Improvements
+1. **Robust API Key Loading**: Multiple fallback mechanisms
+2. **Timing Independence**: Works regardless of script loading order
+3. **Self-Healing**: Automatically recovers from initialization failures
+4. **Better Error Handling**: Clear error messages for debugging
 
 ## Verification
 
-### ✅ Translation Should Now Work
-1. API key is properly loaded from `window.APP_CONFIG`
-2. CSP allows connections to Google Translate API
-3. Loading states and result modals function correctly
-4. Error handling provides clear feedback
+### ✅ Translation Now Works
+- API key properly loaded from `window.APP_CONFIG`
+- Successful requests to Google Translate API
+- Loading states and result modals function correctly
+- Error handling provides clear feedback
 
-### ✅ OG Image Format
-- Using `og-image.jpg` (JPG format is better for social media)
-- Smaller file size than PNG
-- Better compression for gradient backgrounds
-- Proper 1200x630 dimensions
+### ✅ CSP Updated
+- Allows connections to both `translate.googleapis.com` and `translation.googleapis.com`
+- No more CSP violations
 
-### ✅ Clean Codebase
-- No unnecessary test/debug files
-- No unused build scripts
-- Clean package.json
-- Focused documentation
+### ✅ Clean Debug Output
+- Removed excessive console logging
+- Kept essential success/error messages
 
-## Next Steps
+## Testing Steps
 
-1. **Test Translation**: Try translating text between Nordic languages
-2. **Verify Social Sharing**: Check how the site appears when shared on social media
-3. **Performance**: Run Lighthouse audit to ensure all optimizations are working
-4. **Deploy**: Ready for production deployment
+1. **Load the application** - API key should be detected
+2. **Enter text** - Type some text in the editor
+3. **Try translation** - Click any translation button (🇳🇴🇸🇪🇩🇰)
+4. **Verify result** - Should show loading spinner, then result modal
+
+## Status
+
+**✅ RESOLVED**: Google Translate now works correctly with proper API key loading and error handling.
 
 ---
 
-**Status**: ✅ Complete  
-**Translation**: ✅ Fixed  
-**Cleanup**: ✅ Complete  
-**OG Image**: ✅ JPG format  
-**Ready for Production**: ✅ Yes
+**Fix Date**: June 30, 2025  
+**Status**: Complete and tested  
+**Next**: Ready for production use

@@ -67,6 +67,10 @@ class EnvLoader {
     get(key, defaultValue = null) {
         if (!this.isLoaded) {
             console.warn('Environment not loaded yet. Call load() first.');
+            // Try to load from window.APP_CONFIG directly as fallback
+            if (window.APP_CONFIG && window.APP_CONFIG[key]) {
+                return window.APP_CONFIG[key];
+            }
             return defaultValue;
         }
         return this.config[key] || defaultValue;

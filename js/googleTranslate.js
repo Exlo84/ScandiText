@@ -16,6 +16,7 @@ export class GoogleTranslate {
         };
         this.cache = new Map(); // Simple translation cache
         this.isInitialized = false;
+        this.initializationPromise = null; // To prevent multiple simultaneous initializations
     }
 
     /**
@@ -23,15 +24,36 @@ export class GoogleTranslate {
      * Loads API key from environment configuration
      */
     async initialize() {
+        // Prevent multiple simultaneous initializations
+        if (this.initializationPromise) {
+            return await this.initializationPromise;
+        }
+        
         if (this.isInitialized) {
-            return;
+            return true;
         }
 
+        this.initializationPromise = this._doInitialize();
+        const result = await this.initializationPromise;
+        this.initializationPromise = null;
+        return result;
+    }
+
+    async _doInitialize() {
         try {
-            const config = await envLoader.load();
-            this.apiKey = envLoader.get('GOOGLE_TRANSLATE_API_KEY');
+            // Wait a bit to ensure window.APP_CONFIG is fully loaded
+            await new Promise(resolve => setTimeout(resolve, 100));
             
-            if (!this.apiKey) {
+            // Try direct access to window.APP_CONFIG first
+            if (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY) {
+                this.apiKey = window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY;
+            } else {
+                // Fallback to envLoader
+                const config = await envLoader.load();
+                this.apiKey = envLoader.get('GOOGLE_TRANSLATE_API_KEY');
+            }
+            
+            if (!this.apiKey || this.apiKey === 'null') {
                 console.warn('⚠️ Google Translate API key not configured - translation disabled');
                 this.isInitialized = false;
                 return false;
@@ -55,8 +77,10 @@ export class GoogleTranslate {
      * @returns {Promise<Object>} Translation result
      */
     async translateText(text, targetLang, sourceLang = null) {
-        // Ensure API is initialized
-        await this.initialize();
+        // Always re-check initialization before translation
+        if (!this.isInitialized || !this.apiKey) {
+            await this.initialize();
+        }
 
         if (!text || !text.trim()) {
             throw new Error('Ingen tekst å oversette');
@@ -64,6 +88,17 @@ export class GoogleTranslate {
 
         if (!this.supportedLanguages[targetLang]) {
             throw new Error(`Språket "${targetLang}" støttes ikke`);
+        }
+
+        // Double-check API key right before making the request
+        let currentApiKey = this.apiKey;
+        if (!currentApiKey && window.APP_CONFIG && window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY) {
+            currentApiKey = window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY;
+            this.apiKey = currentApiKey;
+        }
+
+        if (!currentApiKey) {
+            throw new Error('Google Translate API key ikke konfigurert');
         }
 
         // Check cache first
@@ -74,7 +109,7 @@ export class GoogleTranslate {
 
         try {
             const params = new URLSearchParams({
-                key: this.apiKey,
+                key: currentApiKey,
                 q: text,
                 target: this.supportedLanguages[targetLang],
                 format: 'text'
