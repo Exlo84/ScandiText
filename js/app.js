@@ -324,6 +324,7 @@ class NordiskTekstredigering {
                     transformed = this.textTransforms.toLowerCase(text);
                     break;
                 case 'title':
+                case 'titlecase':
                     transformed = this.textTransforms.toTitleCase(text, this.currentLanguage);
                     break;
                 case 'clean':
