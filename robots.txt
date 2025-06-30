@@ -1,5 +1,5 @@
 # Robots.txt for ScandiText - Nordisk Tekstredigering
-# https://scanditext.exlo.no/robots.txt
+# https://nordisk.exlo.no/robots.txt
 
 User-agent: *
 Allow: /
@@ -22,7 +22,7 @@ Disallow: /*.log
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://scanditext.exlo.no/sitemap.xml
+Sitemap: https://nordisk.exlo.no/sitemap.xml
 
 # Search engine specific instructions
 User-agent: Googlebot

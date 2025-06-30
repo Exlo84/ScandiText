@@ -344,7 +344,7 @@ export class ExportUtils {
         
         // Add footer
         markdown += `---\n\n`;
-        markdown += `*Generert av [Nordisk Tekstredigering](https://scanditext.exlo.no) - Avansert tekstbehandling for nordiske språk*\n`;
+        markdown += `*Generert av [Nordisk Tekstredigering](https://nordisk.exlo.no) - Avansert tekstbehandling for nordiske språk*\n`;
 
         const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
         this.downloadBlob(blob, filename);

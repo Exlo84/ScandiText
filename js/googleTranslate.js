@@ -44,16 +44,28 @@ export class GoogleTranslate {
             // Wait a bit to ensure window.APP_CONFIG is fully loaded
             await new Promise(resolve => setTimeout(resolve, 100));
             
-            // Try direct access to window.APP_CONFIG first
+            // Try multiple sources for the API key
+            this.apiKey = null;
+            
+            // 1. Try direct access to window.APP_CONFIG first
             if (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY) {
                 this.apiKey = window.APP_CONFIG.GOOGLE_TRANSLATE_API_KEY;
-            } else {
-                // Fallback to envLoader
-                const config = await envLoader.load();
-                this.apiKey = envLoader.get('GOOGLE_TRANSLATE_API_KEY');
+                console.log('✅ API key loaded from window.APP_CONFIG');
+            } 
+            // 2. Fallback to envLoader
+            else {
+                try {
+                    const config = await envLoader.load();
+                    this.apiKey = envLoader.get('GOOGLE_TRANSLATE_API_KEY');
+                    if (this.apiKey) {
+                        console.log('✅ API key loaded from envLoader');
+                    }
+                } catch (err) {
+                    console.warn('EnvLoader failed:', err.message);
+                }
             }
             
-            if (!this.apiKey || this.apiKey === 'null') {
+            if (!this.apiKey || this.apiKey === 'null' || this.apiKey === '') {
                 console.warn('⚠️ Google Translate API key not configured - translation disabled');
                 this.isInitialized = false;
                 return false;

@@ -46,8 +46,8 @@
     <meta name="copyright" content="© 2025 Exlo. All rights reserved.">
     <meta name="designer" content="Exlo">
     <meta name="owner" content="Exlo">
-    <meta name="url" content="https://scanditext.exlo.no/">
-    <meta name="identifier-URL" content="https://scanditext.exlo.no/">
+    <meta name="url" content="https://nordisk.exlo.no/">
+    <meta name="identifier-URL" content="https://nordisk.exlo.no/">
     <meta name="directory" content="submission">
     <meta name="pagename" content="Nordisk Tekstredigering - ScandiText">
     <meta name="Category" content="Education, Productivity, Language Tools">
@@ -57,8 +57,8 @@
     <meta name="subtitle" content="Professional Nordic Text Processing Tool">
     <meta name="target" content="Nordic language users, writers, translators">
     <meta name="medium" content="mult">
-    <meta name="syndication-source" content="https://scanditext.exlo.no/">
-    <meta name="original-source" content="https://scanditext.exlo.no/">
+    <meta name="syndication-source" content="https://nordisk.exlo.no/">
+    <meta name="original-source" content="https://nordisk.exlo.no/">
     <meta name="verification" content="ScandiText Nordic Text Editor">
     
     <!-- Sitemap and Robots -->
@@ -107,7 +107,7 @@
       "name": "Nordisk Tekstredigering",
       "alternateName": "ScandiText",
       "description": "Profesjonell tekstredigeringsverktøy for nordiske språk. Automatisk språkgjenkjenning, tekststatistikk, oversettelse og avanserte redigeringsverktøy for norsk, svensk og dansk.",
-      "url": "https://scanditext.exlo.no/",
+      "url": "https://nordisk.exlo.no/",
       "applicationCategory": "Productivity",
       "operatingSystem": "Web Browser",
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
@@ -156,7 +156,7 @@
         "Responsiv design",
         "Tilgjengelighetsfunksjoner"
       ],
-      "screenshot": "https://scanditext.exlo.no/icons/og-image.png",
+      "screenshot": "https://nordisk.exlo.no/og-image.jpg",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
@@ -195,13 +195,13 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Hjem",
-          "item": "https://scanditext.exlo.no/"
+          "item": "https://nordisk.exlo.no/"
         },
         {
           "@type": "ListItem", 
           "position": 2,
           "name": "Nordisk Tekstredigering",
-          "item": "https://scanditext.exlo.no/"
+          "item": "https://nordisk.exlo.no/"
         }
       ]
     }
@@ -209,14 +209,6 @@
     
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
-    
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
     
     <!-- Stylesheets -->
     <!-- Fonts -->
@@ -232,7 +224,14 @@
     <link rel="stylesheet" href="css/tooltips.css">
     
     <!-- Configuration -->
-    <script src="config.js"></script>
+    <script>
+        // Fallback configuration in case config.js is not available
+        window.APP_CONFIG = window.APP_CONFIG || {
+            "GOOGLE_TRANSLATE_API_KEY": "AIzaSyADbeyYtB-ZdXur0MNPTihPJ7ryqZgTm-E",
+            "NODE_ENV": "production"
+        };
+    </script>
+    <script src="config.js" onerror="console.log('config.js not found, using fallback configuration')"></script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC264CFY25"></script>
