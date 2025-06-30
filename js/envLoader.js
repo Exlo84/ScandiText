@@ -36,9 +36,16 @@ class EnvLoader {
         // Fallback: check for environment variables in the global scope
         if (!this.config.GOOGLE_TRANSLATE_API_KEY) {
             this.config = {
-                GOOGLE_TRANSLATE_API_KEY: window.GOOGLE_TRANSLATE_API_KEY || 'AIzaSyDBUbyegoI6b776HWZmof_a8utTOBwMd0I',
+                GOOGLE_TRANSLATE_API_KEY: window.GOOGLE_TRANSLATE_API_KEY || null,
                 NODE_ENV: window.NODE_ENV || 'development'
             };
+        }
+
+        // Security check - never expose API keys in client-side code
+        if (!this.config.GOOGLE_TRANSLATE_API_KEY) {
+            console.error('🚨 SECURITY WARNING: Google Translate API key not found!');
+            console.error('For security reasons, API keys should not be exposed in client-side code.');
+            console.error('Consider implementing a backend proxy for Google Translate API calls.');
         }
 
         this.isLoaded = true;
