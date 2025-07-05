@@ -13,6 +13,7 @@ import { TextCompare } from './textCompare.js';
 import { modal } from './ui/modal.js';
 import { i18n } from './i18n.js';
 import { GoogleTranslate } from './googleTranslate.js';
+import { ToolManager } from './tools/toolManager.js';
 
 /**
  * Main application class
@@ -34,6 +35,7 @@ class NordiskTekstredigering {
         this.findReplace = null; // Will be initialized after DOM is ready
         this.i18n = new i18n(this.currentLanguage);
         this.googleTranslate = new GoogleTranslate();
+        this.toolManager = new ToolManager(this);
 
         // Bind methods
         this.updateStats = this.updateStats.bind(this);
@@ -59,6 +61,14 @@ class NordiskTekstredigering {
             this.setupEventListeners();
             this.setupKeyboardShortcuts();
             this.initializeAutoSave();
+            
+            // Initialize tool manager
+            await this.toolManager.init();
+            this.toolManager.setupBrowserNavigation();
+            
+            // Make exportUtils globally available for tools
+            window.exportUtils = this.exportUtils;
+            
             this.updateStats();
             
             console.log('✅ Nordisk Tekstredigering initialized successfully');

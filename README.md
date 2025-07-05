@@ -1,34 +1,68 @@
-# Nordisk Tekstredigering
+# Nordisk Verktøysuite (ScandiText)
 
-En avansert tekstredigeringsapplikasjon spesielt utviklet for nordiske språk (norsk, svensk, dansk). Bygget med vanilla JavaScript og moderne web-teknologier.
+En komplett verktøysuite for nordiske brukere som kombinerer avansert tekstredigering med praktiske forretningsverktøy. Bygget med vanilla JavaScript og moderne web-teknologier.
 
-## 🌟 Funksjoner
+## 🌟 Verktøy og Funksjoner
 
-### 🔄 Oversettelse (NYT!)
+### 📝 Tekstredigering
+Den opprinnelige og kraftige teksteditoren for nordiske språk:
+
+#### 🔄 Oversettelse
 - **Google Translate API**: Oversett mellom norsk, svensk og dansk
 - **Én-klikk oversettelse**: Hurtig oversettelse mellom nordiske språk
 - **Automatisk språkgjenkjenning**: Intelligent gjenkjenning av kildespråk
 - **Sikker API-håndtering**: API-nøkler lagres sikkert i miljøvariabler
 
-### Tekstanalyse
+#### Tekstanalyse
 - **Sanntidsstatistikker**: Ord, tegn, setninger, avsnitt
 - **Lesbarhetsscore**: Tilpasset Flesch-Kincaid for nordiske språk
 - **Gjennomsnittsmålinger**: Ordlengde og setningslengde
 - **Lesetidsestimering**: Basert på gjennomsnittlig lesehastighet
 - **Sammensatte ord**: Automatisk gjenkjenning av nordiske sammensatte ord
 
-### Språkvalg
+#### Språkvalg
 - **Manuelt språkvalg**: Velg mellom norsk (bokmål/nynorsk), svensk og dansk
 - **Språkspesifikke funksjoner**: Tilpasset tekstanalyse for hvert språk
 - **Språkindikatorer**: Tydelig visning av valgt språk
 
-### Teksttransformasjoner
+#### Teksttransformasjoner
 - **Store/små bokstaver**: Intelligent konvertering
 - **Tittelformatering**: Smart kapitalisering som respekterer navn og forkortelser
 - **Tekstrengjøring**: Fjerner ekstra mellomrom og normaliserer formatering
 - **Nordiske tegn**: Konvertering mellom æ/ø/å ↔ ae/oe/aa
 - **Sammensatte ord**: Legg til eller fjern bindestreker
 - **Tegnsetting**: Normaliser mellomrom og tegnsetting
+
+### 📄 Fakturagenerator (NYT!)
+Enkelt verktøy for norske småbedrifter:
+- **Firmaopplysninger**: Navn, adresse, organisasjonsnummer
+- **Kundeinformasjon**: Navn og adressebehandling
+- **Dynamiske varer/tjenester**: Legg til og fjern linjer
+- **MVA-beregning**: Automatisk norsk MVA (25%)
+- **Live forhåndsvisning**: Se fakturaen mens du fyller ut
+- **PDF-eksport**: Profesjonell PDF-generering
+- **Mal-system**: Lagre og gjenbruk firmainformasjon
+
+### 📱 Sosiale medier formatter (Kommer snart)
+Optimaliser innlegg for ulike plattformer:
+- **Plattformoptimalisering**: LinkedIn, Instagram, Facebook, Twitter/X
+- **Tegngrenser**: Automatisk telling og advarsler
+- **Hashtag-forslag**: Relevante hashtags for nordisk innhold
+- **Formatering**: Optimalisert layout for hver plattform
+
+### 🔐 Passordgenerator (Kommer snart)
+Generer sterke passord med nordisk tilpasning:
+- **Norske ord**: Inkluder norske ord for lettere memorering
+- **Tilpassbar lengde**: 8-50 tegn
+- **Kompleksitet**: Tall, spesialtegn og store/små bokstaver
+- **Flere alternativer**: Generer flere passord samtidig
+- **Sikker generering**: Kryptografisk sikre algoritmer
+
+### 🙏 Donasjonsstøtte (NYT!)
+Støtt videreutvikling av verktøysuite:
+- **Coffee-donasjon**: Enkel støtte via Coffee-tjeneste
+- **Vipps-integrasjon**: QR-kode for norske brukere
+- **Enkel prosess**: Rask donasjon uten registrering
 
 ### Finn og Erstatt
 - **Avansert søk** med regex-støtte
@@ -222,25 +256,36 @@ node test-imports.js
 
 ## 🏗️ Arkitektur
 
-Applikasjonen er bygget med modulær vanilla JavaScript:
+Applikasjonen er bygget med modulær vanilla JavaScript og en moderne verktøysuite-arkitektur:
 
 ```
 ScandiText/
-├── index.html              # Hovedside
+├── index.html              # Hovedside med tab-navigasjon
 ├── demo.html              # Demotekster
 ├── package.json           # Prosjektmetadata
 ├── README.md              # Denne filen
 ├── LICENSE                # MIT-lisens
+├── vipps-qr.png           # QR-kode for Vipps-donasjoner
 ├── css/
 │   ├── main.css          # Hovedstyling
-│   └── components.css    # UI-komponenter
+│   ├── components.css    # UI-komponenter og verktøystyling
+│   ├── logo.css          # Logo og branding
+│   ├── tooltips.css      # Tooltip-styling
+│   └── sponsor.css       # Sponsor-banner
 ├── js/
-│   ├── app.js            # Hovedapplikasjon
+│   ├── app.js            # Hovedapplikasjon og koordinering
 │   ├── textAnalyzer.js   # Tekstanalyse
 │   ├── languageDetector.js # Språkgjenkjenning
 │   ├── textTransforms.js # Teksttransformasjoner  
 │   ├── textCompare.js    # Tekstsammenligning
 │   ├── exportUtils.js    # Eksportfunksjoner
+│   ├── googleTranslate.js # Google Translate API
+│   ├── i18n.js           # Flerspråklig støtte
+│   ├── tools/
+│   │   ├── toolManager.js     # Tab-navigasjon og verktøyhåndtering
+│   │   ├── invoiceGenerator.js # Komplett faktura-funksjonalitet
+│   │   ├── socialFormatter.js  # Sosiale medier (kommer i v2.1)
+│   │   └── passwordGenerator.js # Passord (kommer i v2.1)
 │   └── ui/
 │       ├── modal.js      # Modal-komponenter
 │       └── findReplace.js # Finn og erstatt
@@ -438,18 +483,39 @@ Dette prosjektet er lisensiert under MIT-lisensen - se [LICENSE](LICENSE) filen 
 
 Vi bruker [SemVer](http://semver.org/) for versjonering.
 
-### Nåværende versjon: 1.1.0
-✅ **Fullført:**
-- Alle kjernefunksjoner implementert
+### Nåværende versjon: 2.0.0 - Nordisk Verktøysuite 🎉
+✅ **Hovedfunksjonalitet:**
+- Alle opprinnelige tekstredigeringsfunksjoner bevart og forbedret
+- **Tab-basert navigasjon** mellom ulike verktøy
+- **Fakturagenerator** med MVA-beregning og PDF-eksport
+- **Donasjonsstøtte** med Coffee og Vipps-integrasjon
+- **Responsivt design** optimalisert for alle enheter
+- **Modulær arkitektur** for enkel utvidelse
+
+✅ **Tekstredigering (forbedret):**
 - Full støtte for norsk, svensk og dansk
-- Responsivt og tilgjengelig design
-- Modulær arkitektur
-- Omfattende tekstanalyse
-- Manuelt språkvalg (anbefalt)
-- Eksport til flere formater
-- Finn og erstatt med avanserte alternativer
-- Tekstsammenligning
-- Auto-lagring med PWA-støtte
+- Sanntids tekstanalyse og statistikk
+- Google Translate API-integrasjon
+- Avanserte teksttransformasjoner
+- Finn og erstatt med regex-støtte
+- Tekstsammenligning med diff-visning
+- Eksport til TXT, HTML, Word og PDF
+
+✅ **Fakturagenerator (ny):**
+- Komplett skjema for norske småbedrifter
+- Automatisk MVA-beregning (25%)
+- Dynamiske varerader med legg til/fjern
+- Live forhåndsvisning av faktura
+- PDF-eksport med profesjonell layout
+- Mal-system for gjenbruk av firmadata
+
+✅ **Donasjonsstøtte (ny):**
+- Coffee-knapp for internasjonale donasjoner
+- Vipps QR-kode modal for norske brukere
+- Enkel og diskret plassering
+
+### Tidligere versjoner:
+#### v1.1.0 - PWA og forbedringer
 - ✅ **Nye i v1.1:** Utvidede hurtigtaster og tilgjengelighetsforbedrings
 - ✅ **Nye i v1.1:** Forbedret PDF-eksport (ikke via print)
 - ✅ **Nye i v1.1:** Ekte Word-dokumentstøtte (.docx forbedret RTF)
@@ -458,26 +524,28 @@ Vi bruker [SemVer](http://semver.org/) for versjonering.
 
 ## 🗺️ Roadmap
 
-### Kort sikt (v1.2) - Nå tilgjengelig! ✅
-- ✅ Forbedret PDF-eksport (ikke via print)
-- ✅ Ekte Word-dokumentstøtte (.docx)
-- ✅ Flere hurtigtaster og tilgjengelighetsforbedrings
-- ✅ Bedre mobile-experience
-- ✅ PWA-støtte (offline bruk)
+### Neste versjon (v2.1) - Fullføring av verktøysuite
+- [ ] **Sosiale medier formatter** - Komplett implementasjon
+- [ ] **Passordgenerator** - Norsk-tilpasset passordgenerering
+- [ ] Forbedret clipboard-funksjonalitet
+- [ ] Flere eksportformater for faktura
+- [ ] Template-deling mellom brukere
 
-### Mellomlang sikt (v1.3-1.5)
+### Mellomlang sikt (v2.2-2.5)
 - [ ] Grammatikksjekking for nordiske språk
 - [ ] Synonymforslag og ordbok
 - [ ] Stilguide-sjekking
 - [ ] Plugin-system for utvidelser
 - [ ] Avansert diff-algoritme for tekstsammenligning
+- [ ] Flere forretningsverktøy (timeregistrering, prosjektplanlegging)
 
-### Lang sikt (v2.0+)
+### Lang sikt (v3.0+)
 - [ ] Samarbeidsredigering (real-time)
 - [ ] Integrasjon med populære tekstredigerere
 - [ ] API for tredjepartsintegrasjon
 - [ ] Avansert AI-assistert skriving
 - [ ] Flerspråklig dokument-støtte
+- [ ] Enterprise-funksjoner for bedrifter
 
 ### 🎉 Nytt i v1.1.0:
 
@@ -527,4 +595,4 @@ Vi bruker [SemVer](http://semver.org/) for versjonering.
 
 ---
 
-**Nordisk Tekstredigering** - Bygget med ❤️ for nordiske språk
+**Nordisk Verktøysuite** - Bygget med ❤️ for nordiske brukere

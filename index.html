@@ -262,6 +262,26 @@
             </div>
         </header>
 
+        <!-- Tool Navigation -->
+        <nav class="tool-navigation" role="navigation" aria-label="Verktøynavigasjon">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tool="text-editor" aria-pressed="true" aria-label="Tekstredigering">
+                    📝 Tekstredigering
+                </button>
+                <button class="nav-tab" data-tool="invoice" aria-pressed="false" aria-label="Fakturagenerator">
+                    📄 Faktura
+                </button>
+                <button class="nav-tab" data-tool="social" aria-pressed="false" aria-label="Sosiale medier formatter">
+                    📱 Sosiale medier
+                </button>
+                <button class="nav-tab" data-tool="password" aria-pressed="false" aria-label="Passordgenerator">
+                    🔐 Passord
+                </button>
+            </div>
+        </nav>
+
+        <!-- Text Editor Tool (existing content) -->
+        <section id="text-editor-tool" class="tool-section active">
         <div class="main-content">
             <div class="editor-section">
                 <div class="editor-toolbar" role="toolbar" aria-label="Teksttransformasjoner">
@@ -347,6 +367,169 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 </div>
             </div>
         </div>
+        </section>
+
+        <!-- Invoice Generator Tool -->
+        <section id="invoice-tool" class="tool-section hidden">
+            <div class="invoice-generator">
+                <h2>📄 Faktura-generator</h2>
+                <p class="tool-description">Lag enkle fakturaer for norske småbedrifter med MVA-beregning og PDF-eksport</p>
+                
+                <div class="invoice-form">
+                    <div class="company-info">
+                        <h3>Firmaopplysninger</h3>
+                        <div class="form-group">
+                            <label for="company-name">Firmanavn:</label>
+                            <input type="text" id="company-name" placeholder="Ditt firmanavn AS">
+                        </div>
+                        <div class="form-group">
+                            <label for="company-address">Adresse:</label>
+                            <textarea id="company-address" placeholder="Gateadresse&#10;Postnummer Sted&#10;Norge"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-org">Organisasjonsnummer:</label>
+                            <input type="text" id="company-org" placeholder="123 456 789">
+                        </div>
+                    </div>
+                    
+                    <div class="customer-info">
+                        <h3>Kunde</h3>
+                        <div class="form-group">
+                            <label for="customer-name">Kundenavn:</label>
+                            <input type="text" id="customer-name" placeholder="Kunde AS eller privatperson">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-address">Kundeadresse:</label>
+                            <textarea id="customer-address" placeholder="Kundens adresse"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="invoice-items">
+                        <h3>Varer/Tjenester</h3>
+                        <div id="items-list">
+                            <div class="invoice-item">
+                                <input type="text" class="item-description" placeholder="Beskrivelse av vare/tjeneste">
+                                <input type="number" class="item-quantity" placeholder="Antall" value="1" min="1">
+                                <input type="number" class="item-price" placeholder="Pris eks. MVA" min="0" step="0.01">
+                                <button type="button" class="remove-item-btn">❌</button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-item-btn" class="tool-btn">➕ Legg til vare/tjeneste</button>
+                    </div>
+                </div>
+                
+                <div class="invoice-preview">
+                    <h3>Forhåndsvisning</h3>
+                    <div id="invoice-preview-content">
+                        <!-- Live preview av faktura -->
+                        <p class="preview-placeholder">Fyll ut skjemaet for å se forhåndsvisning av fakturaen</p>
+                    </div>
+                </div>
+                
+                <div class="invoice-actions">
+                    <button id="export-pdf-btn" class="advanced-btn">📄 Eksporter PDF</button>
+                    <button id="save-template-btn" class="advanced-btn">💾 Lagre mal</button>
+                    <button id="load-template-btn" class="tool-btn">📂 Last inn mal</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Formatter Tool -->
+        <section id="social-tool" class="tool-section hidden">
+            <div class="social-formatter">
+                <h2>📱 Sosiale medier formatter</h2>
+                <p class="tool-description">Optimaliser innlegg for LinkedIn, Instagram, Facebook og Twitter/X</p>
+                
+                <div class="social-input">
+                    <label for="social-text">Skriv innlegget ditt:</label>
+                    <textarea id="social-text" placeholder="Skriv innlegget ditt her..."></textarea>
+                </div>
+                
+                <div class="platform-buttons">
+                    <button class="platform-btn active" data-platform="linkedin">💼 LinkedIn</button>
+                    <button class="platform-btn" data-platform="instagram">📸 Instagram</button>
+                    <button class="platform-btn" data-platform="facebook">👍 Facebook</button>
+                    <button class="platform-btn" data-platform="twitter">🐦 Twitter/X</button>
+                </div>
+                
+                <div class="social-output">
+                    <h3 id="platform-title">LinkedIn-optimalisering</h3>
+                    <div id="formatted-output">
+                        <p class="output-placeholder">Skriv tekst over for å se formatert versjon</p>
+                    </div>
+                    <div class="social-stats">
+                        <span id="char-count">0</span> / <span id="char-limit">3000</span> tegn
+                    </div>
+                    <button id="copy-formatted-btn" class="advanced-btn">📋 Kopier formatert tekst</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Password Generator Tool -->
+        <section id="password-tool" class="tool-section hidden">
+            <div class="password-generator">
+                <h2>🔐 Passord-generator</h2>
+                <p class="tool-description">Generer sterke passord med norske ord og tilpassbare innstillinger</p>
+                
+                <div class="password-settings">
+                    <div class="setting-group">
+                        <label for="password-length">Passordlengde:</label>
+                        <input type="range" id="password-length" min="8" max="50" value="16">
+                        <span id="length-display">16</span> tegn
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="include-numbers" checked>
+                            Inkluder tall
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="include-symbols" checked>
+                            Inkluder spesialtegn
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="include-norwegian">
+                            Bruk norske ord
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="password-output">
+                    <div class="generated-passwords">
+                        <h3>Genererte passord:</h3>
+                        <div id="password-list">
+                            <!-- Passord vil bli vist her -->
+                        </div>
+                    </div>
+                    
+                    <div class="password-actions">
+                        <button id="generate-passwords-btn" class="advanced-btn">🎲 Generer passord</button>
+                        <button id="copy-password-btn" class="tool-btn" disabled>📋 Kopier valgt</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Section -->
+        <section class="donation-section">
+            <h3>🙏 Støtt prosjektet</h3>
+            <p>Liker du de nordiske verktøyene? Hjelp meg å lage flere!</p>
+            
+            <div class="donate-buttons">
+                <a href="https://coff.ee/exlo" target="_blank" rel="noopener" class="donate-btn coffi-btn">
+                    ☕ Kjøp meg en kaffe
+                </a>
+                <button id="vipps-qr-btn" class="donate-btn vipps-btn">
+                    📱 Åpne Vipps
+                </button>
+            </div>
+        </section>
 
         <div class="status-bar">
             <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link">© Exlo 2025</a>
@@ -357,7 +540,88 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
         🎵 Sponset av Exlo Music
     </a>
 
+    <!-- Vipps QR Modal -->
+    <div id="vipps-modal" class="vipps-modal-overlay" style="display: none;">
+        <div class="vipps-modal-content">
+            <div class="vipps-modal-header">
+                <h3>📱 Vipps QR-kode</h3>
+                <button class="vipps-modal-close" id="close-vipps-modal">&times;</button>
+            </div>
+            <div class="vipps-modal-body">
+                <img src="vipps-qr.png" alt="Vipps QR-kode for donasjon" class="vipps-qr-modal">
+                <p>Skann med Vipps-appen for å donere</p>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/app.js"></script>
+    
+    <!-- Vipps Modal Script -->
+    <script>
+        // Simple immediate execution - no conflicts with other modules
+        (function() {
+            console.log('Vipps modal script starting...');
+            
+            function setupVippsModal() {
+                const vippsBtn = document.getElementById('vipps-qr-btn');
+                const modal = document.getElementById('vipps-modal');
+                const closeBtn = document.getElementById('close-vipps-modal');
+                
+                console.log('Elements found:', {
+                    button: !!vippsBtn,
+                    modal: !!modal,
+                    closeBtn: !!closeBtn
+                });
+                
+                if (!vippsBtn || !modal || !closeBtn) {
+                    console.error('Missing Vipps modal elements');
+                    return;
+                }
+                
+                // Remove any existing listeners
+                const newVippsBtn = vippsBtn.cloneNode(true);
+                vippsBtn.parentNode.replaceChild(newVippsBtn, vippsBtn);
+                
+                // Add click listener to open modal
+                newVippsBtn.onclick = function(e) {
+                    console.log('Vipps button clicked!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    return false;
+                };
+                
+                // Add click listener to close button
+                closeBtn.onclick = function(e) {
+                    console.log('Close button clicked!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    return false;
+                };
+                
+                // Close when clicking background
+                modal.onclick = function(e) {
+                    if (e.target === modal) {
+                        console.log('Background clicked - closing modal');
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                };
+                
+                console.log('Vipps modal setup complete!');
+            }
+            
+            // Try to setup immediately, or wait for DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupVippsModal);
+            } else {
+                setupVippsModal();
+            }
+        })();
+    </script>
     
     <!-- PWA Installation and Service Worker -->
     <script>
@@ -513,6 +777,119 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Vipps Modal Styles */
+        .vipps-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .vipps-modal-content {
+            background: var(--bg-color, white);
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        .vipps-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 10px;
+            border-bottom: 1px solid var(--border-color, #e0e0e0);
+        }
+        
+        .vipps-modal-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        
+        .vipps-modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 5px;
+            line-height: 1;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        
+        .vipps-modal-close:hover {
+            background: var(--hover-color, #f0f0f0);
+        }
+        
+        .vipps-modal-body {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .vipps-qr-modal {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vipps-modal-body p {
+            margin: 0;
+            color: var(--text-color, #666);
+            font-size: 0.95rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Dark mode support for modal */
+        @media (prefers-color-scheme: dark) {
+            .vipps-modal-content {
+                background: #2d3748;
+                color: white;
+            }
+            
+            .vipps-modal-header {
+                border-bottom-color: #4a5568;
+            }
+            
+            .vipps-modal-header h3 {
+                color: white !important;
+            }
+            
+            .vipps-modal-close {
+                color: white;
+            }
+            
+            .vipps-modal-close:hover {
+                background: #4a5568;
+            }
+            
+            .vipps-modal-body p {
+                color: #e2e8f0;
+            }
         }
     </style>
 </body>

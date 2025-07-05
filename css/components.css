@@ -441,6 +441,592 @@
     width: 0%;
 }
 
+/* Tool Navigation Styles */
+.tool-navigation {
+    background: var(--light-gray);
+    border-bottom: 2px solid var(--border-gray);
+    padding: 0;
+    margin: 0;
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-tab {
+    background: var(--light-gray);
+    color: var(--text-gray);
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-modern);
+    font-weight: 600;
+    font-size: 0.95em;
+    white-space: nowrap;
+    border-radius: 0;
+    min-width: 140px;
+    text-align: center;
+}
+
+.nav-tab:hover {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-blue);
+}
+
+.nav-tab.active {
+    background: white;
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+    box-shadow: 0 -2px 10px rgba(37, 99, 235, 0.1);
+}
+
+/* Tool Sections */
+.tool-section {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.tool-section.hidden {
+    display: none;
+}
+
+.tool-section.active {
+    display: block;
+}
+
+/* Invoice Generator Styles */
+.invoice-generator {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.invoice-generator h2 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-size: 2em;
+    text-align: center;
+}
+
+.tool-description {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.invoice-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.invoice-items {
+    grid-column: 1 / -1;
+}
+
+.company-info,
+.customer-info,
+.invoice-items {
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+}
+
+.company-info h3,
+.customer-info h3,
+.invoice-items h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    font-family: var(--font-modern);
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Invoice Items */
+.invoice-item {
+    display: grid;
+    grid-template-columns: 2fr 100px 120px 40px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+}
+
+.invoice-item input {
+    padding: 8px;
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.remove-item-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+}
+
+.remove-item-btn:hover {
+    background: #dc2626;
+}
+
+#add-item-btn {
+    margin-top: 10px;
+    background: var(--success-green);
+    color: white;
+    border: none;
+}
+
+#add-item-btn:hover {
+    background: #15803d;
+}
+
+/* Invoice Preview */
+.invoice-preview {
+    background: white;
+    border: 2px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 300px;
+}
+
+.invoice-preview h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 8px;
+}
+
+.preview-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* Invoice Actions */
+.invoice-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Social Media Formatter Styles */
+.social-formatter {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.social-formatter h2 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-size: 2em;
+    text-align: center;
+}
+
+.social-input {
+    margin-bottom: 20px;
+}
+
+.social-input label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+#social-text {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    font-family: var(--font-modern);
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+#social-text:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.platform-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.platform-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--border-gray);
+    background: white;
+    color: var(--text-dark);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-modern);
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.platform-btn:hover {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.platform-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.social-output {
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+}
+
+.social-output h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+#formatted-output {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+    min-height: 100px;
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    font-family: var(--font-modern);
+    line-height: 1.5;
+}
+
+.output-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+}
+
+.social-stats {
+    margin-bottom: 15px;
+    text-align: right;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Password Generator Styles */
+.password-generator {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.password-generator h2 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-size: 2em;
+    text-align: center;
+}
+
+.password-settings {
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+    margin-bottom: 20px;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setting-group label {
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#password-length {
+    flex: 1;
+    max-width: 200px;
+}
+
+#length-display {
+    background: var(--primary-blue);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.password-output {
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-gray);
+}
+
+.generated-passwords h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+#password-list {
+    margin-bottom: 20px;
+}
+
+.password-item {
+    background: white;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-gray);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 14px;
+}
+
+.password-item:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.password-item.selected {
+    border-color: var(--primary-blue);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.password-strength {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: var(--font-modern);
+}
+
+.strength-weak { background: #ef4444; color: white; }
+.strength-medium { background: #f59e0b; color: white; }
+.strength-strong { background: #10b981; color: white; }
+
+.password-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Donation Section Styles */
+.donation-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.donation-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+.donation-section p {
+    font-size: 1.1em;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.donate-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: var(--font-modern);
+    font-size: 1em;
+}
+
+.donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-decoration: none;
+}
+
+.coffi-btn {
+    background: #ff813f;
+    color: white;
+}
+
+.coffi-btn:hover {
+    background: #e6732d;
+    color: white;
+}
+
+.vipps-btn {
+    background: #ff5b24;
+    color: white;
+}
+
+.vipps-btn:hover {
+    background: #e64d1f;
+    color: white;
+}
+
+.vipps-info {
+    margin-top: 1.5rem;
+    opacity: 0.9;
+}
+
+.vipps-info p {
+    margin-bottom: 1rem;
+    font-size: 1em;
+}
+
+.qr-placeholder {
+    background: white;
+    color: var(--text-dark);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 1rem auto;
+    max-width: 200px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.qr-placeholder:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.qr-text {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text-dark);
+}
+
+.qr-text small {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    font-weight: normal;
+}
+
+.qr-instruction {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
 /* Responsive modal styles */
 @media (max-width: 768px) {
     .modal {
@@ -480,96 +1066,209 @@
     }
 }
 
-/* Dark mode support for components */
-@media (prefers-color-scheme: dark) {
-    .modal {
-        background: #1e293b;
-        color: var(--text-dark);
+/* Responsive Design for Tools */
+@media screen and (max-width: 768px) {
+    /* Tool Navigation Mobile */
+    .nav-tabs {
+        justify-content: flex-start;
+        padding: 0 10px;
     }
     
-    .modal-header,
-    .modal-footer {
-        background: #334155;
-        border-color: #475569;
+    .nav-tab {
+        min-width: auto;
+        padding: 12px 15px;
+        font-size: 0.85em;
     }
     
-    .form-input {
-        background: #334155;
-        color: var(--text-dark);
-        border-color: #475569;
+    /* Invoice Generator Mobile */
+    .invoice-generator {
+        padding: 20px;
     }
     
-    .form-input:focus {
-        border-color: var(--primary-blue);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    .invoice-form {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     
-    .search-results {
-        background: #334155;
-        border-color: #475569;
-        color: var(--text-muted);
+    .invoice-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: center;
     }
     
-    .compare-section {
-        border-color: #475569;
+    .invoice-item input {
+        text-align: center;
     }
     
-    .compare-header {
-        background: #334155;
-        border-color: #475569;
+    .remove-item-btn {
+        justify-self: center;
+        width: 100%;
+        max-width: 120px;
     }
     
-    .compare-text {
-        background: #1e293b;
-        color: var(--text-dark);
+    .invoice-actions {
+        flex-direction: column;
+        align-items: center;
     }
     
-    .stat-card {
-        background: #334155;
+    .invoice-actions button {
+        width: 100%;
+        max-width: 300px;
     }
     
-    .toast {
-        background: #1e293b;
-        border-left-color: var(--primary-blue);
+    /* Social Media Formatter Mobile */
+    .social-formatter {
+        padding: 20px;
     }
     
-    .export-option {
-        background: #334155;
-        border-color: #475569;
+    .platform-buttons {
+        gap: 8px;
     }
     
-    .export-option:hover {
-        background: rgba(37, 99, 235, 0.1);
+    .platform-btn {
+        padding: 8px 16px;
+        font-size: 0.85em;
     }
     
-    .export-option.active {
-        background: rgba(37, 99, 235, 0.2);
+    /* Password Generator Mobile */
+    .password-generator {
+        padding: 20px;
+    }
+    
+    .setting-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .password-item {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .password-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .password-actions button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Donation Section Mobile */
+    .donation-section {
+        margin: 1rem 0;
+        padding: 1.5rem;
+    }
+    
+    .donate-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .donate-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .qr-placeholder {
+        max-width: 150px;
     }
 }
 
-/* High contrast mode for components */
+/* Touch device improvements for tools */
+@media (hover: none) and (pointer: coarse) {
+    .nav-tab {
+        min-height: 44px;
+        font-weight: 600;
+    }
+    
+    .platform-btn,
+    .password-item,
+    .invoice-item button {
+        min-height: 44px;
+        font-weight: 600;
+    }
+    
+    .donate-btn {
+        min-height: 48px;
+        font-weight: 700;
+    }
+}
+
+/* High contrast mode for tools */
 @media (prefers-contrast: high) {
-    .modal {
+    .nav-tab {
         border: 2px solid var(--text-dark);
-    }
-    
-    .form-input {
-        border: 3px solid var(--text-gray);
-        font-weight: 500;
-    }
-    
-    .btn {
-        border: 2px solid;
         font-weight: 700;
     }
     
-    .export-option {
-        border: 3px solid var(--border-gray);
+    .nav-tab.active {
+        border-bottom-width: 4px;
+        font-weight: 700;
     }
     
-    .export-option:hover,
-    .export-option.active {
-        border-color: var(--text-dark);
-        font-weight: 600;
+    .platform-btn,
+    .password-item {
+        border-width: 2px;
+        font-weight: 700;
+    }
+    
+    .donate-btn {
+        border: 2px solid white;
+        font-weight: 700;
+    }
+}
+
+/* Dark mode support for tools */
+@media (prefers-color-scheme: dark) {
+    .tool-section {
+        background: #1e293b;
+        color: var(--text-dark);
+    }
+    
+    .invoice-generator,
+    .social-formatter,
+    .password-generator {
+        background: #1e293b;
+    }
+    
+    .company-info,
+    .customer-info,
+    .invoice-items,
+    .social-output,
+    .password-settings,
+    .password-output {
+        background: #334155;
+        border-color: var(--border-gray);
+    }
+    
+    .invoice-item,
+    .password-item,
+    #formatted-output,
+    .invoice-preview {
+        background: #475569;
+        border-color: var(--border-gray);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    #social-text {
+        background: #475569;
+        color: var(--text-dark);
+        border-color: var(--border-gray);
+    }
+    
+    .qr-placeholder {
+        background: #475569;
+        color: var(--text-dark);
+    }
+    
+    .qr-text {
+        color: var(--text-dark);
     }
 }
