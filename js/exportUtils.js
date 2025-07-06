@@ -385,6 +385,14 @@ export class ExportUtils {
      * @param {Object} loading - Loading modal controller
      */
     async exportToPdf(text, filename, stats, loading) {
+        // Ensure stats object exists to prevent null reference errors
+        stats = stats || {
+            words: 0,
+            characters: text ? text.length : 0,
+            sentences: 0,
+            paragraphs: 0
+        };
+        
         loading.updateMessage('Genererer PDF...');
         loading.updateProgress(30);
 

@@ -1,0 +1,81 @@
+<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="nordGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#50C3A5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#667EEA;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2C3E50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34495E;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Main logo container with rounded background -->
+  <rect x="5" y="5" width="290" height="90" rx="15" ry="15" fill="url(#nordGradient)" filter="url(#dropshadow)"/>
+  
+  <!-- Nordic flags inspiration - abstract geometric shapes -->
+  <rect x="20" y="15" width="50" height="25" fill="#FFFFFF" opacity="0.3" rx="3"/>
+  <rect x="20" y="45" width="50" height="25" fill="#FFD700" opacity="0.4" rx="3"/>
+  <rect x="20" y="75" width="50" height="10" fill="#FF6B6B" opacity="0.3" rx="2"/>
+  
+  <!-- Tool icons integrated into design -->
+  <!-- Wrench/tool icon -->
+  <g transform="translate(25, 25)">
+    <path d="M8 2 L12 6 L10 8 L6 4 Z M2 8 L6 4 L4 2 L0 6 Z" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="4" cy="6" r="1.5" fill="#FFD700"/>
+  </g>
+  
+  <!-- Text editing icon -->
+  <g transform="translate(35, 50)">
+    <rect x="0" y="0" width="12" height="2" fill="#FFFFFF" opacity="0.6"/>
+    <rect x="0" y="4" width="8" height="2" fill="#FFFFFF" opacity="0.6"/>
+    <rect x="0" y="8" width="10" height="2" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="85" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#textGradient)">
+    ScandiText
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="85" y="55" font-family="Arial, sans-serif" font-weight="normal" font-size="14" fill="#34495E" opacity="0.8">
+    Nordisk Verktøysuite
+  </text>
+  
+  <!-- Small Nordic characters as design elements -->
+  <text x="85" y="75" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#50C3A5" opacity="0.7">
+    æ ø å • ä ö • ä ø
+  </text>
+  
+  <!-- Tool symbols on the right -->
+  <g transform="translate(250, 20)">
+    <!-- Document/invoice icon -->
+    <rect x="0" y="0" width="20" height="25" fill="#FFFFFF" opacity="0.7" rx="2"/>
+    <rect x="3" y="5" width="14" height="2" fill="#4A90E2" opacity="0.8"/>
+    <rect x="3" y="9" width="10" height="2" fill="#4A90E2" opacity="0.6"/>
+    <rect x="3" y="13" width="12" height="2" fill="#4A90E2" opacity="0.6"/>
+    <rect x="3" y="17" width="8" height="2" fill="#50C3A5" opacity="0.8"/>
+  </g>
+  
+  <g transform="translate(250, 55)">
+    <!-- Password/security icon -->
+    <rect x="2" y="8" width="16" height="12" fill="#FFFFFF" opacity="0.7" rx="2"/>
+    <path d="M6 8 V5 A4 4 0 0 1 14 5 V8" stroke="#4A90E2" stroke-width="2" fill="none" opacity="0.8"/>
+    <circle cx="10" cy="14" r="2" fill="#FFD700"/>
+  </g>
+  
+  <!-- Subtle Nordic pattern background -->
+  <g opacity="0.1">
+    <path d="M100 10 L110 20 L100 30 L90 20 Z" fill="#FFFFFF"/>
+    <path d="M120 15 L130 25 L120 35 L110 25 Z" fill="#FFFFFF"/>
+    <path d="M140 10 L150 20 L140 30 L130 20 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

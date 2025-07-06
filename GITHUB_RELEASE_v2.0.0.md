@@ -13,7 +13,8 @@ Vi presenterer ScandiText v2.0.0 - nå utvidet fra en tekstredigerer til en komp
 - **Komplett løsning** for norske småbedrifter
 - **Automatisk MVA-beregning** (25%)
 - **Live forhåndsvisning** mens du fyller ut
-- **PDF-eksport** og template-system
+- **PDF-eksport** via moderne browser API eller utskriftsdialog
+- **Template-system** for lagring og gjenbruk av firmadata
 - Dynamiske varer/tjenester med legg til/fjern
 
 ### 🙏 Donasjonsstøtte (Nytt!)

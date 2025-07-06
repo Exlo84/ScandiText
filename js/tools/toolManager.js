@@ -116,13 +116,21 @@ export class ToolManager {
                     break;
                     
                 case 'social':
-                    // Placeholder for Social Media Formatter
-                    console.log('Social Media Formatter - Coming soon');
+                    const { SocialFormatter } = await import('./socialFormatter.js');
+                    this.tools.social = new SocialFormatter();
+                    this.tools.social.app = this.app; // Give access to main app
+                    this.tools.social.showToast = this.app.showToast.bind(this.app);
+                    this.tools.social.init();
                     break;
                     
                 case 'password':
-                    // Placeholder for Password Generator
-                    console.log('Password Generator - Coming soon');
+                    const { PasswordGenerator } = await import('./passwordGenerator.js');
+                    this.tools.password = new PasswordGenerator();
+                    this.tools.password.app = this.app; // Give access to main app
+                    this.tools.password.showToast = this.app.showToast.bind(this.app);
+                    this.tools.password.setI18n(this.app.i18n); // Give access to i18n
+                    this.tools.password.setLanguage(this.app.currentLanguage); // Set current language
+                    // Password generator initializes itself
                     break;
                     
                 default:
@@ -170,5 +178,16 @@ export class ToolManager {
      */
     isToolAvailable(toolName) {
         return this.tools.hasOwnProperty(toolName) || toolName === 'text-editor';
+    }
+    
+    /**
+     * Update language for all loaded tools
+     */
+    updateLanguage(language) {
+        Object.values(this.tools).forEach(tool => {
+            if (tool && typeof tool.setLanguage === 'function') {
+                tool.setLanguage(language);
+            }
+        });
     }
 }

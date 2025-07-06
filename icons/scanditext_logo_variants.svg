@@ -1,0 +1,126 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="normalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="50%" style="stop-color:#50C3A5"/>
+      <stop offset="100%" style="stop-color:#667EEA"/>
+    </linearGradient>
+    
+    <linearGradient id="darkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C3E50"/>
+      <stop offset="50%" style="stop-color:#34495E"/>
+      <stop offset="100%" style="stop-color:#2980B9"/>
+    </linearGradient>
+    
+    <linearGradient id="lightText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#ECF0F1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F8F9FA"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#2C3E50" text-anchor="middle">
+    ScandiText Logo Variants
+  </text>
+  
+  <!-- 1. Original Logo (Top) -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">1. Original Logo (300x100)</text>
+    <rect x="0" y="0" width="300" height="100" rx="15" fill="url(#normalGrad)"/>
+    <text x="20" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#FFFFFF">ScandiText</text>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" opacity="0.9">Nordisk Verktøysuite</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="12" fill="#FFD700" opacity="0.8">æ ø å • ä ö • ä ø</text>
+    <!-- Tool icons -->
+    <rect x="250" y="20" width="20" height="25" fill="#FFFFFF" opacity="0.7" rx="2"/>
+    <rect x="253" y="27" width="14" height="2" fill="#4A90E2"/>
+    <rect x="253" y="31" width="10" height="2" fill="#4A90E2" opacity="0.6"/>
+    <rect x="253" y="35" width="12" height="2" fill="#50C3A5"/>
+  </g>
+  
+  <!-- 2. Horizontal Compact -->
+  <g transform="translate(400, 70)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">2. Compact Horizontal (200x60)</text>
+    <rect x="0" y="0" width="200" height="60" rx="10" fill="url(#normalGrad)"/>
+    <text x="15" y="28" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="#FFFFFF">ScandiText</text>
+    <text x="15" y="45" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.8">Nordisk Verktøy</text>
+    <circle cx="170" cy="30" r="15" fill="#FFFFFF" opacity="0.2"/>
+    <text x="170" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#FFFFFF" text-anchor="middle">ST</text>
+  </g>
+  
+  <!-- 3. Dark Theme -->
+  <g transform="translate(50, 200)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">3. Dark Theme (300x100)</text>
+    <rect x="0" y="0" width="300" height="100" rx="15" fill="url(#darkGrad)"/>
+    <text x="20" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#lightText)">ScandiText</text>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="14" fill="#BDC3C7">Nordisk Verktøysuite</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="12" fill="#F39C12">æ ø å • ä ö • ä ø</text>
+    <!-- Dark theme icons -->
+    <rect x="250" y="20" width="20" height="25" fill="#ECF0F1" opacity="0.9" rx="2"/>
+    <rect x="253" y="27" width="14" height="2" fill="#3498DB"/>
+    <rect x="253" y="31" width="10" height="2" fill="#3498DB" opacity="0.7"/>
+    <rect x="253" y="35" width="12" height="2" fill="#1ABC9C"/>
+  </g>
+  
+  <!-- 4. White Background -->
+  <g transform="translate(400, 200)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">4. White Background (300x100)</text>
+    <rect x="0" y="0" width="300" height="100" rx="15" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
+    <text x="20" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#normalGrad)">ScandiText</text>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">Nordisk Verktøysuite</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="12" fill="#50C3A5">æ ø å • ä ö • ä ø</text>
+    <!-- White bg icons -->
+    <rect x="250" y="20" width="20" height="25" fill="#4A90E2" opacity="0.1" rx="2" stroke="#4A90E2" stroke-width="1"/>
+    <rect x="253" y="27" width="14" height="2" fill="#4A90E2"/>
+    <rect x="253" y="31" width="10" height="2" fill="#4A90E2" opacity="0.6"/>
+    <rect x="253" y="35" width="12" height="2" fill="#50C3A5"/>
+  </g>
+  
+  <!-- 5. Icon Only Square -->
+  <g transform="translate(50, 350)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">5. Icon Only (100x100)</text>
+    <rect x="0" y="0" width="100" height="100" rx="20" fill="url(#normalGrad)"/>
+    <text x="50" y="60" font-family="Arial, sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle">ST</text>
+    <circle cx="75" cy="25" r="8" fill="#FFD700" opacity="0.9"/>
+    <path d="M71 21 L79 29" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="25" cy="25" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="35" cy="20" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="20" cy="35" r="2" fill="#FFFFFF" opacity="0.4"/>
+  </g>
+  
+  <!-- 6. Monochrome -->
+  <g transform="translate(200, 350)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">6. Monochrome (200x80)</text>
+    <rect x="0" y="0" width="200" height="80" rx="10" fill="#2C3E50"/>
+    <text x="15" y="30" font-family="Arial, sans-serif" font-weight="bold" font-size="18" fill="#FFFFFF">ScandiText</text>
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="12" fill="#BDC3C7">Nordisk Verktøy</text>
+    <text x="15" y="65" font-family="Arial, sans-serif" font-size="10" fill="#95A5A6">æ ø å</text>
+  </g>
+  
+  <!-- 7. Favicon Preview -->
+  <g transform="translate(450, 350)">
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">7. Favicon (32x32)</text>
+    <!-- Enlarged for visibility -->
+    <rect x="0" y="0" width="64" height="64" rx="12" fill="url(#normalGrad)"/>
+    <text x="32" y="44" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="#FFFFFF" text-anchor="middle">S</text>
+    <circle cx="48" cy="16" r="6" fill="#FFD700" opacity="0.9"/>
+    <path d="M44 12 L52 20" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="16" cy="16" r="3" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+  
+  <!-- Usage Instructions -->
+  <g transform="translate(50, 480)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="#2C3E50">Usage Guide:</text>
+    <text x="0" y="25" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">1. Original: Website header, presentations</text>
+    <text x="0" y="45" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">2. Compact: Small spaces, mobile header</text>
+    <text x="0" y="65" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">3. Dark: Dark theme websites, night mode</text>
+    <text x="0" y="85" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">4. White: Light backgrounds, documents</text>
+    
+    <text x="350" y="25" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">5. Icon: App icon, PWA, social media</text>
+    <text x="350" y="45" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">6. Monochrome: Black/white printing</text>
+    <text x="350" y="65" font-family="Arial, sans-serif" font-size="14" fill="#7F8C8D">7. Favicon: Browser tab icon</text>
+  </g>
+</svg>

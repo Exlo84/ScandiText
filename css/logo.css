@@ -1,13 +1,57 @@
 /**
- * Logo and branding styles for Nordisk Tekstredigering
+ * Logo and branding styles for ScandiText Nordisk Verktøysuite
  */
 
 .logo {
     display: flex;
     align-items: center;
     gap: 15px;
+    height: 100%; /* Fill full header height */
+    padding: 5px 0; /* Minimal padding for maximum size */
 }
 
+.logo-svg {
+    height: 90px; /* Much larger - almost maximum header fill */
+    width: auto;
+    max-width: 550px; /* Dramatically increased max width */
+    transition: transform 0.3s ease;
+}
+
+.logo-svg:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive design for new SVG logo */
+@media (max-width: 768px) {
+    .logo-svg {
+        height: 75px; /* Much larger on mobile */
+        max-width: 420px; /* Increased mobile width significantly */
+    }
+    
+    .logo {
+        height: 100%;
+        padding: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-svg {
+        height: 65px; /* Significantly larger on small screens */
+        max-width: 320px; /* Increased small screen width */
+    }
+    
+    .logo {
+        height: 100%;
+        padding: 3px 0;
+    }
+}
+
+/* Ensure SVG logo works well in header context */
+.header .logo-svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Legacy logo styles (kept for fallback/compatibility) */
 .logo-icon {
     width: 48px;
     height: 48px;

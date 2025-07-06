@@ -68,7 +68,27 @@ export const translations = {
         findReplaceTooltip: "Søk og erstatt tekst med avanserte alternativer",
         compareTooltip: "Sammenlign to tekster side-ved-side med diff-markering",
         exportTooltip: "Eksporter tekst til TXT, HTML, Word eller PDF format",
-        helpTooltip: "Vis hurtigtaster og bruksanvisning"
+        helpTooltip: "Vis hurtigtaster og bruksanvisning",
+        
+        // Password Generator
+        passwordGenerator: "🔐 Passordgenerator",
+        passwordDescription: "Generer sterke passord med norske ord og tilpassbare innstillinger",
+        passwordLength: "Passordlengde:",
+        includeNumbers: "Inkluder tall",
+        includeSymbols: "Inkluder spesialtegn",
+        useNordicWords: "Bruk norske ord",
+        generatedPasswords: "Genererte passord:",
+        generatePasswords: "🎲 Generer passord",
+        copySelected: "📋 Kopier valgt",
+        selectPasswordFirst: "Velg et passord først",
+        passwordCopied: "Passord kopiert til utklippstavle!",
+        passwordsGenerated: "nye passord generert!",
+        strength: "Styrke:",
+        strengthWeak: "Svakt",
+        strengthMedium: "Middels",
+        strengthStrong: "Sterkt",
+        strengthVeryStrong: "Meget sterkt",
+        copyFailed: "Kunne ikke kopiere"
     },
     
     se: {
@@ -135,7 +155,27 @@ export const translations = {
         findReplaceTooltip: "Sök och ersätt text med avancerade alternativ",
         compareTooltip: "Jämför två texter sida vid sida med diff-markering",
         exportTooltip: "Exportera text till TXT, HTML, Word eller PDF-format",
-        helpTooltip: "Visa tangentbordsgenvägar och användarguide"
+        helpTooltip: "Visa tangentbordsgenvägar och användarguide",
+        
+        // Password Generator
+        passwordGenerator: "🔐 Lösenordsgenerator",
+        passwordDescription: "Generera starka lösenord med svenska ord och anpassningsbara inställningar",
+        passwordLength: "Lösenordslängd:",
+        includeNumbers: "Inkludera siffror",
+        includeSymbols: "Inkludera specialtecken",
+        useNordicWords: "Använd svenska ord",
+        generatedPasswords: "Genererade lösenord:",
+        generatePasswords: "🎲 Generera lösenord",
+        copySelected: "📋 Kopiera valt",
+        selectPasswordFirst: "Välj ett lösenord först",
+        passwordCopied: "Lösenord kopierat till urklipp!",
+        passwordsGenerated: "nya lösenord genererade!",
+        strength: "Styrka:",
+        strengthWeak: "Svagt",
+        strengthMedium: "Medel",
+        strengthStrong: "Starkt",
+        strengthVeryStrong: "Mycket starkt",
+        copyFailed: "Kunde inte kopiera"
     },
     
     dk: {
@@ -191,7 +231,27 @@ export const translations = {
         findReplaceTooltip: "Søg og erstat tekst med avancerede muligheder",
         compareTooltip: "Sammenlign to tekster side om side med diff-markering",
         exportTooltip: "Eksporter tekst til TXT, HTML, Word eller PDF-format",
-        helpTooltip: "Vis tastaturgenveje og brugsanvisning"
+        helpTooltip: "Vis tastaturgenveje og brugsanvisning",
+        
+        // Password Generator
+        passwordGenerator: "🔐 Adgangskodegenerator",
+        passwordDescription: "Generer stærke adgangskoder med danske ord og tilpasselige indstillinger",
+        passwordLength: "Adgangskodelængde:",
+        includeNumbers: "Inkluder tal",
+        includeSymbols: "Inkluder specialtegn",
+        useNordicWords: "Brug danske ord",
+        generatedPasswords: "Genererede adgangskoder:",
+        generatePasswords: "🎲 Generer adgangskoder",
+        copySelected: "📋 Kopier valgt",
+        selectPasswordFirst: "Vælg en adgangskode først",
+        passwordCopied: "Adgangskode kopieret til udklipsholder!",
+        passwordsGenerated: "nye adgangskoder genereret!",
+        strength: "Styrke:",
+        strengthWeak: "Svagt",
+        strengthMedium: "Mellem",
+        strengthStrong: "Stærkt",
+        strengthVeryStrong: "Meget stærkt",
+        copyFailed: "Kunne ikke kopiere"
     }
 };
 
@@ -278,6 +338,12 @@ export class i18n {
                     break;
             }
         });
+        
+        // Update password generator nordic words label
+        const nordicWordsLabel = document.getElementById('nordic-words-label');
+        if (nordicWordsLabel) {
+            nordicWordsLabel.textContent = this.t('useNordicWords');
+        }
         
         // Update advanced tools
         const advancedTitle = document.querySelector('.tools-section h4');

@@ -71,7 +71,7 @@ class NordiskTekstredigering {
             
             this.updateStats();
             
-            console.log('✅ Nordisk Tekstredigering initialized successfully');
+            console.log('✅ Nordisk Verktøysuite initialized successfully');
         } catch (error) {
             console.error('Failed to initialize application:', error);
             this.showToast('Feil ved oppstart: ' + error.message, 'error');
@@ -121,10 +121,21 @@ class NordiskTekstredigering {
             btn.addEventListener('click', () => this.handleTextTransform(action));
         });
 
+        // Navigation tabs
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tool = btn.getAttribute('data-tool');
+                this.switchTool(tool);
+            });
+        });
+
         // Advanced tool buttons
         document.querySelectorAll('[data-tool]').forEach(btn => {
             const tool = btn.getAttribute('data-tool');
-            btn.addEventListener('click', () => this.handleAdvancedTool(tool));
+            // Skip nav-tab buttons as they're handled above
+            if (!btn.classList.contains('nav-tab')) {
+                btn.addEventListener('click', () => this.handleAdvancedTool(tool));
+            }
         });
 
         // Translation buttons
@@ -219,6 +230,27 @@ class NordiskTekstredigering {
             if (languages[langIndex]) {
                 this.currentLanguage = languages[langIndex];
                 this.i18n.setLanguage(this.currentLanguage);
+                
+                // Update all tools through toolManager
+                if (this.toolManager) {
+                    this.toolManager.updateLanguage(this.currentLanguage);
+                }
+                
+                // Update password generator language if it exists (legacy support)
+                if (this.passwordGenerator) {
+                    this.passwordGenerator.setLanguage(this.currentLanguage);
+                }
+                
+                // Update social formatter language if it exists (legacy support)
+                if (this.toolManager && this.toolManager.tools.social) {
+                    this.toolManager.tools.social.updateLanguage(this.currentLanguage);
+                }
+                
+                // Update password generator language if it exists (legacy support)
+                if (this.toolManager && this.toolManager.tools.password) {
+                    this.toolManager.tools.password.setLanguage(this.currentLanguage);
+                }
+                
                 this.updateLanguageUI();
                 this.updateStats();
                 this.showToast(`${this.i18n.t('langChanged')} ${this.getLanguageLabel(languages[langIndex])}`, 'info');
@@ -307,6 +339,26 @@ class NordiskTekstredigering {
         
         // Update i18n language and UI
         this.i18n.setLanguage(lang);
+        
+        // Update all tools through toolManager
+        if (this.toolManager) {
+            this.toolManager.updateLanguage(lang);
+        }
+        
+        // Update password generator language if it exists (legacy support)
+        if (this.passwordGenerator) {
+            this.passwordGenerator.setLanguage(lang);
+        }
+        
+        // Update social formatter language if it exists (legacy support)
+        if (this.toolManager && this.toolManager.tools.social) {
+            this.toolManager.tools.social.updateLanguage(lang);
+        }
+        
+        // Update password generator language if it exists (legacy support)
+        if (this.toolManager && this.toolManager.tools.password) {
+            this.toolManager.tools.password.setLanguage(lang);
+        }
         
         // Update stats with new language
         this.updateStats();
@@ -675,7 +727,7 @@ class NordiskTekstredigering {
         `;
 
         modal.create({
-            title: 'Hjelp - Nordisk Tekstredigering',
+            title: 'Hjelp - Nordisk Verktøysuite',
             body: helpContent,
             footer: `<button class="btn btn-primary" onclick="modal.close()">Lukk</button>`,
             size: 'large'
@@ -814,7 +866,7 @@ class NordiskTekstredigering {
         toast.className = `toast ${type} show`;
         toast.innerHTML = `
             <div class="toast-header">
-                <span class="toast-title">Nordisk Tekstredigering</span>
+                <span class="toast-title">Nordisk Verktøysuite</span>
                 <button class="toast-close">×</button>
             </div>
             <div class="toast-body">${message}</div>
@@ -998,6 +1050,93 @@ class NordiskTekstredigering {
                 translateBtn.innerHTML = `Oversett til ${this.googleTranslate.getLanguageName(targetLang)}`;
             }
         }
+    }
+
+    /**
+     * Switch between different tools
+     * @param {string} toolName - Name of the tool to switch to
+     */
+    switchTool(toolName) {
+        // Update nav tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-pressed', 'false');
+        });
+        
+        const activeTab = document.querySelector(`[data-tool="${toolName}"]`);
+        if (activeTab && activeTab.classList.contains('nav-tab')) {
+            activeTab.classList.add('active');
+            activeTab.setAttribute('aria-pressed', 'true');
+        }
+        
+        // Update tool sections
+        document.querySelectorAll('.tool-section').forEach(section => {
+            section.classList.remove('active');
+            section.classList.add('hidden');
+        });
+        
+        const targetSection = document.getElementById(`${toolName}-tool`);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('active');
+        }
+        
+        // Initialize tool-specific functionality
+        this.initializeToolSpecific(toolName);
+        
+        // Show success message
+        const toolNames = {
+            'text-editor': 'Tekstredigering',
+            'invoice': 'Fakturagenerator', 
+            'social': 'Sosiale medier formatter',
+            'password': 'Passordgenerator'
+        };
+        
+        this.showToast(`${toolNames[toolName] || toolName} aktivert`, 'success');
+    }
+
+    /**
+     * Initialize tool-specific functionality
+     * @param {string} toolName - Name of the tool
+     */
+    initializeToolSpecific(toolName) {
+        switch (toolName) {
+            case 'invoice':
+                // Initialize invoice generator if not already done
+                if (typeof InvoiceGenerator !== 'undefined' && !this.invoiceGenerator) {
+                    this.invoiceGenerator = new InvoiceGenerator();
+                }
+                break;
+            case 'password':
+                // Initialize password generator
+                this.initializePasswordGenerator();
+                break;
+            case 'social':
+                // Initialize social media formatter
+                this.initializeSocialMediaFormatter();
+                break;
+            default:
+                // Default tool initialization
+                break;
+        }
+    }
+
+    /**
+     * Initialize password generator
+     */
+    initializePasswordGenerator() {
+        if (typeof PasswordGenerator !== 'undefined' && !this.passwordGenerator) {
+            this.passwordGenerator = new PasswordGenerator();
+            this.passwordGenerator.setLanguage(this.currentLanguage);
+        }
+    }
+
+    /**
+     * Initialize social media formatter (placeholder)
+     */
+    initializeSocialMediaFormatter() {
+        // TODO: Implement social media formatter
+        console.log('Social media formatter not yet implemented');
     }
 }
 

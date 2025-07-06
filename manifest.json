@@ -1,7 +1,7 @@
 {
-  "name": "Nordisk Tekstredigering - Avansert tekstbehandling for nordiske språk",
+  "name": "ScandiText - Nordisk Verktøysuite",
   "short_name": "ScandiText",
-  "description": "Profesjonell tekstredigeringsverktøy for nordiske språk med automatisk språkgjenkjenning, tekststatistikk, Google Translate oversettelse, finn og erstatt, eksport og offline støtte.",
+  "description": "Komplett verktøysuite for nordiske brukere med tekstredigering, fakturagenerator, sosiale medier formatter og passordgenerator.",
   "start_url": "/?utm_source=pwa&utm_medium=manifest",
   "scope": "/",
   "display": "standalone",
@@ -13,6 +13,18 @@
   "dir": "ltr",
   "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "icons/scanditext_favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/scanditext_app_icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "og-image.jpg",
       "sizes": "1200x630",

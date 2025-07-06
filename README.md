@@ -1,6 +1,6 @@
-# Nordisk Verktøysuite (ScandiText)
+# ScandiText - Nordisk Verktøysuite
 
-En komplett verktøysuite for nordiske brukere som kombinerer avansert tekstredigering med praktiske forretningsverktøy. Bygget med vanilla JavaScript og moderne web-teknologier.
+En komplett verktøysuite for nordiske brukere som kombinerer avansert tekstredigering med praktiske forretningsverktøy. Profesjonell, brukervennlig og optimalisert for nordisk språk og kultur. Bygget med vanilla JavaScript og moderne web-teknologier.
 
 ## 🌟 Verktøy og Funksjoner
 
@@ -33,30 +33,51 @@ Den opprinnelige og kraftige teksteditoren for nordiske språk:
 - **Sammensatte ord**: Legg til eller fjern bindestreker
 - **Tegnsetting**: Normaliser mellomrom og tegnsetting
 
-### 📄 Fakturagenerator (NYT!)
-Enkelt verktøy for norske småbedrifter:
+### 📄 Fakturagenerator (Fullstendig oppgradert v2.0.5!)
+Profesjonell fakturaløsning for norske småbedrifter:
 - **Firmaopplysninger**: Navn, adresse, organisasjonsnummer
-- **Kundeinformasjon**: Navn og adressebehandling
-- **Dynamiske varer/tjenester**: Legg til og fjern linjer
-- **MVA-beregning**: Automatisk norsk MVA (25%)
-- **Live forhåndsvisning**: Se fakturaen mens du fyller ut
-- **PDF-eksport**: Profesjonell PDF-generering
-- **Mal-system**: Lagre og gjenbruk firmainformasjon
+- **Kundeinformasjon**: Komplett navn og adressebehandling  
+- **Dynamiske varer/tjenester**: Legg til og fjern linjer enkelt
+- **MVA-beregning**: Automatisk norsk MVA (25%) med klare totaler
+- **Live forhåndsvisning**: Profesjonell midtstilt visning med optimal kontrast
+- **Høykvalitets PDF**: Ren eksport uten browser-elementer via window.print()
+- **Intelligent mal-system**: Lagre og gjenbruk firmainformasjon med validering
+- **Forskuddsfaktura**: Støtte for forskuddsbetaling og normale fakturaer
+- **Forfallsdato**: Automatisk 30-dagers betalingsfrist
+- **Responsive design**: Perfekt på alle enheter og utskriftsformater
 
-### 📱 Sosiale medier formatter (Kommer snart)
+**Nyeste forbedringer i v2.0.5:**
+- 🎨 Komplett redesign av forhåndsvisning - midtstilt og profesjonell
+- 📄 Maksimal kontrast (svart tekst på hvit bakgrunn) for optimal lesbarhet  
+- 🖨️ Perfekt PDF-eksport med clean layout uten browser-elementer
+- 💾 Forbedret "Lagre mal" funksjon med bedre validering og tilbakemelding
+- 🔄 "Last inn mal" gjenoppretter alle lagrede firmadetaljer automatisk
+- ✨ Profesjonell footer med link til nordisk.exlo.no på alle fakturaer
+- 🎯 Forbedret responsivt design for tablet og mobil
+- 🔧 Bedre feilhåndtering og bruker-feedback
+- ✅ Bedre validering og feilhåndtering
+- 💬 Forbedret toast-meldinger og bruker-feedback
+- 🖨️ Automatisk print-dialog for enkel PDF-lagring
+- 🔢 Forbedret fakturanummer-generering (YYYY-MMDD-XXXX format)
+- 🎯 Mer robust popup-håndtering og feilmeldinger
+
+### 📱 Sosiale medier formatter (NYT!)
 Optimaliser innlegg for ulike plattformer:
 - **Plattformoptimalisering**: LinkedIn, Instagram, Facebook, Twitter/X
 - **Tegngrenser**: Automatisk telling og advarsler
 - **Hashtag-forslag**: Relevante hashtags for nordisk innhold
 - **Formatering**: Optimalisert layout for hver plattform
+- **Live forhåndsvisning**: Se formatert innhold i sanntid
+- **Beste praksis**: Plattformspesifikke tips og anbefalinger
 
-### 🔐 Passordgenerator (Kommer snart)
+### 🔐 Passordgenerator (NYT!)
 Generer sterke passord med nordisk tilpasning:
-- **Norske ord**: Inkluder norske ord for lettere memorering
+- **Nordiske ord**: Inkluder norske, svenske eller danske ord for lettere memorering
 - **Tilpassbar lengde**: 8-50 tegn
 - **Kompleksitet**: Tall, spesialtegn og store/små bokstaver
 - **Flere alternativer**: Generer flere passord samtidig
 - **Sikker generering**: Kryptografisk sikre algoritmer
+- **Språktilpasning**: Automatisk bruk av ord fra valgt språk
 
 ### 🙏 Donasjonsstøtte (NYT!)
 Støtt videreutvikling av verktøysuite:
@@ -120,7 +141,7 @@ python -m http.server 8000
 
 ### 1. Last ned prosjektet
 ```bash
-git clone https://github.com/username/ScandiText.git
+git clone https://github.com/exlo84/ScandiText.git
 cd ScandiText
 ```
 
@@ -525,8 +546,8 @@ Vi bruker [SemVer](http://semver.org/) for versjonering.
 ## 🗺️ Roadmap
 
 ### Neste versjon (v2.1) - Fullføring av verktøysuite
-- [ ] **Sosiale medier formatter** - Komplett implementasjon
-- [ ] **Passordgenerator** - Norsk-tilpasset passordgenerering
+- ✅ **Sosiale medier formatter** - Komplett implementasjon (v2.0.7)
+- ✅ **Passordgenerator** - Norsk-tilpasset passordgenerering (v2.0.7)
 - [ ] Forbedret clipboard-funksjonalitet
 - [ ] Flere eksportformater for faktura
 - [ ] Template-deling mellom brukere
