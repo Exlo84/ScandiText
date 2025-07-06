@@ -1,0 +1,29 @@
+Contact: mailto:security@exlo.no
+Contact: https://exlo.no/contact
+Expires: 2026-07-06T23:59:59.000Z
+Encryption: https://exlo.no/pgp-key.txt
+Acknowledgments: https://exlo.no/security-acknowledgments
+Preferred-Languages: no, en, sv, da
+Canonical: https://nordisk.exlo.no/.well-known/security.txt
+Policy: https://exlo.no/security-policy
+
+# Security Policy for ScandiText - Nordisk Verktøysuite
+# If you discover a security vulnerability, please report it responsibly.
+# We appreciate your help in keeping our users safe.
+
+# Scope: This security policy applies to:
+# - https://nordisk.exlo.no/
+# - All subdomains of nordisk.exlo.no
+# - The ScandiText application code
+
+# Out of scope:
+# - Social engineering attacks
+# - Physical attacks
+# - Denial of service attacks
+# - Brute force attacks
+
+# We commit to:
+# - Acknowledging receipt within 48 hours
+# - Providing regular updates on progress
+# - Crediting researchers (with permission)
+# - Working towards responsible disclosure

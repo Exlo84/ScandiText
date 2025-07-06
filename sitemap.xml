@@ -7,7 +7,7 @@
     <!-- Main page with language alternatives -->
     <url>
         <loc>https://nordisk.exlo.no/</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <mobile:mobile/>
@@ -20,22 +20,28 @@
         
         <!-- Images -->
         <image:image>
-            <image:loc>https://nordisk.exlo.no/icons/og-image.png</image:loc>
-            <image:title>ScandiText - Nordisk Tekstredigering</image:title>
-            <image:caption>Professional Nordic text editing tool interface</image:caption>
+            <image:loc>https://nordisk.exlo.no/og-image.jpg</image:loc>
+            <image:title>ScandiText - Nordisk Verktøysuite</image:title>
+            <image:caption>ScandiText professional Nordic toolkit with text editing, invoice generator, social media formatter and password generator</image:caption>
         </image:image>
         
         <image:image>
             <image:loc>https://nordisk.exlo.no/icons/icon-512x512.png</image:loc>
             <image:title>ScandiText App Icon</image:title>
-            <image:caption>ScandiText application icon</image:caption>
+            <image:caption>ScandiText Nordic Toolkit application icon</image:caption>
+        </image:image>
+        
+        <image:image>
+            <image:loc>https://nordisk.exlo.no/icons/scanditext_logo.svg</image:loc>
+            <image:title>ScandiText Logo</image:title>
+            <image:caption>ScandiText - Nordisk Verktøysuite official logo</image:caption>
         </image:image>
     </url>
     
     <!-- Norwegian version -->
     <url>
         <loc>https://nordisk.exlo.no/?lang=no</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <mobile:mobile/>
@@ -47,7 +53,7 @@
     <!-- Swedish version -->
     <url>
         <loc>https://nordisk.exlo.no/?lang=se</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <mobile:mobile/>
@@ -59,7 +65,7 @@
     <!-- Danish version -->
     <url>
         <loc>https://nordisk.exlo.no/?lang=dk</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <mobile:mobile/>
@@ -68,10 +74,43 @@
         <xhtml:link rel="alternate" hreflang="da" href="https://nordisk.exlo.no/?lang=dk"/>
     </url>
     
+    <!-- Tool-specific pages for SEO -->
+    <url>
+        <loc>https://nordisk.exlo.no/#tekstredigering</loc>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+    
+    <url>
+        <loc>https://nordisk.exlo.no/#faktura</loc>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+    
+    <url>
+        <loc>https://nordisk.exlo.no/#sosiale-medier</loc>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+    
+    <url>
+        <loc>https://nordisk.exlo.no/#passord</loc>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+    
     <!-- Manifest file -->
     <url>
         <loc>https://nordisk.exlo.no/manifest.json</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -79,7 +118,7 @@
     <!-- Service Worker -->
     <url>
         <loc>https://nordisk.exlo.no/sw.js</loc>
-        <lastmod>2025-01-17T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
     </url>

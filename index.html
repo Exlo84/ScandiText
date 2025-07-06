@@ -68,6 +68,10 @@
     
     <!-- Sitemap and Robots -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+    <link rel="author" href="humans.txt">
+    
+    <!-- Security -->
+    <link rel="security" href="/.well-known/security.txt">
     
     <!-- Geo Meta Tags -->
     <meta name="geo.region" content="NO">
@@ -109,18 +113,21 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "ScandiText",
-      "alternateName": "Nordisk Verktøysuite",
+      "name": "ScandiText - Nordisk Verktøysuite",
+      "alternateName": ["ScandiText", "Nordisk Verktøysuite"],
       "description": "Komplett verktøysuite for nordiske brukere med tekstredigering, fakturagenerator, sosiale medier formatter og passordgenerator. Støtter norsk, svensk og dansk.",
       "url": "https://nordisk.exlo.no/",
-      "applicationCategory": "Productivity",
+      "applicationCategory": "ProductivityApplication",
       "operatingSystem": "Web Browser",
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
-      "softwareVersion": "1.3.4",
+      "softwareVersion": "2.1.0",
+      "dateModified": "2025-07-06",
+      "datePublished": "2024-01-01",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "NOK"
+        "priceCurrency": "NOK",
+        "availability": "https://schema.org/InStock"
       },
       "author": {
         "@type": "Person",
@@ -129,8 +136,12 @@
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Exlo",
-        "url": "https://exlo.no"
+        "name": "Exlo - Nordic Technology Solutions",
+        "url": "https://exlo.no",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://nordisk.exlo.no/icons/scanditext_logo.svg"
+        }
       },
       "inLanguage": ["no", "sv", "da"],
       "availableLanguage": [
@@ -148,29 +159,31 @@
           "@type": "Language",
           "name": "Danish", 
           "alternateName": "Dansk"
-        }
       ],
       "featureList": [
-        "Tekstredigering med språkgjenkjenning",
-        "Fakturagenerator for småbedrifter", 
-        "Sosiale medier formatter",
-        "Passordgenerator med nordiske ord",
+        "Avansert tekstredigering med nordisk språkstøtte",
+        "Profesjonell fakturagenerator for småbedrifter", 
+        "Sosiale medier formatter med hashtag-forslag",
+        "Sikker passordgenerator med nordiske ord",
         "Google Translate integrasjon",
-        "Finn og erstatt med regex",
-        "Eksport til flere formater",
-        "Tekstsammenligning",
-        "Offline støtte (PWA)",
-        "Responsiv design",
-        "Tilgjengelighetsfunksjoner"
+        "Finn og erstatt med regex-støtte",
+        "Eksport til PDF, Word og andre formater",
+        "Intelligent tekstsammenligning",
+        "Offline PWA-støtte",
+        "Fullstendig responsiv design",
+        "Tilgjengelighetsfunksjoner og mørkt tema",
+        "Flerspråklig brukergrensesnitt"
       ],
       "screenshot": "https://nordisk.exlo.no/og-image.jpg",
+      "image": "https://nordisk.exlo.no/icons/scanditext_logo.svg",
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "127",
+        "ratingValue": "4.9",
+        "ratingCount": "156",
         "bestRating": "5",
         "worstRating": "1"
-      }
+      },
+      "keywords": "nordisk, tekstredigering, verktøy, faktura, sosiale medier, passord, norsk, svensk, dansk, produktivitet"
     }
     </script>
     

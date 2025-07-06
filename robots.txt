@@ -1,5 +1,6 @@
-# Robots.txt for ScandiText - Nordisk Tekstredigering
+# Robots.txt for ScandiText - Nordisk Verktøysuite
 # https://nordisk.exlo.no/robots.txt
+# Last updated: 2025-07-06
 
 User-agent: *
 Allow: /
@@ -8,15 +9,25 @@ Allow: /js/
 Allow: /icons/
 Allow: /manifest.json
 Allow: /sitemap.xml
+Allow: /og-image.jpg
+Allow: /robots.txt
 
-# Disallow sensitive files
+# Disallow sensitive files and development artifacts
 Disallow: /.env
 Disallow: /.env.example
 Disallow: /config.js
+Disallow: /config.js.template
 Disallow: /build.sh
+Disallow: /deploy.sh
 Disallow: /.git/
 Disallow: /node_modules/
 Disallow: /*.log
+Disallow: /tests/
+Disallow: /test_*
+Disallow: /debug-*
+Disallow: /*.md
+Disallow: /create-og-image.py
+Disallow: /create-og-image.sh
 
 # Enhanced crawling
 Crawl-delay: 1

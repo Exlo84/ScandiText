@@ -6,12 +6,26 @@
   "scope": "/",
   "display": "standalone",
   "background_color": "#667eea",
-  "theme_color": "#3498db",
+  "theme_color": "#2563eb",
   "orientation": "portrait-primary",
-  "categories": ["productivity", "utilities", "education", "office"],
+  "categories": ["productivity", "utilities", "education", "office", "business"],
   "lang": "no",
   "dir": "ltr",
   "prefer_related_applications": false,
+  "keywords": ["nordisk", "tekst", "faktura", "sosiale medier", "passord", "produktivitet"],
+  "related_applications": [],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "screenshots": [
+    {
+      "src": "og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "ScandiText hovedgrensesnitt"
+    }
+  ],
   "icons": [
     {
       "src": "icons/scanditext_favicon.svg",
@@ -23,7 +37,7 @@
       "src": "icons/scanditext_app_icon.svg",
       "sizes": "192x192 512x512",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "og-image.jpg",
@@ -35,7 +49,8 @@
   "features": [
     "cross-platform",
     "offline-capable",
-    "file-handling"
+    "file-handling",
+    "multi-language"
   ],
   "file_handlers": [
     {

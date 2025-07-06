@@ -1,0 +1,78 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Developer & Designer: Exlo
+    Contact: nordisk [at] exlo.no
+    Twitter: @TeAmExlo
+    Location: Norway
+
+# THANKS
+
+    Nordic language communities
+    Open source contributors
+    Beta testers and users
+    Accessibility advocates
+
+# TECHNOLOGY COLOPHON
+
+    ## Languages
+    HTML5, CSS3, JavaScript (ES6+)
+    
+    ## Frameworks & Libraries
+    Vanilla JavaScript
+    CSS Grid & Flexbox
+    Web APIs (File, Clipboard, etc.)
+    
+    ## Tools
+    VS Code
+    Git
+    npm
+    
+    ## Fonts
+    System fonts (-apple-system, BlinkMacSystemFont)
+    Fallback web fonts
+    
+    ## Standards
+    Progressive Web App (PWA)
+    Web Content Accessibility Guidelines (WCAG 2.1)
+    Responsive Web Design
+    Semantic HTML
+    
+    ## Hosting & Performance
+    Static site hosting
+    CDN optimization
+    Service Worker caching
+    Gzip compression
+    
+    ## SEO & Analytics
+    Structured data (JSON-LD)
+    Open Graph Protocol
+    Twitter Cards
+    Sitemap.xml
+    Robots.txt
+    
+    ## Languages Supported
+    Norwegian (Bokmål)
+    Swedish
+    Danish
+    
+    ## Features
+    Text editing with Nordic language support
+    Professional invoice generator
+    Social media content formatter
+    Secure password generator
+    Offline functionality
+    Multi-language interface
+    Dark/light theme support
+    
+    ## Accessibility
+    ARIA labels
+    Keyboard navigation
+    Screen reader support
+    High contrast mode
+    Scalable text
+    
+    Last update: 2025-07-06
+    Standards: HTML5, CSS3, ES6+, PWA
