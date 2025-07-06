@@ -5,44 +5,69 @@
 .logo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: flex-start;
+    gap: 0; /* Remove gap for maximum width */
     height: 100%; /* Fill full header height */
-    padding: 5px 0; /* Minimal padding for maximum size */
+    padding: 0; /* Remove padding for maximum size */
+    width: 100%; /* Take full available width */
+    flex: 1; /* Take maximum available space */
 }
 
 .logo-svg {
-    height: 90px; /* Much larger - almost maximum header fill */
-    width: auto;
-    max-width: 550px; /* Dramatically increased max width */
+    height: 100%; /* Fill full header height */
+    width: 100%; /* Take full available width */
+    max-width: none; /* Remove width restriction */
+    min-height: 80px; /* Minimum height for readability */
+    max-height: 120px; /* Maximum height to prevent overflow */
+    object-fit: contain; /* Maintain aspect ratio */
+    object-position: left center; /* Align to left */
     transition: transform 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0); /* Force hardware acceleration */
 }
 
 .logo-svg:hover {
-    transform: scale(1.05);
+    transform: scale(1.02); /* Subtle scale on hover */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* Enhanced logo styling for full-width display */
+.header .logo {
+    flex: 2; /* Give logo more space relative to content */
+    max-width: 70%; /* Prevent logo from taking up too much space */
+}
+
+.header .header-content {
+    min-width: 200px; /* Ensure content doesn't get too small */
 }
 
 /* Responsive design for new SVG logo */
 @media (max-width: 768px) {
     .logo-svg {
-        height: 75px; /* Much larger on mobile */
-        max-width: 420px; /* Increased mobile width significantly */
+        height: 100%; /* Fill available header height */
+        max-height: 90px; /* Slightly smaller on mobile */
+        width: 100%; /* Full width on mobile */
     }
     
     .logo {
         height: 100%;
-        padding: 5px 0;
+        padding: 0;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .logo-svg {
-        height: 65px; /* Significantly larger on small screens */
-        max-width: 320px; /* Increased small screen width */
+        height: 100%; /* Fill available space */
+        max-height: 75px; /* Manageable size on small screens */
+        width: 100%; /* Full width */
     }
     
     .logo {
         height: 100%;
-        padding: 3px 0;
+        padding: 0;
+        width: 100%;
     }
 }
 

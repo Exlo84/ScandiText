@@ -55,17 +55,21 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch; /* Changed to stretch for full height usage */
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px; /* Increased gap for better spacing */
     background: var(--blue-gradient);
     color: white;
-    padding: 25px 30px;
+    padding: 20px 25px; /* Adjusted padding for better logo fit */
     text-align: center;
+    min-height: 100px; /* Minimum height for proper logo display */
 }
 
 .header-content {
-    flex: 1;
+    flex: 0 1 auto; /* Changed flex to allow logo to take more space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .header h1 {
@@ -707,13 +711,23 @@ html body .container .main-content .stats-panel:not(.force-mobile) {
     }
     
     .header {
-        padding: 20px 15px;
+        padding: 15px 10px;
         text-align: center;
+        min-height: 80px; /* Smaller minimum height on mobile */
+        flex-direction: column; /* Stack elements vertically on mobile */
+        gap: 10px;
+    }
+    
+    .header-content {
+        flex: none; /* Reset flex on mobile */
+        order: 2; /* Put content after logo */
     }
     
     .logo {
         justify-content: center;
-        margin-bottom: 10px;
+        order: 1; /* Put logo first */
+        width: 100%;
+        margin-bottom: 5px;
     }
     
     .language-selector {
