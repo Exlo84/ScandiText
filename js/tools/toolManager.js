@@ -187,6 +187,8 @@ export class ToolManager {
         Object.values(this.tools).forEach(tool => {
             if (tool && typeof tool.setLanguage === 'function') {
                 tool.setLanguage(language);
+            } else if (tool && typeof tool.updateLanguage === 'function') {
+                tool.updateLanguage(language);
             }
         });
     }

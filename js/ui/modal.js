@@ -130,10 +130,22 @@ export class Modal {
         // Show modal with animation
         requestAnimationFrame(() => {
             overlay.classList.add('active');
+            
+            // Update modal language content
+            if (window.app && window.app.i18n) {
+                setTimeout(() => {
+                    window.app.i18n.updateUI();
+                }, 50);
+            }
+            
             if (onOpen) onOpen(modal);
         });
 
-        return modal;
+        // Return modal object with methods
+        return {
+            element: modal,
+            close: () => this.close()
+        };
     }
 
     /**

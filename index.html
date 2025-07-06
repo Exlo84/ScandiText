@@ -307,61 +307,61 @@
 Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. Den kan telle ord, setninger og gi deg nyttig statistikk om teksten din.'"></textarea>
 
                 <div class="tools-section">
-                    <h4>Avanserte verktøy</h4>
+                    <h4 id="advanced-tools-title">Avanserte verktøy</h4>
                     <div class="tool-group" role="group" aria-label="Avanserte verktøy">
-                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="find-replace" data-tooltip="Søk og erstatt tekst med avanserte alternativer" data-shortcut="Ctrl+F" aria-label="Åpne finn og erstatt">Finn og erstatt</button>
-                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="compare" data-tooltip="Sammenlign to tekster side-ved-side med diff-markering" data-shortcut="Ctrl+Shift+C" aria-label="Sammenlign tekster">Sammenlign tekster</button>
-                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="export" data-tooltip="Eksporter tekst til TXT, HTML, Word eller PDF format" data-shortcut="Ctrl+E" aria-label="Eksporter tekst">Eksporter</button>
-                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="help" data-tooltip="Vis hurtigtaster og bruksanvisning" data-shortcut="F1" aria-label="Vis hjelp">Hjelp</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="find-replace" data-tooltip="Søk og erstatt tekst med avanserte alternativer" data-shortcut="Ctrl+F" aria-label="Åpne finn og erstatt" id="find-replace-btn">Finn og erstatt</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="compare" data-tooltip="Sammenlign to tekster side-ved-side med diff-markering" data-shortcut="Ctrl+Shift+C" aria-label="Sammenlign tekster" id="compare-btn">Sammenlign tekster</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="export" data-tooltip="Eksporter tekst til TXT, HTML, Word eller PDF format" data-shortcut="Ctrl+E" aria-label="Eksporter tekst" id="export-btn">Eksporter</button>
+                        <button class="advanced-btn tooltip tooltip-shortcut" data-tool="help" data-tooltip="Vis hurtigtaster og bruksanvisning" data-shortcut="F1" aria-label="Vis hjelp" id="help-btn">Hjelp</button>
                     </div>
                 </div>
             </div>
 
             <div class="stats-panel" role="region" aria-label="Tekststatistikk">
-                <h3>Tekststatistikk</h3>
+                <h3 id="stats-title">Tekststatistikk</h3>
                 
                 <div class="stat-row">
-                    <span class="stat-label">Gjenkjent språk:</span>
+                    <span class="stat-label" id="detected-lang-label">Gjenkjent språk:</span>
                     <span class="detected-language" id="detectedLang">Norsk</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Ord:</span>
+                    <span class="stat-label" id="words-label">Ord:</span>
                     <span class="stat-value" id="wordCount">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Tegn (med mellomrom):</span>
+                    <span class="stat-label" id="chars-with-spaces-label">Tegn (med mellomrom):</span>
                     <span class="stat-value" id="charCount">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Tegn (uten mellomrom):</span>
+                    <span class="stat-label" id="chars-no-spaces-label">Tegn (uten mellomrom):</span>
                     <span class="stat-value" id="charCountNoSpaces">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Setninger:</span>
+                    <span class="stat-label" id="sentences-label">Setninger:</span>
                     <span class="stat-value" id="sentenceCount">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Avsnitt:</span>
+                    <span class="stat-label" id="paragraphs-label">Avsnitt:</span>
                     <span class="stat-value" id="paragraphCount">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Lesetid:</span>
+                    <span class="stat-label" id="reading-time-label">Lesetid:</span>
                     <span class="stat-value" id="readingTime">0 min</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Gjennomsnittlig ordlengde:</span>
+                    <span class="stat-label" id="avg-word-length-label">Gjennomsnittlig ordlengde:</span>
                     <span class="stat-value" id="avgWordLength">0</span>
                 </div>
 
                 <div class="stat-row">
-                    <span class="stat-label">Gjennomsnittlig setningslengde:</span>
+                    <span class="stat-label" id="avg-sentence-length-label">Gjennomsnittlig setningslengde:</span>
                     <span class="stat-value" id="avgSentenceLength">0</span>
                 </div>
             </div>
@@ -555,6 +555,8 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
 
         <div class="status-bar">
             <a href="https://github.com/Exlo84/ScandiText" target="_blank" rel="noopener" class="copyright-link">© Exlo 2025</a>
+            <span class="status-separator">|</span>
+            <a href="https://github.com/Exlo84/ScandiText/issues" target="_blank" rel="noopener" class="bug-report-link" id="bug-report-link">🐛 Rapporter feil på siden</a>
         </div>
     </div>
 

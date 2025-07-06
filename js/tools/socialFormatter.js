@@ -69,7 +69,7 @@ export class SocialFormatter {
                 formatting: {
                     addLineBreaks: true,
                     emphasizeBold: false,
-                    suggestHashtags: false
+                    suggestHashtags: true
                 }
             },
             twitter: {
@@ -86,21 +86,41 @@ export class SocialFormatter {
                 formatting: {
                     addLineBreaks: false,
                     emphasizeBold: false,
-                    suggestHashtags: false,
+                    suggestHashtags: true,
                     concise: true
                 }
             }
         };
         
-        // Nordic hashtag suggestions
+        // Nordic hashtag suggestions by language
         this.hashtagSuggestions = {
-            business: ['#norskbedrift', '#skandinavisk', '#nordiskarbeidsliv', '#innovation', '#entreprenørskap'],
-            tech: ['#teknologi', '#digitalisering', '#AI', '#innovation', '#nordisktech'],
-            culture: ['#norskkultur', '#skandinavisk', '#hygge', '#janteloven', '#nordisketradisjoner'],
-            nature: ['#norgeinnordre', '#skandinavisknatur', '#friluftsliv', '#allemannsretten'],
-            food: ['#norskmat', '#skandinaviskmat', '#hyggemat', '#lokalmat'],
-            travel: ['#visitnorway', '#visitscandinavia', '#nordiskereise', '#friluftsliv'],
-            lifestyle: ['#nordisklivsstil', '#hygge', '#lagom', '#bærekraft', '#miljøbevisst']
+            no: {
+                business: ['#norskbedrift', '#skandinavisk', '#nordiskarbeidsliv', '#innovation', '#entreprenørskap'],
+                tech: ['#teknologi', '#digitalisering', '#AI', '#innovation', '#nordisktech'],
+                culture: ['#norskkultur', '#skandinavisk', '#hygge', '#janteloven', '#nordisketradisjoner'],
+                nature: ['#norgeinnordre', '#skandinavisknatur', '#friluftsliv', '#allemannsretten'],
+                food: ['#norskmat', '#skandinaviskmat', '#hyggemat', '#lokalmat'],
+                travel: ['#visitnorway', '#visitscandinavia', '#nordiskereise', '#friluftsliv'],
+                lifestyle: ['#nordisklivsstil', '#hygge', '#lagom', '#bærekraft', '#miljøbevisst']
+            },
+            se: {
+                business: ['#svenskföretag', '#skandinavisk', '#nordiskarbetsliv', '#innovation', '#entreprenörskap'],
+                tech: ['#teknik', '#digitalisering', '#AI', '#innovation', '#nordisktech'],
+                culture: ['#svenskkultur', '#skandinavisk', '#hygge', '#jantelagen', '#nordiskatraditioner'],
+                nature: ['#visitsweden', '#skandinavisknatur', '#allemansrätten', '#friluftsliv'],
+                food: ['#svenskmat', '#skandinaviskmat', '#fika', '#lokalmat'],
+                travel: ['#visitsweden', '#visitscandinavia', '#nordiskaresa', '#äventyr'],
+                lifestyle: ['#nordisklivsstil', '#lagom', '#hygge', '#hållbarhet', '#miljömedvetenhet']
+            },
+            da: {
+                business: ['#danskvirksomhed', '#skandinavisk', '#nordiskarbejdsliv', '#innovation', '#iværksætteri'],
+                tech: ['#teknologi', '#digitalisering', '#AI', '#innovation', '#nordisktech'],
+                culture: ['#danskkultur', '#skandinavisk', '#hygge', '#janteloven', '#nordisketraditioner'],
+                nature: ['#visitdenmark', '#skandinavisknatur', '#allemansret', '#friluftsliv'],
+                food: ['#danskmad', '#skandinaviskmad', '#hyggemad', '#lokalmad'],
+                travel: ['#visitdenmark', '#visitscandinavia', '#nordiskrejse', '#eventyr'],
+                lifestyle: ['#nordisklivsstil', '#hygge', '#lagom', '#bæredygtighed', '#miljøbevidst']
+            }
         };
     }
     
@@ -288,17 +308,70 @@ export class SocialFormatter {
     generateHashtagSuggestions(text) {
         const lowerText = text.toLowerCase();
         const suggestions = new Set();
+        const currentLanguage = this.i18n.getCurrentLanguage() || 'no';
+        
+        // Get hashtags for current language
+        const languageHashtags = this.hashtagSuggestions[currentLanguage] || this.hashtagSuggestions.no;
         
         // Analyze content for relevant categories
-        Object.entries(this.hashtagSuggestions).forEach(([category, tags]) => {
+        Object.entries(languageHashtags).forEach(([category, tags]) => {
             const categoryKeywords = {
-                business: ['bedrift', 'forretning', 'arbeid', 'jobb', 'karriere', 'lederskap'],
-                tech: ['teknologi', 'digital', 'data', 'AI', 'app', 'software'],
-                culture: ['kultur', 'tradisjon', 'historie', 'samfunn'],
-                nature: ['natur', 'fjell', 'skog', 'hav', 'friluft'],
-                food: ['mat', 'oppskrift', 'kokk', 'restaurant'],
-                travel: ['reise', 'ferie', 'besøk', 'tur'],
-                lifestyle: ['livsstil', 'helse', 'miljø', 'bærekraft']
+                business: [
+                    // Norwegian
+                    'bedrift', 'forretning', 'arbeid', 'jobb', 'karriere', 'lederskap',
+                    // Swedish
+                    'företag', 'business', 'arbete', 'jobb', 'karriär', 'ledarskap',
+                    // Danish
+                    'virksomhed', 'forretning', 'arbejde', 'job', 'karriere', 'lederskab'
+                ],
+                tech: [
+                    // Norwegian
+                    'teknologi', 'digital', 'data', 'AI', 'app', 'software',
+                    // Swedish
+                    'teknik', 'digital', 'data', 'AI', 'app', 'mjukvara',
+                    // Danish
+                    'teknologi', 'digital', 'data', 'AI', 'app', 'software'
+                ],
+                culture: [
+                    // Norwegian
+                    'kultur', 'tradisjon', 'historie', 'samfunn',
+                    // Swedish
+                    'kultur', 'tradition', 'historia', 'samhälle',
+                    // Danish
+                    'kultur', 'tradition', 'historie', 'samfund'
+                ],
+                nature: [
+                    // Norwegian
+                    'natur', 'fjell', 'skog', 'hav', 'friluft',
+                    // Swedish
+                    'natur', 'fjäll', 'skog', 'hav', 'friluft',
+                    // Danish
+                    'natur', 'bjerg', 'skov', 'hav', 'friluft'
+                ],
+                food: [
+                    // Norwegian
+                    'mat', 'oppskrift', 'kokk', 'restaurant', 'fisk', 'sjømat',
+                    // Swedish
+                    'mat', 'recept', 'kock', 'restaurang', 'fisk', 'skaldjur', 'fisksoppa', 'räkor',
+                    // Danish
+                    'mad', 'opskrift', 'kok', 'restaurant', 'fisk', 'skaldyr'
+                ],
+                travel: [
+                    // Norwegian
+                    'reise', 'ferie', 'besøk', 'tur',
+                    // Swedish
+                    'resa', 'semester', 'besök', 'tur',
+                    // Danish
+                    'rejse', 'ferie', 'besøg', 'tur'
+                ],
+                lifestyle: [
+                    // Norwegian
+                    'livsstil', 'helse', 'miljø', 'bærekraft',
+                    // Swedish
+                    'livsstil', 'hälsa', 'miljö', 'hållbarhet',
+                    // Danish
+                    'livsstil', 'sundhed', 'miljø', 'bæredygtighed'
+                ]
             };
             
             const keywords = categoryKeywords[category] || [];
@@ -449,6 +522,13 @@ export class SocialFormatter {
         this.i18n.setLanguage(language);
         this.updateUI();
         this.formatText(); // Reformat with new language
+    }
+    
+    /**
+     * Set language (alias for updateLanguage for compatibility)
+     */
+    setLanguage(language) {
+        this.updateLanguage(language);
     }
     
     /**

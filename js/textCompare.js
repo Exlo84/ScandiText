@@ -97,7 +97,7 @@ export class TextCompare {
         });
 
         this.modalElement = modal.create({
-            title: 'Sammenlign tekster',
+            title: this.app && this.app.i18n ? this.app.i18n.t('compareTexts') : 'Sammenlign tekster',
             body,
             footer,
             className: 'compare-modal',

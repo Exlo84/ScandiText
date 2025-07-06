@@ -727,9 +727,9 @@ class NordiskTekstredigering {
         `;
 
         modal.create({
-            title: 'Hjelp - Nordisk Verktøysuite',
+            title: this.i18n ? this.i18n.t('help') + ' - ScandiText' : 'Hjelp - ScandiText',
             body: helpContent,
-            footer: `<button class="btn btn-primary" onclick="modal.close()">Lukk</button>`,
+            footer: `<button class="btn btn-primary" onclick="modal.close()">${this.i18n ? this.i18n.t('close') : 'Lukk'}</button>`,
             size: 'large'
         });
     }
@@ -1145,6 +1145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const app = new NordiskTekstredigering();
     await app.init();
     
-    // Make app globally available for debugging
-    window.NordiskTekstredigering = app;
+    // Make app globally available for modal language updates
+    window.app = app;
+    window.NordiskTekstredigering = app; // Keep for debugging
 });

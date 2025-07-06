@@ -328,12 +328,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 15px;
     font-family: var(--font-modern);
     font-weight: 500;
     letter-spacing: 0.5px;
 }
 
-.copyright-link {
+.copyright-link,
+.bug-report-link {
     color: white;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -344,19 +346,26 @@ body {
     letter-spacing: 0.5px;
 }
 
-.copyright-link:hover {
+.copyright-link:hover,
+.bug-report-link:hover {
     color: #e2e8f0;
     background: rgba(255, 255, 255, 0.1);
     text-decoration: none;
-    transform: translateY(-1px);
 }
 
-.copyright-link:focus {
+.status-separator {
+    color: #64748b;
+    font-weight: 300;
+}
+
+.copyright-link:focus,
+.bug-report-link:focus {
     outline: 2px solid rgba(255, 255, 255, 0.8);
     outline-offset: 2px;
 }
 
-.copyright-link:visited {
+.copyright-link:visited,
+.bug-report-link:visited {
     color: white;
 }
 

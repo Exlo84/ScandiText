@@ -26,9 +26,10 @@
 }
 
 .modal {
-    background: white;
+    background: #1e293b;
+    border: 1px solid #374151;
     border-radius: var(--border-radius);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-width: 90%;
     max-height: 90%;
     overflow: auto;
@@ -42,18 +43,18 @@
 
 .modal-header {
     padding: 20px 25px;
-    border-bottom: 1px solid var(--border-gray);
+    border-bottom: 1px solid #475569;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--light-gray);
+    background: #334155;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .modal-title {
     font-size: 1.4em;
     font-weight: 600;
-    color: var(--text-dark);
+    color: #ffffff;
     margin: 0;
 }
 
@@ -62,7 +63,7 @@
     border: none;
     font-size: 1.5em;
     cursor: pointer;
-    color: var(--text-gray);
+    color: #ffffff;
     transition: all 0.2s ease;
     padding: 5px;
     border-radius: 50%;
@@ -71,46 +72,76 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.7;
 }
 
 .modal-close:hover {
-    color: var(--text-dark);
-    background: rgba(55, 65, 81, 0.1);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
 }
 
 .modal-body {
     padding: 25px;
-    color: var(--text-dark);
-    background: white;
+    color: #ffffff;
+    background: #1e293b;
 }
 
 .modal-body p,
 .modal-body div,
-.modal-body span {
-    color: var(--text-dark);
+.modal-body span,
+.modal-body label,
+.modal-body h1,
+.modal-body h2,
+.modal-body h3,
+.modal-body h4,
+.modal-body h5,
+.modal-body h6 {
+    color: #ffffff;
 }
 
 .modal-body input,
 .modal-body textarea,
 .modal-body select {
-    color: var(--text-dark);
-    background: white;
-    border: 2px solid var(--border-gray);
+    color: #ffffff;
+    background: #334155;
+    border: 2px solid #475569;
 }
 
-.modal-body label {
-    color: var(--text-dark);
-    font-weight: 600;
+.modal-body input:focus,
+.modal-body textarea:focus,
+.modal-body select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .modal-footer {
     padding: 20px 25px;
-    border-top: 1px solid var(--border-gray);
+    border-top: 1px solid #475569;
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    background: var(--light-gray);
+    background: #334155;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Ensure modal buttons keep their colors */
+.modal-footer .btn-primary {
+    background: var(--primary-blue) !important;
+    border-color: var(--primary-blue) !important;
+    color: white !important;
+}
+
+.modal-footer .btn-secondary {
+    background: #64748b !important;
+    border-color: #64748b !important;
+    color: white !important;
+}
+
+.modal-footer .btn-success {
+    background: var(--success-green) !important;
+    border-color: var(--success-green) !important;
+    color: white !important;
 }
 
 /* Find/Replace Modal Specific Styles */
@@ -126,18 +157,18 @@
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
-    color: var(--text-dark);
+    color: #ffffff;
 }
 
 .form-input {
     width: 100%;
     padding: 10px;
-    border: 2px solid var(--border-gray);
+    border: 2px solid #475569;
     border-radius: 6px;
     font-size: 14px;
     transition: border-color 0.3s ease;
-    color: var(--text-dark);
-    background: white;
+    color: #ffffff;
+    background: #334155;
 }
 
 .form-input:focus {
@@ -175,19 +206,379 @@
 
 .checkbox-item label {
     font-size: 14px;
-    color: var(--text-dark);
+    color: #ffffff;
     cursor: pointer;
     font-weight: 500;
 }
 
 .search-results {
-    background: var(--light-gray);
+    background: #334155;
     padding: 10px;
     border-radius: 6px;
     margin: 15px 0;
     font-size: 14px;
-    color: var(--text-gray);
-    border: 1px solid var(--border-gray);
+    color: #e2e8f0;
+    border: 1px solid #475569;
+}
+
+/* Translation Modal Specific Styles */
+.translation-modal {
+    width: 600px;
+    max-width: 90vw;
+}
+
+.translation-modal .modal {
+    background: #1e293b;
+    border: 1px solid #374151;
+}
+
+.translation-modal .modal-header {
+    background: #334155;
+    border-bottom-color: #475569;
+}
+
+.translation-modal .modal-title {
+    color: #ffffff;
+}
+
+.translation-modal .modal-close {
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    opacity: 0.7;
+}
+
+.translation-modal .modal-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.translation-modal .modal-body {
+    background: #1e293b !important;
+    color: #ffffff !important;
+    padding: 25px;
+}
+
+.translation-modal .modal-body *,
+.translation-modal .modal-body h1,
+.translation-modal .modal-body h2,
+.translation-modal .modal-body h3,
+.translation-modal .modal-body h4,
+.translation-modal .modal-body h5,
+.translation-modal .modal-body h6,
+.translation-modal .modal-body p,
+.translation-modal .modal-body div,
+.translation-modal .modal-body span,
+.translation-modal .modal-body label,
+.translation-modal .modal-body strong,
+.translation-modal .modal-body em,
+.translation-modal .modal-body b,
+.translation-modal .modal-body i {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.translation-modal .modal-body textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid #475569;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #ffffff !important;
+    background: #334155 !important;
+    resize: vertical;
+    margin: 10px 0;
+}
+
+.translation-modal .modal-body textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.translation-progress {
+    background: #334155;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid #475569;
+}
+
+.translation-progress p {
+    margin: 0;
+    color: #e2e8f0 !important;
+    font-weight: 500;
+}
+
+.translation-result {
+    background: #334155;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid #475569;
+}
+
+.translation-result h4 {
+    margin: 0 0 10px 0;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.translation-result p {
+    margin: 0;
+    color: #e2e8f0 !important;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.translation-language-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px;
+    background: #475569;
+    border-radius: 6px;
+}
+
+.translation-language-info span {
+    color: #cbd5e1 !important;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.translation-modal .modal-footer {
+    background: #334155;
+    border-top-color: #475569;
+}
+
+.translation-modal .modal-footer .btn {
+    color: #ffffff;
+}
+
+.translation-modal .modal-footer .btn-secondary {
+    background: #64748b;
+    border-color: #64748b;
+}
+
+.translation-modal .modal-footer .btn-secondary:hover {
+    background: #475569;
+    border-color: #475569;
+}
+
+.translation-modal .modal-footer .btn-primary {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.translation-modal .modal-footer .btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* Hide Google Translate widget elements that might interfere */
+.goog-te-banner-frame,
+.goog-te-combo,
+.goog-te-gadget,
+.goog-te-menu-frame,
+.skiptranslate {
+    display: none !important;
+}
+
+/* Ensure translation modal always has full dark theme */
+.translation-modal,
+.translation-modal * {
+    background-color: inherit !important;
+}
+
+.translation-modal .modal {
+    background: #2d3748 !important;
+    border: 1px solid #4a5568 !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.translation-modal .modal-header {
+    background: #4a5568 !important;
+    border-bottom-color: #718096 !important;
+}
+
+.translation-modal .modal-body {
+    background: #2d3748 !important;
+    color: #e2e8f0 !important;
+    padding: 25px;
+}
+
+.translation-modal .modal-body *,
+.translation-modal .modal-body h1,
+.translation-modal .modal-body h2,
+.translation-modal .modal-body h3,
+.translation-modal .modal-body h4,
+.translation-modal .modal-body h5,
+.translation-modal .modal-body h6,
+.translation-modal .modal-body p,
+.translation-modal .modal-body div,
+.translation-modal .modal-body span,
+.translation-modal .modal-body label,
+.translation-modal .modal-body strong,
+.translation-modal .modal-body em,
+.translation-modal .modal-body b,
+.translation-modal .modal-body i {
+    color: #e2e8f0 !important;
+    background: transparent !important;
+}
+
+.translation-modal .modal-body textarea {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+    border-color: #718096;
+}
+
+.translation-modal .translation-result,
+.translation-modal .translation-stats,
+.translation-modal .translation-preview,
+.translation-modal .translation-text {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+    border-color: #718096 !important;
+}
+
+.translation-modal .modal-footer {
+    background: #4a5568 !important;
+    border-top-color: #718096 !important;
+}
+
+.translation-modal .modal-footer .btn-primary {
+    background: var(--primary-blue) !important;
+    border-color: var(--primary-blue) !important;
+    color: white !important;
+}
+
+.translation-modal .modal-footer .btn-secondary {
+    background: #718096 !important;
+    border-color: #718096 !important;
+    color: white !important;
+}
+
+/* Light mode override for translation modal (if user prefers light theme) */
+@media (prefers-color-scheme: light) {
+    .translation-modal .modal {
+        background: #1e293b !important;
+        border-color: #374151 !important;
+    }
+    
+    .translation-modal .modal-header {
+        background: #334155 !important;
+    }
+    
+    .translation-modal .modal-body {
+        background: #1e293b !important;
+        color: #ffffff !important;
+    }
+    
+    .translation-modal .modal-body *,
+    .translation-modal .modal-body h1,
+    .translation-modal .modal-body h2,
+    .translation-modal .modal-body h3,
+    .translation-modal .modal-body h4,
+    .translation-modal .modal-body h5,
+    .translation-modal .modal-body h6,
+    .translation-modal .modal-body p,
+    .translation-modal .modal-body div,
+    .translation-modal .modal-body span,
+    .translation-modal .modal-body label,
+    .translation-modal .modal-body strong,
+    .translation-modal .modal-body em,
+    .translation-modal .modal-body b,
+    .translation-modal .modal-body i {
+        color: #ffffff !important;
+        background: transparent !important;
+    }
+    
+    .translation-modal .modal-body textarea {
+        background: #334155 !important;
+        color: #ffffff !important;
+        border-color: #475569;
+    }
+    
+    .translation-modal .translation-result,
+    .translation-modal .translation-stats,
+    .translation-modal .translation-preview,
+    .translation-modal .translation-text {
+        background: #334155 !important;
+        color: #ffffff !important;
+    }
+}
+
+/* Additional rules to prevent any white elements in modals */
+.modal iframe,
+.modal embed,
+.modal object,
+.modal .goog-te-gadget,
+.modal .goog-te-combo,
+.modal .goog-te-banner-frame {
+    display: none !important;
+}
+
+/* Hide Google Translate elements globally when modals are open */
+.modal-overlay.active ~ .goog-te-banner-frame,
+.modal-overlay.active ~ div[id*="google_translate"],
+body.modal-open .goog-te-banner-frame,
+body.modal-open div[id*="google_translate"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Ensure modal overlay covers everything completely */
+.modal-overlay {
+    z-index: 9999 !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.translation-modal .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Ensure all modal children follow dark theme */
+.modal *:not(.btn):not(.spinner) {
+    color: inherit;
+    background-color: transparent;
+}
+
+.modal .btn {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.modal .btn-secondary {
+    background-color: #64748b;
+    color: white;
+}
+.modal embed,
+.modal object,
+.modal .goog-te-gadget,
+.modal .goog-te-combo,
+.modal .goog-te-banner-frame {
+    display: none !important;
+}
+
+/* Ensure all modal children follow dark theme */
+.modal *:not(.btn):not(.spinner) {
+    color: inherit;
+    background-color: transparent;
+}
+
+.modal .btn {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.modal .btn-secondary {
+    background-color: #64748b;
+    color: white;
 }
 
 /* Button Styles */

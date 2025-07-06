@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test ScandiText Current State</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>ScandiText - Test Current State</h1>
+    <div id="test-results"></div>
+    
+    <script type="module">
+        const results = [];
+        
+        function addResult(test, status, message) {
+            results.push({ test, status, message });
+            const div = document.createElement('div');
+            div.className = `test-result ${status}`;
+            div.innerHTML = `<strong>${test}:</strong> ${message}`;
+            document.getElementById('test-results').appendChild(div);
+        }
+        
+        // Test 1: Check if main modules can be imported
+        try {
+            const { i18n } = await import('./js/i18n.js');
+            const instance = new i18n('no');
+            addResult('i18n Module', 'success', 'Successfully imported and instantiated');
+            
+            // Test language switching
+            instance.setLanguage('se');
+            const swedishTitle = instance.t('mainTitle');
+            addResult('Language Switching', swedishTitle ? 'success' : 'error', 
+                      swedishTitle ? `Swedish title: "${swedishTitle}"` : 'Failed to get Swedish translation');
+            
+        } catch (error) {
+            addResult('i18n Module', 'error', `Failed to import: ${error.message}`);
+        }
+        
+        // Test 2: Check modal module
+        try {
+            const { modal } = await import('./js/ui/modal.js');
+            addResult('Modal Module', 'success', 'Successfully imported modal');
+        } catch (error) {
+            addResult('Modal Module', 'error', `Failed to import: ${error.message}`);
+        }
+        
+        // Test 3: Check toolManager
+        try {
+            const { ToolManager } = await import('./js/tools/toolManager.js');
+            addResult('ToolManager Module', 'success', 'Successfully imported ToolManager');
+        } catch (error) {
+            addResult('ToolManager Module', 'error', `Failed to import: ${error.message}`);
+        }
+        
+        // Test 4: Check if main app can be imported
+        try {
+            await import('./js/app.js');
+            addResult('Main App Module', 'success', 'Successfully imported main app');
+        } catch (error) {
+            addResult('Main App Module', 'error', `Failed to import: ${error.message}`);
+        }
+        
+        // Test 5: DOM readiness test - run after a short delay
+        setTimeout(() => {
+            const textEditor = document.getElementById('textEditor');
+            const statsPanel = document.querySelector('.stats-panel');
+            const navTabs = document.querySelectorAll('.nav-tab');
+            
+            addResult('DOM Elements', textEditor ? 'warning' : 'error', 
+                      textEditor ? 'Text editor found in main app (not in test page)' : 'Text editor not found');
+        }, 100);
+    </script>
+</body>
+</html>

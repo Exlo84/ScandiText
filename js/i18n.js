@@ -58,10 +58,16 @@ export const translations = {
         // Mobile menu
         statisticsToggle: "📊 Statistikk",
         closeMenu: "✕ Lukk",
+         // Advanced tools
+        advancedTools: "Avanserte verktøy",
+        findReplace: "Finn og erstatt",
+        compareTexts: "Sammenlign tekster", 
+        export: "Eksporter",
+        help: "Hjelp",
         
         // Tooltips
         uppercaseTooltip: "Konverter all tekst til store bokstaver",
-        lowercaseTooltip: "Konverter all tekst til små bokstaver", 
+        lowercaseTooltip: "Konverter all tekst til små bokstaver",
         titlecaseTooltip: "Intelligent kapitalisering med nordisk språkstøtte",
         cleanTooltip: "Fjern ekstra mellomrom og normaliser tekst",
         asciiTooltip: "Konverter nordiske bokstaver til ASCII-ekvivalenter for kompatibilitet",
@@ -88,7 +94,25 @@ export const translations = {
         strengthMedium: "Middels",
         strengthStrong: "Sterkt",
         strengthVeryStrong: "Meget sterkt",
-        copyFailed: "Kunne ikke kopiere"
+        copyFailed: "Kunne ikke kopiere",
+        
+        // Social Media Formatter
+        socialTextPlaceholder: "Skriv teksten din her for å optimalisere for sosiale medier...",
+        copyFormattedText: "📋 Kopier formatert tekst",
+        formattedTextCopied: "Formatert tekst kopiert til utklippstavle!",
+        noTextToCopy: "Ingen tekst å kopiere",
+        couldNotCopyText: "Kunne ikke kopiere tekst",
+        previewPlaceholder: "Forhåndsvisning av formatert tekst vises her...",
+        bestPracticesFor: "Beste praksis for",
+        
+        // Modal buttons
+        cancel: "Avbryt",
+        close: "Lukk",
+        apply: "Bruk",
+        save: "Lagre",
+        
+        // Footer
+        reportBugs: "Rapporter feil på siden"
     },
     
     se: {
@@ -143,8 +167,15 @@ export const translations = {
         readability: "Läsbarhet:",
         
         // Mobile menu
-        statisticsToggle: "📊 Statistik",
+        statisticsToggle: "📊 Statistik", 
         closeMenu: "✕ Stäng",
+        
+        // Advanced tools
+        advancedTools: "Avancerade verktyg",
+        findReplace: "Sök och ersätt",
+        compareTexts: "Jämför texter",
+        export: "Exportera",
+        help: "Hjälp",
         
         // Tooltips
         uppercaseTooltip: "Konvertera all text till stora bokstäver",
@@ -175,7 +206,25 @@ export const translations = {
         strengthMedium: "Medel",
         strengthStrong: "Starkt",
         strengthVeryStrong: "Mycket starkt",
-        copyFailed: "Kunde inte kopiera"
+        copyFailed: "Kunde inte kopiera",
+        
+        // Social Media Formatter
+        socialTextPlaceholder: "Skriv din text här för att optimera för sociala medier...",
+        copyFormattedText: "📋 Kopiera formaterad text",
+        formattedTextCopied: "Formaterad text kopierad till urklipp!",
+        noTextToCopy: "Ingen text att kopiera",
+        couldNotCopyText: "Kunde inte kopiera text",
+        previewPlaceholder: "Förhandsgranskning av formaterad text visas här...",
+        bestPracticesFor: "Bästa praxis för",
+        
+        // Modal buttons
+        cancel: "Avbryt",
+        close: "Stäng",
+        apply: "Använd",
+        save: "Spara",
+        
+        // Footer
+        reportBugs: "Rapportera fel på sidan"
     },
     
     dk: {
@@ -222,6 +271,13 @@ export const translations = {
         statisticsToggle: "📊 Statistik",
         closeMenu: "✕ Luk",
         
+        // Advanced tools
+        advancedTools: "Avancerede værktøjer",
+        findReplace: "Søg og erstat",
+        compareTexts: "Sammenlign tekster",
+        export: "Eksporter", 
+        help: "Hjælp",
+        
         // Tooltips
         uppercaseTooltip: "Konverter al tekst til store bogstaver",
         lowercaseTooltip: "Konverter al tekst til små bogstaver",
@@ -250,8 +306,26 @@ export const translations = {
         strengthWeak: "Svagt",
         strengthMedium: "Mellem",
         strengthStrong: "Stærkt",
-        strengthVeryStrong: "Meget stærkt",
-        copyFailed: "Kunne ikke kopiere"
+        strengthVeryStrong: "Mycket stærkt",
+        copyFailed: "Kunne ikke kopiere",
+        
+        // Social Media Formatter
+        socialTextPlaceholder: "Skriv din tekst her for at optimere til sociale medier...",
+        copyFormattedText: "📋 Kopier formateret tekst",
+        formattedTextCopied: "Formateret tekst kopieret til udklippsholder!",
+        noTextToCopy: "Ingen tekst at kopiere",
+        couldNotCopyText: "Kunne ikke kopiere tekst",
+        previewPlaceholder: "Forhåndsvisning af formateret tekst vises her...",
+        bestPracticesFor: "Bedste praksis for",
+        
+        // Modal buttons
+        cancel: "Annuller",
+        close: "Luk",
+        apply: "Anvend",
+        save: "Gem",
+        
+        // Footer
+        reportBugs: "Rapporter fejl på siden"
     }
 };
 
@@ -272,6 +346,14 @@ export class i18n {
             this.currentLanguage = language;
             this.updateUI();
         }
+    }
+    
+    /**
+     * Get the current language
+     * @returns {string} Current language code
+     */
+    getCurrentLanguage() {
+        return this.currentLanguage;
     }
     
     /**
@@ -346,8 +428,20 @@ export class i18n {
         }
         
         // Update advanced tools
-        const advancedTitle = document.querySelector('.tools-section h4');
+        const advancedTitle = document.getElementById('advanced-tools-title');
         if (advancedTitle) advancedTitle.textContent = this.t('advancedTools');
+        
+        const findReplaceBtn = document.getElementById('find-replace-btn');
+        if (findReplaceBtn) findReplaceBtn.textContent = this.t('findReplace');
+        
+        const compareBtn = document.getElementById('compare-btn');
+        if (compareBtn) compareBtn.textContent = this.t('compareTexts');
+        
+        const exportBtn = document.getElementById('export-btn');
+        if (exportBtn) exportBtn.textContent = this.t('export');
+        
+        const helpBtn = document.getElementById('help-btn');
+        if (helpBtn) helpBtn.textContent = this.t('help');
         
         const advancedButtons = document.querySelectorAll('[data-tool]');
         advancedButtons.forEach(btn => {
@@ -372,23 +466,83 @@ export class i18n {
             }
         });
         
+        // Update modal titles when they appear
+        const modalTitles = document.querySelectorAll('.modal-title');
+        modalTitles.forEach(title => {
+            const titleText = title.textContent.toLowerCase();
+            if (titleText.includes('finn') || titleText.includes('find') || titleText.includes('søk')) {
+                title.textContent = this.t('findReplace');
+            } else if (titleText.includes('sammenlign') || titleText.includes('jämför') || titleText.includes('compare')) {
+                title.textContent = this.t('compareTexts');
+            } else if (titleText.includes('eksporter') || titleText.includes('exportera') || titleText.includes('export')) {
+                title.textContent = this.t('export');
+            } else if (titleText.includes('hjelp') || titleText.includes('hjälp') || titleText.includes('help')) {
+                title.textContent = this.t('help');
+            }
+        });
+        
+        // Update modal labels and form elements
+        const formLabels = document.querySelectorAll('.modal .form-label');
+        formLabels.forEach(label => {
+            const labelText = label.textContent.toLowerCase();
+            if (labelText.includes('søk') || labelText.includes('find')) {
+                label.textContent = this.currentLanguage === 'se' ? 'Sök efter:' : 
+                                   this.currentLanguage === 'dk' ? 'Søg efter:' : 'Søk etter:';
+            } else if (labelText.includes('erstatt') || labelText.includes('ersätt') || labelText.includes('erstat')) {
+                label.textContent = this.currentLanguage === 'se' ? 'Ersätt med:' : 
+                                   this.currentLanguage === 'dk' ? 'Erstat med:' : 'Erstatt med:';
+            }
+        });
+        
+        // Update modal buttons
+        const modalButtons = document.querySelectorAll('.modal .btn');
+        modalButtons.forEach(btn => {
+            const btnText = btn.textContent.toLowerCase();
+            if (btnText.includes('avbryt') || btnText.includes('cancel') || btnText.includes('annuller')) {
+                btn.textContent = this.currentLanguage === 'se' ? 'Avbryt' : 
+                                 this.currentLanguage === 'dk' ? 'Annuller' : 'Avbryt';
+            } else if (btnText.includes('lukk') || btnText.includes('stäng') || btnText.includes('luk')) {
+                btn.textContent = this.currentLanguage === 'se' ? 'Stäng' : 
+                                 this.currentLanguage === 'dk' ? 'Luk' : 'Lukk';
+            }
+        });
+        
         // Update statistics panel
-        const statsTitle = document.querySelector('.stats-panel h3');
+        const statsTitle = document.getElementById('stats-title');
         if (statsTitle) statsTitle.textContent = this.t('statsTitle');
         
-        // Update stat labels
-        const statLabels = document.querySelectorAll('.stat-label');
-        statLabels.forEach(label => {
-            const text = label.textContent.toLowerCase();
-            if (text.includes('ord')) label.textContent = this.t('words');
-            else if (text.includes('tegn') && text.includes('med')) label.textContent = this.t('charactersWithSpaces');
-            else if (text.includes('tegn') && text.includes('uten')) label.textContent = this.t('charactersNoSpaces');
-            else if (text.includes('setning') || text.includes('mening') || text.includes('sætning')) label.textContent = this.t('sentences');
-            else if (text.includes('avsnitt') || text.includes('stycke') || text.includes('afsnit')) label.textContent = this.t('paragraphs');
-            else if (text.includes('lesetid') || text.includes('lästid') || text.includes('læsetid')) label.textContent = this.t('readingTime');
-            else if (text.includes('ordlengde') || text.includes('ordlängd')) label.textContent = this.t('avgWordLength');
-            else if (text.includes('setningslengde') || text.includes('meningslängd') || text.includes('sætningslængde')) label.textContent = this.t('avgSentenceLength');
-            else if (text.includes('språk') || text.includes('sprog')) label.textContent = this.t('detectedLanguage');
-        });
+        // Update stat labels directly by ID (more reliable than text matching)
+        const detectedLangLabel = document.getElementById('detected-lang-label');
+        if (detectedLangLabel) detectedLangLabel.textContent = this.t('detectedLanguage');
+        
+        const wordsLabel = document.getElementById('words-label');
+        if (wordsLabel) wordsLabel.textContent = this.t('words');
+        
+        const charsWithSpacesLabel = document.getElementById('chars-with-spaces-label');
+        if (charsWithSpacesLabel) charsWithSpacesLabel.textContent = this.t('charactersWithSpaces');
+        
+        const charsNoSpacesLabel = document.getElementById('chars-no-spaces-label');
+        if (charsNoSpacesLabel) charsNoSpacesLabel.textContent = this.t('charactersNoSpaces');
+        
+        const sentencesLabel = document.getElementById('sentences-label');
+        if (sentencesLabel) sentencesLabel.textContent = this.t('sentences');
+        
+        const paragraphsLabel = document.getElementById('paragraphs-label');
+        if (paragraphsLabel) paragraphsLabel.textContent = this.t('paragraphs');
+        
+        const readingTimeLabel = document.getElementById('reading-time-label');
+        if (readingTimeLabel) readingTimeLabel.textContent = this.t('readingTime');
+        
+        const avgWordLengthLabel = document.getElementById('avg-word-length-label');
+        if (avgWordLengthLabel) avgWordLengthLabel.textContent = this.t('avgWordLength');
+        
+        const avgSentenceLengthLabel = document.getElementById('avg-sentence-length-label');
+        if (avgSentenceLengthLabel) avgSentenceLengthLabel.textContent = this.t('avgSentenceLength');
+        
+        // Update footer links
+        const bugReportLink = document.getElementById('bug-report-link');
+        if (bugReportLink) {
+            bugReportLink.textContent = `🐛 ${this.t('reportBugs')}`;
+        }
     }
 }

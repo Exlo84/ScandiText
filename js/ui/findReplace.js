@@ -10,8 +10,9 @@ import { modal } from './modal.js';
  * Find and Replace functionality with advanced search options
  */
 export class FindReplace {
-    constructor(textArea) {
+    constructor(textArea, i18n = null) {
         this.textArea = textArea;
+        this.i18n = i18n;
         this.searchResults = [];
         this.currentResultIndex = -1;
         this.isModalOpen = false;
