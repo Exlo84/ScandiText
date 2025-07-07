@@ -11,13 +11,13 @@ Users were seeing the old "Nordisk Tekstredigering" UI when visiting https://nor
 ## Solution Implemented
 
 ### 1. Service Worker Updates
-- **New cache name**: `scanditext-v2.0.0` (forces complete cache refresh)
+- **New cache name**: `scanditext-v2.0.7` (forces complete cache refresh)
 - **Improved caching strategy**: Network-first for HTML/CSS/JS to ensure latest files
 - **Immediate activation**: `skipWaiting()` and `clients.claim()` for instant takeover
 - **Client messaging**: Notifies clients when SW updates, triggering page reload
 
 ### 2. Cache Busting
-- **Version parameter**: All CSS/JS files now load with `?v=2.0.0`
+- **Version parameter**: All CSS/JS files now load with `?v=2.0.7`
 - **Cache control headers**: HTML files set to `no-cache, no-store, must-revalidate`
 - **Version checking**: JavaScript checks localStorage for version changes
 - **Auto-redirect**: Forces hash addition if no hash present on main page

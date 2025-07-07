@@ -3,7 +3,7 @@
  * Enables offline functionality and caching
  */
 
-const CACHE_NAME = 'scanditext-v2.0.0';
+const CACHE_NAME = 'scanditext-v2.0.7';
 const OFFLINE_URL = '/offline.html';
 
 // Files to cache for offline use
