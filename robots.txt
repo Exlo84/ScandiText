@@ -1,6 +1,7 @@
 # Robots.txt for ScandiText - Nordisk Verktøysuite
 # https://nordisk.exlo.no/robots.txt
-# Last updated: 2025-07-06
+# Last updated: 2025-07-07
+# Contact: nordisk@exlo.no
 
 User-agent: *
 Allow: /

@@ -339,6 +339,7 @@ body {
 }
 
 .copyright-link,
+.contact-link,
 .bug-report-link {
     color: white;
     text-decoration: none;
@@ -351,6 +352,7 @@ body {
 }
 
 .copyright-link:hover,
+.contact-link:hover,
 .bug-report-link:hover {
     color: #e2e8f0;
     background: rgba(255, 255, 255, 0.1);
@@ -363,12 +365,14 @@ body {
 }
 
 .copyright-link:focus,
+.contact-link:focus,
 .bug-report-link:focus {
     outline: 2px solid rgba(255, 255, 255, 0.8);
     outline-offset: 2px;
 }
 
 .copyright-link:visited,
+.contact-link:visited,
 .bug-report-link:visited {
     color: white;
 }

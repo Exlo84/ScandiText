@@ -112,6 +112,7 @@ export const translations = {
         save: "Lagre",
         
         // Footer
+        contactEmail: "📧 nordisk@exlo.no",
         reportBugs: "Rapporter feil på siden"
     },
     
@@ -224,6 +225,7 @@ export const translations = {
         save: "Spara",
         
         // Footer
+        contactEmail: "📧 nordisk@exlo.no",
         reportBugs: "Rapportera fel på sidan"
     },
     
@@ -325,6 +327,7 @@ export const translations = {
         save: "Gem",
         
         // Footer
+        contactEmail: "📧 nordisk@exlo.no",
         reportBugs: "Rapporter fejl på siden"
     }
 };
@@ -540,6 +543,11 @@ export class i18n {
         if (avgSentenceLengthLabel) avgSentenceLengthLabel.textContent = this.t('avgSentenceLength');
         
         // Update footer links
+        const contactLink = document.getElementById('contact-link');
+        if (contactLink) {
+            contactLink.textContent = this.t('contactEmail');
+        }
+        
         const bugReportLink = document.getElementById('bug-report-link');
         if (bugReportLink) {
             bugReportLink.textContent = `🐛 ${this.t('reportBugs')}`;
