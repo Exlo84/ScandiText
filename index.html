@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Cache control for latest updates -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <title>ScandiText - Nordisk Verktøysuite</title>
     
     <!-- Essential SEO meta tags -->
@@ -236,12 +241,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/logo.css">
-    <link rel="stylesheet" href="css/sponsor.css">
-    <link rel="stylesheet" href="css/tooltips.css">
+    <!-- Stylesheets with cache busting -->
+    <link rel="stylesheet" href="css/main.css?v=2.0.0">
+    <link rel="stylesheet" href="css/components.css?v=2.0.0">
+    <link rel="stylesheet" href="css/logo.css?v=2.0.0">
+    <link rel="stylesheet" href="css/sponsor.css?v=2.0.0">
+    <link rel="stylesheet" href="css/tooltips.css?v=2.0.0">
     
     <!-- Configuration -->
     <script src="config.js" onerror="console.log('config.js not found - translation features will be disabled')"></script>
@@ -593,8 +598,8 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
         </div>
     </div>
 
-    <script type="module" src="js/app.js"></script>
-    <script type="module" src="js/tools/passwordGenerator.js"></script>
+    <script type="module" src="js/app.js?v=2.0.0"></script>
+    <script type="module" src="js/tools/passwordGenerator.js?v=2.0.0"></script>
     
     <!-- Vipps Modal Script -->
     <script>
@@ -665,12 +670,55 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
     
     <!-- PWA Installation and Service Worker -->
     <script>
+        // Cache busting and version checking
+        const CURRENT_VERSION = '2.0.0';
+        const VERSION_KEY = 'scanditext-version';
+        
+        // Check if we need to force reload for cache busting
+        function checkForUpdates() {
+            const storedVersion = localStorage.getItem(VERSION_KEY);
+            if (storedVersion !== CURRENT_VERSION) {
+                console.log('🔄 Version update detected, clearing cache...');
+                localStorage.setItem(VERSION_KEY, CURRENT_VERSION);
+                
+                // Clear all caches
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => {
+                            if (name.includes('scandinavian-text-editor') || name.includes('scanditext')) {
+                                caches.delete(name);
+                            }
+                        });
+                    });
+                }
+                
+                // Force hash if not present to bypass cache
+                if (!window.location.hash && window.location.pathname === '/') {
+                    window.location.href = window.location.href + '#updated';
+                }
+            }
+        }
+        
+        // Run version check immediately
+        checkForUpdates();
+        
         // Register service worker for PWA functionality
         if ('serviceWorker' in navigator) {
+            // Listen for service worker messages
+            navigator.serviceWorker.addEventListener('message', event => {
+                if (event.data && event.data.type === 'SW_UPDATED') {
+                    console.log('🔄 Service Worker updated, reloading page...');
+                    window.location.reload();
+                }
+            });
+            
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' })
                     .then(registration => {
                         console.log('✅ Service Worker registered successfully:', registration.scope);
+                        
+                        // Force immediate update check
+                        registration.update();
                         
                         // Listen for updates
                         registration.addEventListener('updatefound', () => {
@@ -679,13 +727,28 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                     // Show update notification
                                     showUpdateNotification();
+                                } else if (newWorker.state === 'activated') {
+                                    // Force reload to get latest version
+                                    window.location.reload();
                                 }
                             });
                         });
+                        
+                        // Check for updates every 30 seconds
+                        setInterval(() => {
+                            registration.update();
+                        }, 30000);
                     })
                     .catch(error => {
                         console.warn('❌ Service Worker registration failed:', error);
                     });
+            });
+            
+            // Force service worker update on page load
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(registration => {
+                    registration.update();
+                });
             });
         }
 

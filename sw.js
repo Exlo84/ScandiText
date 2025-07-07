@@ -1,27 +1,32 @@
 /**
- * Service Worker for Nordisk Tekstredigering
+ * Service Worker for ScandiText - Nordisk Verktøysuite
  * Enables offline functionality and caching
  */
 
-const CACHE_NAME = 'scandinavian-text-editor-v1.0.0';
+const CACHE_NAME = 'scanditext-v2.0.0';
 const OFFLINE_URL = '/offline.html';
 
 // Files to cache for offline use
 const CACHE_FILES = [
     '/',
     '/index.html',
-    '/demo.html',
     '/css/main.css',
     '/css/components.css',
+    '/css/logo.css',
     '/js/app.js',
     '/js/textAnalyzer.js',
     '/js/languageDetector.js',
     '/js/textTransforms.js',
     '/js/textCompare.js',
     '/js/exportUtils.js',
+    '/js/i18n.js',
     '/js/ui/modal.js',
     '/js/ui/findReplace.js',
-    '/manifest.json'
+    '/js/tools/socialFormatter.js',
+    '/js/tools/passwordGenerator.js',
+    '/manifest.json',
+    '/icons/icon-192x192.png',
+    '/icons/icon-512x512.png'
 ];
 
 // Install event - cache all files
@@ -36,6 +41,7 @@ self.addEventListener('install', event => {
             })
             .then(() => {
                 console.log('Service Worker: All files cached');
+                // Force immediate activation
                 return self.skipWaiting();
             })
             .catch(error => {
@@ -44,13 +50,14 @@ self.addEventListener('install', event => {
     );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and claim clients immediately
 self.addEventListener('activate', event => {
     console.log('Service Worker: Activating...');
     
     event.waitUntil(
-        caches.keys()
-            .then(cacheNames => {
+        Promise.all([
+            // Clean up old caches
+            caches.keys().then(cacheNames => {
                 return Promise.all(
                     cacheNames.map(cacheName => {
                         if (cacheName !== CACHE_NAME) {
@@ -59,11 +66,18 @@ self.addEventListener('activate', event => {
                         }
                     })
                 );
-            })
-            .then(() => {
-                console.log('Service Worker: Activated');
-                return self.clients.claim();
-            })
+            }),
+            // Take control of all clients immediately
+            self.clients.claim()
+        ]).then(() => {
+            console.log('Service Worker: Activated and controlling all clients');
+            // Notify all clients about the update
+            return self.clients.matchAll().then(clients => {
+                clients.forEach(client => {
+                    client.postMessage({ type: 'SW_UPDATED' });
+                });
+            });
+        })
     );
 });
 
@@ -75,13 +89,43 @@ self.addEventListener('fetch', event => {
     // Skip external requests
     if (!event.request.url.startsWith(self.location.origin)) return;
     
-    // Special handling for navigation requests
-    if (event.request.mode === 'navigate') {
+    // Special handling for navigation requests - always try network first for HTML
+    if (event.request.mode === 'navigate' || event.request.destination === 'document') {
         event.respondWith(
             fetch(event.request)
+                .then(response => {
+                    // Cache the new response
+                    if (response && response.status === 200) {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME).then(cache => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return response;
+                })
                 .catch(() => {
                     return caches.match('/index.html')
                         .then(response => response || caches.match(OFFLINE_URL));
+                })
+        );
+        return;
+    }
+    
+    // For CSS, JS and other assets - try network first, fallback to cache
+    if (event.request.url.includes('/css/') || event.request.url.includes('/js/')) {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    if (response && response.status === 200) {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME).then(cache => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    return caches.match(event.request);
                 })
         );
         return;
@@ -171,14 +215,14 @@ async function saveTextInBackground() {
 // Helper functions for data management
 async function getSavedTextData() {
     return new Promise((resolve) => {
-        const data = localStorage.getItem('nordisk-text-editor-data');
+        const data = localStorage.getItem('scanditext-data');
         resolve(data ? JSON.parse(data) : null);
     });
 }
 
 async function saveTextData(data) {
     return new Promise((resolve) => {
-        localStorage.setItem('nordisk-text-editor-data', JSON.stringify(data));
+        localStorage.setItem('scanditext-data', JSON.stringify(data));
         resolve();
     });
 }
@@ -208,7 +252,7 @@ self.addEventListener('push', event => {
     };
     
     event.waitUntil(
-        self.registration.showNotification('Nordisk Tekstredigering', options)
+        self.registration.showNotification('ScandiText - Nordisk Verktøysuite', options)
     );
 });
 
