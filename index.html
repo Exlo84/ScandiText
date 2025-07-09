@@ -111,7 +111,7 @@
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://translate.googleapis.com https://translation.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://translate.googleapis.com https://translation.googleapis.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://translate.googleapis.com https://translation.googleapis.com https://resources.infolinks.com https://www.highperformanceformat.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://translate.googleapis.com https://translation.googleapis.com; frame-src https://www.highperformanceformat.com https://resources.infolinks.com;">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -448,7 +448,10 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 <div class="stats-ad-container" style="margin-top: 20px; padding: 15px; text-align: center; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
                     <h4 style="margin: 0 0 10px 0; color: #666; font-size: 12px;">Sponsede lenker</h4>
                     
-                    <!-- Infolinks Ad -->
+                    <!-- Infolinks Ad with content -->
+                    <div style="margin-bottom: 15px; padding: 10px; font-size: 13px; color: #555;">
+                        Støtt ScandiText ved å utforske relevante tjenester og verktøy for nordiske brukere.
+                    </div>
                     <script type="text/javascript">
                         var infolinks_pid = 3438111;
                         var infolinks_wsid = 0;
@@ -456,16 +459,33 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                     <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
                     
                     <!-- HighPerformanceFormat Ad -->
-                    <div id="highperf-ad" style="margin-top: 10px;">
+                    <div id="highperf-ad" style="margin-top: 15px; min-height: 50px;">
                         <script type="text/javascript">
-                            atOptions = {
-                                'key' : 'b417f5a39351245992e6ac44331f11c7',
-                                'format' : 'iframe',
-                                'height' : 50,
-                                'width' : 320,
-                                'params' : {}
-                            };
-                            document.write('<scr' + 'ipt type="text/javascript" src="//www.highperformanceformat.com/b417f5a39351245992e6ac44331f11c7/invoke.js"></scr' + 'ipt>');
+                            (function() {
+                                var atOptions = {
+                                    'key' : 'b417f5a39351245992e6ac44331f11c7',
+                                    'format' : 'iframe',
+                                    'height' : 50,
+                                    'width' : 320,
+                                    'params' : {}
+                                };
+                                
+                                // Create script element dynamically
+                                var script = document.createElement('script');
+                                script.type = 'text/javascript';
+                                script.src = '//www.highperformanceformat.com/b417f5a39351245992e6ac44331f11c7/invoke.js';
+                                script.async = true;
+                                
+                                // Add error handling
+                                script.onerror = function() {
+                                    console.log('HighPerformanceFormat ad failed to load');
+                                    document.getElementById('highperf-ad').innerHTML = '<div style="padding: 10px; background: #e9ecef; border-radius: 4px; font-size: 12px; color: #666;">Annonse ikke tilgjengelig</div>';
+                                };
+                                
+                                // Make atOptions global before loading script
+                                window.atOptions = atOptions;
+                                document.head.appendChild(script);
+                            })();
                         </script>
                     </div>
                 </div>
