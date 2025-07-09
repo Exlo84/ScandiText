@@ -7,7 +7,7 @@
     <!-- Main page with language alternatives -->
     <url>
         <loc>https://nordisk.exlo.no/</loc>
-        <lastmod>2025-07-06T12:00:00+01:00</lastmod>
+        <lastmod>2025-07-09T12:00:00+01:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <mobile:mobile/>
@@ -35,6 +35,28 @@
             <image:loc>https://nordisk.exlo.no/icons/scanditext_logo.svg</image:loc>
             <image:title>ScandiText Logo</image:title>
             <image:caption>ScandiText - Nordisk Verktøysuite official logo</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- About page -->
+    <url>
+        <loc>https://nordisk.exlo.no/about</loc>
+        <lastmod>2025-07-09T12:00:00+01:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+        
+        <!-- Language alternatives -->
+        <xhtml:link rel="alternate" hreflang="no" href="https://nordisk.exlo.no/about?lang=no"/>
+        <xhtml:link rel="alternate" hreflang="sv" href="https://nordisk.exlo.no/about?lang=se"/>
+        <xhtml:link rel="alternate" hreflang="da" href="https://nordisk.exlo.no/about?lang=dk"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://nordisk.exlo.no/about"/>
+        
+        <!-- Images -->
+        <image:image>
+            <image:loc>https://nordisk.exlo.no/og-image.jpg</image:loc>
+            <image:title>Om ScandiText - Nordisk Verktøysuite</image:title>
+            <image:caption>Learn about ScandiText - Nordic toolkit with text editing, invoice generator, social media formatter and password generator</image:caption>
         </image:image>
     </url>
     

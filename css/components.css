@@ -3,6 +3,45 @@
  * Handles modals, toast notifications, and other UI components
  */
 
+/* External Link Styles */
+.external-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    color: var(--primary-blue);
+}
+
+.nav-tab.external-link {
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-gray);
+    min-width: 120px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.nav-tab.external-link:hover {
+    background: var(--hover-bg);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
 /* Modal Components */
 .modal-overlay {
     position: fixed;
@@ -2545,18 +2584,18 @@ body.modal-open div[id*="google_translate"] {
     margin: 0;
 }
 
-@media (max-width: 768px) {
-    .faq-section {
-        margin-top: 30px;
-        padding: 20px;
-    }
-    
-    .faq-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .faq-item {
-        padding: 15px;
-    }
+.about-content {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.about-content .hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-bottom: 1px solid var(--border-gray);
+    margin: 0;
+}
+
+.about-content .seo-content-section {
+    border-top: none;
+    background: #f8fafc;
 }

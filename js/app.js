@@ -1089,7 +1089,8 @@ class NordiskTekstredigering {
             'text-editor': 'Tekstredigering',
             'invoice': 'Fakturagenerator', 
             'social': 'Sosiale medier formatter',
-            'password': 'Passordgenerator'
+            'password': 'Passordgenerator',
+            'about': 'Om ScandiText'
         };
         
         this.showToast(`${toolNames[toolName] || toolName} aktivert`, 'success');
