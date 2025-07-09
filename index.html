@@ -448,9 +448,12 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                 <div class="stats-ad-container" style="margin-top: 20px; padding: 15px; text-align: center; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
                     <h4 style="margin: 0 0 10px 0; color: #666; font-size: 12px;">Sponsede lenker</h4>
                     
-                    <!-- Infolinks Ad with content -->
-                    <div style="margin-bottom: 15px; padding: 10px; font-size: 13px; color: #555;">
-                        Støtt ScandiText ved å utforske relevante tjenester og verktøy for nordiske brukere.
+                    <!-- Infolinks Ad with more content for conversion -->
+                    <div id="infolinks-content" style="margin-bottom: 15px; padding: 10px; font-size: 13px; color: #555; line-height: 1.4;">
+                        Støtt ScandiText ved å utforske relevante tjenester og verktøy for nordiske brukere. 
+                        Vi tilbyr tekstredigering, oversettelse, fakturagenerator og passordverktøy. 
+                        Disse verktøyene hjelper med produktivitet, språkbehandling og bedriftsledelse.
+                        Besøk våre partnere for mer programvare, verktøy og tjenester.
                     </div>
                     <script type="text/javascript">
                         var infolinks_pid = 3438111;
@@ -459,7 +462,7 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                     <script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>
                     
                     <!-- HighPerformanceFormat Ad -->
-                    <div id="highperf-ad" style="margin-top: 15px; min-height: 50px;">
+                    <div id="highperf-ad" style="margin-top: 15px; min-height: 50px; display: flex; justify-content: center; align-items: center;">
                         <script type="text/javascript">
                             (function() {
                                 var atOptions = {
@@ -476,17 +479,38 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
                                 script.src = 'https://www.highperformanceformat.com/b417f5a39351245992e6ac44331f11c7/invoke.js';
                                 script.async = true;
                                 
-                                // Add error handling
+                                // Add error handling and debug info
                                 script.onerror = function() {
                                     console.log('HighPerformanceFormat ad failed to load');
                                     document.getElementById('highperf-ad').innerHTML = '<div style="padding: 10px; background: #e9ecef; border-radius: 4px; font-size: 12px; color: #666;">Annonse ikke tilgjengelig</div>';
                                 };
                                 
+                                script.onload = function() {
+                                    console.log('HighPerformanceFormat script loaded successfully');
+                                };
+                                
                                 // Make atOptions global before loading script
                                 window.atOptions = atOptions;
                                 document.head.appendChild(script);
+                                
+                                // Add timeout fallback
+                                setTimeout(function() {
+                                    var adContainer = document.getElementById('highperf-ad');
+                                    if (adContainer && !adContainer.querySelector('iframe') && adContainer.innerHTML.trim() === '') {
+                                        console.log('Ad timeout - showing fallback');
+                                        adContainer.innerHTML = '<div style="padding: 10px; background: #e9ecef; border-radius: 4px; font-size: 12px; color: #666;">Laster annonse...</div>';
+                                    }
+                                }, 5000);
                             })();
                         </script>
+                    </div>
+                    
+                    <!-- Alternative ad space if main ads don't load -->
+                    <div id="fallback-ad" style="margin-top: 10px; display: none;">
+                        <div style="padding: 12px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 6px; color: white; font-size: 13px;">
+                            <strong>📱 Støtt prosjektet</strong><br>
+                            <span style="font-size: 11px;">Hjelp oss å holde ScandiText gratis!</span>
+                        </div>
                     </div>
                 </div>
 
@@ -830,6 +854,58 @@ Prøv for eksempel å skrive: 'Dette er en test av den norske tekstredigereren. 
 
     <script type="module" src="js/app.js?v=2.0.7"></script>
     <script type="module" src="js/tools/passwordGenerator.js?v=2.0.7"></script>
+    
+    <!-- Ad Debug and Fallback Script -->
+    <script>
+        // Ad monitoring and fallback system
+        (function() {
+            console.log('Ad monitoring script starting...');
+            
+            function checkAdsLoaded() {
+                setTimeout(function() {
+                    // Check if HighPerformanceFormat ad loaded
+                    var hpfAd = document.getElementById('highperf-ad');
+                    var hasIframe = hpfAd && hpfAd.querySelector('iframe');
+                    var hasContent = hpfAd && hpfAd.innerHTML.trim() !== '';
+                    
+                    console.log('Ad check:', {
+                        hpfContainer: !!hpfAd,
+                        hasIframe: hasIframe,
+                        hasContent: hasContent,
+                        innerHTML: hpfAd ? hpfAd.innerHTML.length : 0
+                    });
+                    
+                    // Check if Infolinks converted any text
+                    var infolinksContent = document.getElementById('infolinks-content');
+                    var hasInfolinksAds = infolinksContent && infolinksContent.querySelector('a[href*="infolinks"]');
+                    
+                    console.log('Infolinks check:', {
+                        container: !!infolinksContent,
+                        hasLinks: hasInfolinksAds
+                    });
+                    
+                    // Show fallback if no ads loaded
+                    if (!hasIframe && !hasInfolinksAds) {
+                        console.log('No ads detected, considering fallback...');
+                        setTimeout(function() {
+                            var fallbackAd = document.getElementById('fallback-ad');
+                            if (fallbackAd && (!hasIframe && !hasInfolinksAds)) {
+                                console.log('Showing fallback ad');
+                                fallbackAd.style.display = 'block';
+                            }
+                        }, 2000);
+                    }
+                }, 3000);
+            }
+            
+            // Start monitoring when page loads
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkAdsLoaded);
+            } else {
+                checkAdsLoaded();
+            }
+        })();
+    </script>
     
     <!-- Vipps Modal Script -->
     <script>
