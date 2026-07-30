@@ -1051,7 +1051,10 @@ class NordiskTekstredigering {
             if (translateBtn) {
                 translateBtn.classList.remove('loading');
                 translateBtn.disabled = false;
-                translateBtn.innerHTML = `Oversett til ${this.googleTranslate.getLanguageName(targetLang)}`;
+                const flagMap = { no: '/icons/flag-no.svg', se: '/icons/flag-se.svg', dk: '/icons/flag-dk.svg' };
+                const flagSrc = flagMap[targetLang] || '';
+                const flagHtml = flagSrc ? `<img src="${flagSrc}" alt="" class="flag-icon" /> ` : '';
+                translateBtn.innerHTML = `${flagHtml}Oversett til ${this.googleTranslate.getLanguageName(targetLang)}`;
             }
         }
     }

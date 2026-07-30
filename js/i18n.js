@@ -384,13 +384,31 @@ export class i18n {
             const lang = btn.dataset.lang;
             switch (lang) {
                 case 'no':
-                    btn.innerHTML = `<img src="icons/flag-no.svg" alt="" class="flag-icon" /> ${this.t('langNorwegian')}`;
+                    btn.innerHTML = `<img src="/icons/flag-no.svg" alt="" class="flag-icon" /> ${this.t('langNorwegian')}`;
                     break;
                 case 'se':
-                    btn.innerHTML = `<img src="icons/flag-se.svg" alt="" class="flag-icon" /> ${this.t('langSwedish')}`;
+                    btn.innerHTML = `<img src="/icons/flag-se.svg" alt="" class="flag-icon" /> ${this.t('langSwedish')}`;
                     break;
                 case 'dk':
-                    btn.innerHTML = `<img src="icons/flag-dk.svg" alt="" class="flag-icon" /> ${this.t('langDanish')}`;
+                    btn.innerHTML = `<img src="/icons/flag-dk.svg" alt="" class="flag-icon" /> ${this.t('langDanish')}`;
+                    break;
+            }
+        });
+
+        // Update translation buttons
+        const translateButtons = document.querySelectorAll('[data-translate]');
+        translateButtons.forEach(btn => {
+            if (btn.classList.contains('loading')) return;
+            const lang = btn.dataset.translate;
+            switch (lang) {
+                case 'no':
+                    btn.innerHTML = `<img src="/icons/flag-no.svg" alt="" class="flag-icon" /> ${this.t('translateToNorwegian')}`;
+                    break;
+                case 'se':
+                    btn.innerHTML = `<img src="/icons/flag-se.svg" alt="" class="flag-icon" /> ${this.t('translateToSwedish')}`;
+                    break;
+                case 'dk':
+                    btn.innerHTML = `<img src="/icons/flag-dk.svg" alt="" class="flag-icon" /> ${this.t('translateToDanish')}`;
                     break;
             }
         });

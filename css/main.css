@@ -115,15 +115,17 @@ body {
 }
 
 .flag-icon {
-    width: 1.2em;
-    height: 0.9em;
-    vertical-align: -0.15em;
+    width: 20px;
+    height: 13.33px;
+    aspect-ratio: 3 / 2;
+    vertical-align: -2px;
     border-radius: 2px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
     object-fit: cover;
     display: inline-block;
     margin-right: 6px;
     pointer-events: none;
+    flex-shrink: 0;
 }
 
 .mobile-menu-toggle {
