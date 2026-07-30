@@ -74,5 +74,5 @@
     High contrast mode
     Scalable text
     
-    Last update: 2025-07-06
+    Last update: 2026-07-30
     Standards: HTML5, CSS3, ES6+, PWA
