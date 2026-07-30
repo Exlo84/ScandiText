@@ -324,17 +324,21 @@ class NordiskTekstredigering {
      */
     handleLanguageSelect(e) {
         e.preventDefault();
+        const button = e.target.closest('.lang-btn') || e.currentTarget;
+        if (!button) return;
         
         // Remove active class from all buttons
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
         });
         
         // Add active class to clicked button
-        e.target.classList.add('active');
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
         
-        // Extract language from button content or data attribute
-        const lang = e.target.dataset.lang || 'no';
+        // Extract language from button data attribute
+        const lang = button.dataset.lang || 'no';
         this.currentLanguage = lang;
         
         // Update i18n language and UI
@@ -619,10 +623,10 @@ class NordiskTekstredigering {
     updateLanguageButtons() {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active');
-            const langText = btn.textContent.replace(/🇳🇴|🇸🇪|🇩🇰/, '').trim();
-            const langMap = { 'Norsk': 'no', 'Svenska': 'se', 'Dansk': 'dk' };
-            if (langMap[langText] === this.currentLanguage) {
+            btn.setAttribute('aria-pressed', 'false');
+            if (btn.dataset.lang === this.currentLanguage) {
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
             }
         });
     }

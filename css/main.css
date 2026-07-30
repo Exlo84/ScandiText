@@ -114,6 +114,18 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+.flag-icon {
+    width: 1.2em;
+    height: 0.9em;
+    vertical-align: -0.15em;
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+    display: inline-block;
+    margin-right: 6px;
+    pointer-events: none;
+}
+
 .mobile-menu-toggle {
     display: none;
     background: var(--primary-blue);

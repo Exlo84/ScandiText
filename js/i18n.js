@@ -382,16 +382,15 @@ export class i18n {
         const langButtons = document.querySelectorAll('.lang-btn');
         langButtons.forEach(btn => {
             const lang = btn.dataset.lang;
-            const flag = btn.textContent.match(/🇳🇴|🇸🇪|🇩🇰/)?.[0] || '';
             switch (lang) {
                 case 'no':
-                    btn.innerHTML = `🇳🇴 ${this.t('langNorwegian')}`;
+                    btn.innerHTML = `<img src="icons/flag-no.svg" alt="" class="flag-icon" /> ${this.t('langNorwegian')}`;
                     break;
                 case 'se':
-                    btn.innerHTML = `🇸🇪 ${this.t('langSwedish')}`;
+                    btn.innerHTML = `<img src="icons/flag-se.svg" alt="" class="flag-icon" /> ${this.t('langSwedish')}`;
                     break;
                 case 'dk':
-                    btn.innerHTML = `🇩🇰 ${this.t('langDanish')}`;
+                    btn.innerHTML = `<img src="icons/flag-dk.svg" alt="" class="flag-icon" /> ${this.t('langDanish')}`;
                     break;
             }
         });

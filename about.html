@@ -107,9 +107,9 @@
             </nav>
             
             <div class="language-selector" role="group" aria-label="Språkvalg">
-                <button class="lang-btn active" data-lang="no" aria-pressed="true" aria-label="Velg norsk">🇳🇴 Norsk</button>
-                <button class="lang-btn" data-lang="se" aria-pressed="false" aria-label="Velg svenska">🇸🇪 Svenska</button>
-                <button class="lang-btn" data-lang="dk" aria-pressed="false" aria-label="Velg dansk">🇩🇰 Dansk</button>
+                <button class="lang-btn active" data-lang="no" aria-pressed="true" aria-label="Velg norsk"><img src="icons/flag-no.svg" alt="" class="flag-icon" /> Norsk</button>
+                <button class="lang-btn" data-lang="se" aria-pressed="false" aria-label="Velg svenska"><img src="icons/flag-se.svg" alt="" class="flag-icon" /> Svenska</button>
+                <button class="lang-btn" data-lang="dk" aria-pressed="false" aria-label="Velg dansk"><img src="icons/flag-dk.svg" alt="" class="flag-icon" /> Dansk</button>
             </div>
         </header>
 
@@ -275,7 +275,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Exlo - Nordic Technology Solutions</p>
+                <p>&copy; 2026 Exlo - Nordic Technology Solutions</p>
             </div>
         </footer>
     </div>
@@ -406,6 +406,18 @@
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .flag-icon {
+            width: 1.2em;
+            height: 0.9em;
+            vertical-align: -0.15em;
+            border-radius: 2px;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 6px;
+            pointer-events: none;
         }
 
         /* Main content area */
